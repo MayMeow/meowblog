@@ -33,11 +33,9 @@ class ArticlesController extends AppController
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view($slug)
     {
-        $article = $this->Articles->get($id, [
-            'contain' => ['Users', 'Tags'],
-        ]);
+        $article = $this->Articles->findBySlug($slug)->contain(['Users'])->firstOrfail();
 
         $this->set(compact('article'));
     }
@@ -52,6 +50,7 @@ class ArticlesController extends AppController
         $article = $this->Articles->newEmptyEntity();
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
+            $article->user_id = $this->request->getAttribute('identity')->getIdentifier();
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('The article has been saved.'));
 
