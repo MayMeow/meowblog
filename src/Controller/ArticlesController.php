@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Event\EventInterface;
+
 /**
  * Articles Controller
  *
@@ -11,6 +13,15 @@ namespace App\Controller;
  */
 class ArticlesController extends AppController
 {
+    /**
+     * beforeFilter method
+     */
+    public function beforeFilter(EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->Authentication->allowUnauthenticated(['index', 'tags', 'view']);
+    }
+
     /**
      * Index method
      *
@@ -36,7 +47,7 @@ class ArticlesController extends AppController
      */
     public function view($slug)
     {
-        $article = $this->Articles->findBySlug($slug)->contain(['Users', 'tags'])->firstOrfail();
+        $article = $this->Articles->findBySlug($slug)->contain(['Users', 'Tags'])->firstOrfail();
         $this->Authorization->skipAuthorization();
 
         $this->set(compact('article'));
@@ -119,7 +130,8 @@ class ArticlesController extends AppController
     {
         $articles = $this->Articles->find('tagged', [
             'tags' => $tags
-        ])->all();
+        ])->contain(['Tags'])->all();
+        $this->Authorization->skipAuthorization();
 
         $this->set([
             'articles' => $articles,
