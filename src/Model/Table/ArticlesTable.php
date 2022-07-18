@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
+use App\Model\Entity\Tag;
 use Cake\Event\EventInterface;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
@@ -115,6 +116,12 @@ class ArticlesTable extends Table
         return $rules;
     }
 
+    /**
+     * @param EventInterface $event
+     * @param $entity
+     * @param $options
+     * @return void
+     */
     public function beforeSave(EventInterface $event, $entity, $options)
     {
         if ($entity->isNew() && !$entity->slug) {
@@ -128,6 +135,11 @@ class ArticlesTable extends Table
         }
     }
 
+    /**
+     * @param Query $query
+     * @param array $options
+     * @return Query
+     */
     public function findTagged(Query $query, array $options): Query
     {
         $columns = [
@@ -147,11 +159,15 @@ class ArticlesTable extends Table
             $query->innerJoinWith('Tags')
                 ->where(['Tags.title IN' => $options['tags']]);
         }
-    
+
         return $query->group(['Articles.id']);
     }
 
-    protected function _buildTags($tagString)
+    /**
+     * @param string $tagString
+     * @return array<Tag> Array of Tag entities
+     */
+    protected function _buildTags(string $tagString): array
     {
         // Trim tags
         $newTags = array_map('trim', explode(',', $tagString));
