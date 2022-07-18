@@ -36,7 +36,7 @@ class ArticlesController extends AppController
      */
     public function view($slug)
     {
-        $article = $this->Articles->findBySlug($slug)->contain(['Users'])->firstOrfail();
+        $article = $this->Articles->findBySlug($slug)->contain(['Users', 'tags'])->firstOrfail();
         $this->Authorization->skipAuthorization();
 
         $this->set(compact('article'));
@@ -110,5 +110,21 @@ class ArticlesController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+    
+    /**
+     * Tags method
+     */
+    public function tags(...$tags)
+    {
+        $articles = $this->Articles->find('tagged', [
+            'tags' => $tags
+        ])->all();
+
+        $this->set([
+            'articles' => $articles,
+            'tags' => $tags,
+            //'_serialize' => ['articles', 'tags']
+        ]);
     }
 }

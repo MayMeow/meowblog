@@ -46,6 +46,10 @@
                     <th><?= __('Published') ?></th>
                     <td><?= $article->published ? __('Yes') : __('No'); ?></td>
                 </tr>
+                <tr>
+                    <th><?= __('Tag string') ?></th>
+                    <td><?= $article->tag_string ?></td>
+                </tr>
             </table>
             <div class="text">
                 <strong><?= __('Body') ?></strong>
