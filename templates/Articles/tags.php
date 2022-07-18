@@ -11,8 +11,9 @@
         <h4><?= $this->Html->link(
             $article->title,
             ['controller' => 'Articles', 'action' => 'view', $article->slug]
-        ) ?></h4>
+        ); ?></h4>
         <span><?= h($article->created) ?></span>
+        <span><?= $article->tag_string ?></span>
     </article>
 <?php endforeach; ?>
 </section>
