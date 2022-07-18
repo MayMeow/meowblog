@@ -20,9 +20,9 @@ class CreateArticlesTags extends AbstractMigration
             'limit' => 11,
             'null' => false,
         ]);
-        $table->addColumn('tag_id', 'string', [
+        $table->addColumn('tag_id', 'integer', [
             'default' => null,
-            'limit' => 255,
+            'limit' => 11,
             'null' => false,
         ]);
         $table->create();

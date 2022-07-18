@@ -69,7 +69,6 @@ class ArticlesTagsTable extends Table
 
         $validator
             ->scalar('tag_id')
-            ->maxLength('tag_id', 255)
             ->requirePresence('tag_id', 'create')
             ->notEmptyString('tag_id');
 

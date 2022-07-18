@@ -10,7 +10,7 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property int $article_id
- * @property string $tag_id
+ * @property int $tag_id
  *
  * @property \App\Model\Entity\Article $article
  * @property \App\Model\Entity\Tag $tag
