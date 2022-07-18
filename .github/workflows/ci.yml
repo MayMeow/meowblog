@@ -23,7 +23,7 @@ jobs:
         env:
           REDIS_HOST: 'redis'
           REDIS_PORT: '6379'
-          DB_HOST: cake-db
+          DB_HOST: postgres
           DB_PASSWORD: cakepass
           DB_NAME: cake
           DB_USER: cake
@@ -37,7 +37,7 @@ jobs:
         env:
           REDIS_HOST: 'redis'
           REDIS_PORT: '6379'
-          DB_HOST: cake-db
+          DB_HOST: postgres
           DB_PASSWORD: cakepass
           DB_NAME: cake
           DB_USER: cake
