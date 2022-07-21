@@ -9,19 +9,30 @@
 	},
 	// "dockerComposeFile": "docker-compose.yml",
 	// "service": "cake-app",
-	"extensions": [
-		"praveencrony.total-lines",
-		"ikappas.phpcs",
-		"bmewburn.vscode-intelephense-client",
-		"christian-kohler.path-intellisense",
-		"oderwat.indent-rainbow",
-		"eamodio.gitlens",
-		"mhutchie.git-graph",
-		"gitlab.gitlab-workflow",
-		"lacroixdavid1.vscode-format-context-menu",
-		"hookyqr.beautify",
-		"taniarascia.new-moon-vscode"
-	],
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Set *default* container specific settings.json values on container create.
+			"settings": { 
+				"php.validate.executablePath": "/usr/local/bin/php"
+			},
+			
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"praveencrony.total-lines",
+				"ikappas.phpcs",
+				"bmewburn.vscode-intelephense-client",
+				"christian-kohler.path-intellisense",
+				"oderwat.indent-rainbow",
+				"eamodio.gitlens",
+				"mhutchie.git-graph",
+				"gitlab.gitlab-workflow",
+				"lacroixdavid1.vscode-format-context-menu",
+				"hookyqr.beautify",
+				"taniarascia.new-moon-vscode"
+			]
+		}
+	},
 	"forwardPorts": [8765,8080],
 	// "workspaceFolder": "/var/www",
 	"remoteUser": "vscode"
