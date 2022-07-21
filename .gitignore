@@ -6,6 +6,7 @@
 /tmp/*
 /vendor/*
 .env.production
+/node_modules/*
 
 # OS generated files #
 ######################
