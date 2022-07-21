@@ -3,7 +3,7 @@
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": { 
-			"VARIANT": "8.1-cli-bullseye",
+			"VARIANT": "8.1-bullseye",
 			"NODE_VERSION": "lts/*"
 		}
 	},
