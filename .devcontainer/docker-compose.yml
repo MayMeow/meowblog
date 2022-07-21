@@ -6,7 +6,7 @@ services:
       args:
         user: cake
         uid: 1000
-      context: ./
+      context: .
       dockerfile: Dockerfile
     # image: ghcr.io/maymeow/cake-notify/cake-notify:latest
     command: bash -c "composer install && php bin/cake.php server -H 0.0.0.0"
@@ -20,7 +20,7 @@ services:
       - cake-db
       - cake-redis
     volumes:
-      - ./:/var/www
+      - ../:/var/www
 
   cake-db:
     image: postgres:12.4
