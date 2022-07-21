@@ -7,7 +7,7 @@
 		}
 	},
 	// "dockerComposeFile": "docker-compose.yml",
-	"service": "cake-app",
+	// "service": "cake-app",
 	"extensions": [
 		"praveencrony.total-lines",
 		"ikappas.phpcs",
