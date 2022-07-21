@@ -17,5 +17,5 @@
 	],
 	"forwardPorts": [8765,8080],
 	"workspaceFolder": "/var/www",
-	"remoteUser": "cake"
+	"remoteUser": "vscode"
 }
