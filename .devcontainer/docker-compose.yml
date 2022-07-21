@@ -1,53 +1,56 @@
 version: "3.7"
 
 services:
-  app-dev:
+  cake-app:
     build:
       args:
         user: cake
         uid: 1000
-      context: .
+      context: ./
       dockerfile: Dockerfile
     # image: ghcr.io/maymeow/cake-notify/cake-notify:latest
     command: bash -c "composer install && php bin/cake.php server -H 0.0.0.0"
     env_file: ../.env.dev
-    restart: unless-stopped
     working_dir: /var/www/
+    networks:
+      - cake
     ports:
       - "8765:8765"
     depends_on:
-      - postgres
-      - redis
-      - minio
+      - cake-db
+      - cake-redis
     volumes:
-      - ..:/var/www
+      - ./:/var/www
 
-  postgres:
+  cake-db:
     image: postgres:12.4
-    restart: unless-stopped
+    networks:
+      - cake
     # ports:
     #   - "5432:5432"
     volumes:
       - cake_data:/var/lib/postgresql/data
     env_file: ../.env.dev
 
-  redis:
+  cake-redis:
     image: "redis:alpine"
-    env_file: ../.env.dev
-    # command: >
-    #  --requirepass ${REDIS_PASSWORD}
+    networks:
+      - cake
+    volumes:
+      - cake_redis:/data
 
   # if you need graphic acces to application database
   adminer:
     image: adminer
+    networks:
+      - cake
     ports:
       - "8080:8080"
-    restart: unless-stopped
-
 
   minio:
     image: minio/minio:RELEASE.2021-08-05T22-01-19Z
-    restart: unless-stopped
+    networks:
+      - cake
     volumes:
       - minio_data:/data
     env_file: ../.env.dev
@@ -56,7 +59,14 @@ services:
       - "9000:9000"
       - "9001:9001"
 
+networks:
+  cake:
+    driver: bridge
 
 volumes:
   cake_data:
+    driver: local
   minio_data:
+    driver: local
+  cake_redis:
+    driver: local
