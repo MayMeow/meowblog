@@ -4,11 +4,9 @@
 		"dockerfile": "Dockerfile",
 		"args": { 
 			"VARIANT": "8.1-bullseye",
-			"NODE_VERSION": "lts/*"
+			"NODE_VERSION": "18"
 		}
 	},
-	// "dockerComposeFile": "docker-compose.yml",
-	// "service": "cake-app",
 	"customizations": {
 		// Configure properties specific to VS Code.
 		"vscode": {
@@ -16,8 +14,6 @@
 			"settings": { 
 				"php.validate.executablePath": "/usr/local/bin/php"
 			},
-			
-			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
 				"praveencrony.total-lines",
 				"ikappas.phpcs",
@@ -33,7 +29,6 @@
 			]
 		}
 	},
-	"forwardPorts": [8765,8080],
-	// "workspaceFolder": "/var/www",
+	"forwardPorts": [8765],
 	"remoteUser": "vscode"
 }
