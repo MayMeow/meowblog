@@ -16,6 +16,6 @@
 		"taniarascia.new-moon-vscode"
 	],
 	"forwardPorts": [8765,8080],
-	"workspaceFolder": "/var/www",
+	// "workspaceFolder": "/var/www",
 	"remoteUser": "vscode"
 }
