@@ -3,9 +3,9 @@ version: "3.7"
 services:
   cake-app:
     build:
-      args:
-        user: cake
-        uid: 1000
+    #   args:
+    #     user: cake
+    #     uid: 1000
       context: .
       dockerfile: Dockerfile
     # image: ghcr.io/maymeow/cake-notify/cake-notify:latest
