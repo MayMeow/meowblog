@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
+use App\Model\Entity\Tag;
 use Cake\Event\EventInterface;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
@@ -58,6 +59,7 @@ class ArticlesTable extends Table
             'foreignKey' => 'article_id',
             'targetForeignKey' => 'tag_id',
             'joinTable' => 'articles_tags',
+            'dependent' => true,
         ]);
     }
 
@@ -114,6 +116,12 @@ class ArticlesTable extends Table
         return $rules;
     }
 
+    /**
+     * @param EventInterface $event
+     * @param $entity
+     * @param $options
+     * @return void
+     */
     public function beforeSave(EventInterface $event, $entity, $options)
     {
         if ($entity->isNew() && !$entity->slug) {
@@ -121,5 +129,73 @@ class ArticlesTable extends Table
             // trim slug to maximum length defined in schema
             $entity->slug = substr($sluggedTitle, 0, 191);
         }
+
+        if ($entity->tag_string) {
+            $entity->tags = $this->_buildTags($entity->tag_string);
+        }
+    }
+
+    /**
+     * @param Query $query
+     * @param array $options
+     * @return Query
+     */
+    public function findTagged(Query $query, array $options): Query
+    {
+        $columns = [
+            'Articles.id', 'Articles.user_id', 'Articles.title',
+            'Articles.body', 'Articles.published', 'Articles.created',
+            'Articles.slug',
+        ];
+
+        $query = $query->select($columns)->distinct($columns);
+
+        if (empty($options['tags'])) {
+            // If there are no tags provided, find articles that have no tags.
+            $query->leftJoinWith('Tags')
+                ->where(['Tags.title IS' => null]);
+        } else {
+            // Find articles that have one or more of the provided tags.
+            $query->innerJoinWith('Tags')
+                ->where(['Tags.title IN' => $options['tags']]);
+        }
+
+        return $query->group(['Articles.id']);
+    }
+
+    /**
+     * @param string $tagString
+     * @return array<Tag> Array of Tag entities
+     */
+    protected function _buildTags(string $tagString): array
+    {
+        // Trim tags
+        $newTags = array_map('trim', explode(',', $tagString));
+        // Remove all empty tags
+        $newTags = array_filter($newTags);
+        // Reduce duplicated tags
+        $newTags = array_unique($newTags);
+
+        $out = [];
+        $tags = $this->Tags->find()
+            ->where(['Tags.title IN' => $newTags])
+            ->all();
+
+        // Remove existing tags from the list of new tags.
+        foreach ($tags->extract('title') as $existing) {
+            $index = array_search($existing, $newTags);
+            if ($index !== false) {
+                unset($newTags[$index]);
+            }
+        }
+        // Add existing tags.
+        foreach ($tags as $tag) {
+            $out[] = $tag;
+        }
+        // Add new tags.
+        foreach ($newTags as $tag) {
+            $out[] = $this->Tags->newEntity(['title' => $tag]);
+        }
+        return $out;
     }
 }

@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Event\EventInterface;
+
 /**
  * Articles Controller
  *
@@ -11,6 +13,15 @@ namespace App\Controller;
  */
 class ArticlesController extends AppController
 {
+    /**
+     * beforeFilter method
+     */
+    public function beforeFilter(EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->Authentication->allowUnauthenticated(['index', 'tags', 'view']);
+    }
+
     /**
      * Index method
      *
@@ -30,13 +41,13 @@ class ArticlesController extends AppController
     /**
      * View method
      *
-     * @param string|null $id Article id.
+     * @param string $slug
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($slug)
+    public function view(string $slug)
     {
-        $article = $this->Articles->findBySlug($slug)->contain(['Users'])->firstOrfail();
+        $article = $this->Articles->findBySlug($slug)->contain(['Users', 'Tags'])->firstOrfail();
         $this->Authorization->skipAuthorization();
 
         $this->set(compact('article'));
@@ -69,11 +80,11 @@ class ArticlesController extends AppController
     /**
      * Edit method
      *
-     * @param string|null $id Article id.
+     * @param string $slug Article islug
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit($slug)
+    public function edit(string $slug)
     {
         $article = $this->Articles->findBySlug($slug)->contain(['Tags'])->firstOrFail();
         $this->Authorization->authorize($article);
@@ -94,11 +105,11 @@ class ArticlesController extends AppController
     /**
      * Delete method
      *
-     * @param string|null $id Article id.
+     * @param string $slug
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($slug)
+    public function delete(string $slug)
     {
         $this->request->allowMethod(['post', 'delete']);
         $article = $this->Articles->findBySlug($slug)->firstOrFail();
@@ -110,5 +121,23 @@ class ArticlesController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    /**
+     * @param ...$tags
+     * @return void
+     */
+    public function tags(...$tags)
+    {
+        $articles = $this->Articles->find('tagged', [
+            'tags' => $tags
+        ])->contain(['Tags'])->all();
+        $this->Authorization->skipAuthorization();
+
+        $this->set([
+            'articles' => $articles,
+            'tags' => $tags,
+            //'_serialize' => ['articles', 'tags']
+        ]);
     }
 }

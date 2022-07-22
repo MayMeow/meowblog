@@ -25,7 +25,7 @@
                 <?php foreach ($articles as $article): ?>
                 <tr>
                     <td><?= $this->Number->format($article->id) ?></td>
-                    <td><?= $article->has('user') ? $this->Html->link($article->user->id, ['controller' => 'Users', 'action' => 'view', $article->user->id]) : '' ?></td>
+                    <td><?= $article->has('user') ? $this->Html->link($article->user->email, ['controller' => 'Users', 'action' => 'view', $article->user->id]) : '' ?></td>
                     <td><?= h($article->title) ?></td>
                     <td><?= h($article->slug) ?></td>
                     <td><?= h($article->published) ?></td>
