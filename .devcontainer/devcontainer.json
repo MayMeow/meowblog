@@ -1,12 +1,18 @@
 {
 	"name": "PHP",
-	"build": {
-		"dockerfile": "Dockerfile",
-		"args": { 
-			"VARIANT": "8.1-bullseye",
-			"NODE_VERSION": "18"
-		}
-	},
+	// Dockerfile
+	// "build": {
+	//	"dockerfile": "Dockerfile",
+	// 	"args": { 
+	// 		"VARIANT": "8.1-bullseye",
+	// 		"NODE_VERSION": "18"
+	// 	}
+	// },
+	// Docker compose
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspace",
+	// Other configuration
 	"customizations": {
 		// Configure properties specific to VS Code.
 		"vscode": {
@@ -31,6 +37,6 @@
 			]
 		}
 	},
-	"forwardPorts": [8765],
+	"forwardPorts": [8765, 8080],
 	"remoteUser": "vscode"
 }

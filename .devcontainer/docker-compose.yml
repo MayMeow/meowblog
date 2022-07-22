@@ -1,7 +1,7 @@
 version: "3.7"
 
 services:
-  cake-app:
+  app:
     build:
       args:
         NODE_VERSION: "18"
@@ -20,9 +20,9 @@ services:
       - cake-db
       - cake-redis
     volumes:
-      - ../:/var/www
+      - ..:/workspace:cached
 
-  cake-db:
+  database:
     image: postgres:12.4
     networks:
       - cake
@@ -32,7 +32,7 @@ services:
       - cake_data:/var/lib/postgresql/data
     env_file: ../.env.dev
 
-  cake-redis:
+  redis:
     image: "redis:alpine"
     networks:
       - cake
