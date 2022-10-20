@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace MeowBlog\Policy;
 
+use Authentication\IdentityInterface as AuthenticationInterface;
 use Authorization\IdentityInterface;
 use MeowBlog\Model\Entity\Article;
 
@@ -32,7 +33,10 @@ class ArticlePolicy
      */
     public function canEdit(IdentityInterface $user, Article $article)
     {
-        return $this->isAuthor($user, $article);
+        /** @var \Authentication\IdentityInterface $authenticatedUser */
+        $authenticatedUser = $user;
+
+        return $this->isAuthor($authenticatedUser, $article);
     }
 
     /**
@@ -44,7 +48,10 @@ class ArticlePolicy
      */
     public function canDelete(IdentityInterface $user, Article $article)
     {
-        return $this->isAuthor($user, $article);
+        /** @var \Authentication\IdentityInterface $authenticatedUser Authenticated user interface */
+        $authenticatedUser = $user;
+
+        return $this->isAuthor($authenticatedUser, $article);
     }
 
     /**
@@ -56,17 +63,20 @@ class ArticlePolicy
      */
     public function canView(IdentityInterface $user, Article $article)
     {
-        return $this->isAuthor($user, $article);
+        /** @var \Authentication\IdentityInterface $authenticatedUser */
+        $authenticatedUser = $user;
+
+        return $this->isAuthor($authenticatedUser, $article);
     }
 
     /**
      * Check if $user is Author of article
      *
-     * @param \Authorization\IdentityInterface $user The user.
+     * @param \Authentication\IdentityInterface $user The user.
      * @param \MeowBlog\Model\Entity\Article $article Article
      * @return bool
      */
-    protected function isAuthor(IdentityInterface $user, Article $article)
+    protected function isAuthor(AuthenticationInterface $user, Article $article)
     {
         return $article->user_id === $user->getIdentifier();
     }

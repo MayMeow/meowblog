@@ -9,6 +9,7 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Utility\Text;
 use Cake\Validation\Validator;
+use MeowBlog\Model\Entity\Article;
 
 /**
  * Articles Model
@@ -29,6 +30,7 @@ use Cake\Validation\Validator;
  * @method \MeowBlog\Model\Entity\Article[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
  * @method \MeowBlog\Model\Entity\Article[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
+ * @method \MeowBlog\Model\Entity\Article|\Cake\ORM\Query findBySlug($slug)
  */
 class ArticlesTable extends Table
 {
@@ -115,11 +117,11 @@ class ArticlesTable extends Table
 
     /**
      * @param \Cake\Event\EventInterface $event Event
-     * @param \MeowBlog\Model\Entity\Article $entity Entity
+     * @param \MeowBlog\Model\Entity\Article|\Cake\Datasource\EntityInterface $entity Entity
      * @param array $options Options
      * @return void
      */
-    public function beforeSave(EventInterface $event, $entity, $options)
+    public function beforeSave(EventInterface $event, Article $entity, $options)
     {
         if ($entity->isNew() && !$entity->slug) {
             $sluggedTitle = Text::slug($entity->title);
