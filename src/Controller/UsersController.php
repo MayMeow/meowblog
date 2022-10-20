@@ -15,6 +15,9 @@ class UsersController extends AppController
 {
     /**
      * beforeFilter method
+     *
+     * @param \Cake\Event\EventInterface $event event
+     * @return void
      */
     public function beforeFilter(EventInterface $event)
     {
@@ -135,6 +138,11 @@ class UsersController extends AppController
         }
     }
 
+    /**
+     * Logout method
+     *
+     * @return \Cake\Http\Response|null|void
+     */
     public function logout()
     {
         $this->Authorization->skipAuthorization();

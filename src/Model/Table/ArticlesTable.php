@@ -114,9 +114,9 @@ class ArticlesTable extends Table
     }
 
     /**
-     * @param \Cake\Event\EventInterface $event
-     * @param $entity
-     * @param $options
+     * @param \Cake\Event\EventInterface $event Event
+     * @param \MeowBlog\Model\Entity\Article $entity Entity
+     * @param array $options Options
      * @return void
      */
     public function beforeSave(EventInterface $event, $entity, $options)
@@ -133,8 +133,8 @@ class ArticlesTable extends Table
     }
 
     /**
-     * @param \Cake\ORM\Query $query
-     * @param array $options
+     * @param \Cake\ORM\Query $query Server Query
+     * @param array $options Options
      * @return \Cake\ORM\Query
      */
     public function findTagged(Query $query, array $options): Query
@@ -161,7 +161,7 @@ class ArticlesTable extends Table
     }
 
     /**
-     * @param string $tagString
+     * @param string $tagString Tag String
      * @return array<\MeowBlog\Model\Entity\Tag> Array of Tag entities
      */
     protected function _buildTags(string $tagString): array

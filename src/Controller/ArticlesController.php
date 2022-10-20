@@ -15,6 +15,9 @@ class ArticlesController extends AppController
 {
     /**
      * beforeFilter method
+     *
+     * @param \Cake\Event\EventInterface $event event
+     * @return void
      */
     public function beforeFilter(EventInterface $event)
     {
@@ -41,7 +44,7 @@ class ArticlesController extends AppController
     /**
      * View method
      *
-     * @param string $slug
+     * @param string $slug slug
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
@@ -105,7 +108,7 @@ class ArticlesController extends AppController
     /**
      * Delete method
      *
-     * @param string $slug
+     * @param string $slug slug
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
@@ -124,7 +127,7 @@ class ArticlesController extends AppController
     }
 
     /**
-     * @param ...$tags
+     * @param ...$tags tags
      * @return void
      */
     public function tags(...$tags)
