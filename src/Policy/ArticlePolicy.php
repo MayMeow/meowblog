@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace MeowBlog\Policy;
 
-use MeowBlog\Model\Entity\Article;
 use Authorization\IdentityInterface;
+use MeowBlog\Model\Entity\Article;
 
 /**
  * Article policy

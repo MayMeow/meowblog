@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace MeowBlog\Test\TestCase\Model\Table;
 
-use MeowBlog\Model\Table\ArticlesTagsTable;
 use Cake\TestSuite\TestCase;
+use MeowBlog\Model\Table\ArticlesTagsTable;
 
 /**
  * MeowBlog\Model\Table\ArticlesTagsTable Test Case

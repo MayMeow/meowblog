@@ -16,13 +16,13 @@ declare(strict_types=1);
  */
 namespace MeowBlog\Test\TestCase;
 
-use MeowBlog\Application;
 use Cake\Error\Middleware\ErrorHandlerMiddleware;
 use Cake\Http\MiddlewareQueue;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
 use Cake\TestSuite\IntegrationTestCase;
 use InvalidArgumentException;
+use MeowBlog\Application;
 
 /**
  * ApplicationTest class

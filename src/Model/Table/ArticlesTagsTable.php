@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace MeowBlog\Model\Table;
 
-use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -13,7 +12,6 @@ use Cake\Validation\Validator;
  *
  * @property \MeowBlog\Model\Table\ArticlesTable&\Cake\ORM\Association\BelongsTo $Articles
  * @property \MeowBlog\Model\Table\TagsTable&\Cake\ORM\Association\BelongsTo $Tags
- *
  * @method \MeowBlog\Model\Entity\ArticlesTag newEmptyEntity()
  * @method \MeowBlog\Model\Entity\ArticlesTag newEntity(array $data, array $options = [])
  * @method \MeowBlog\Model\Entity\ArticlesTag[] newEntities(array $data, array $options = [])

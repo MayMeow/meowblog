@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace MeowBlog\Model\Table;
 
-use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -12,7 +11,6 @@ use Cake\Validation\Validator;
  * Tags Model
  *
  * @property \MeowBlog\Model\Table\ArticlesTable&\Cake\ORM\Association\BelongsToMany $Articles
- *
  * @method \MeowBlog\Model\Entity\Tag newEmptyEntity()
  * @method \MeowBlog\Model\Entity\Tag newEntity(array $data, array $options = [])
  * @method \MeowBlog\Model\Entity\Tag[] newEntities(array $data, array $options = [])
@@ -26,7 +24,6 @@ use Cake\Validation\Validator;
  * @method \MeowBlog\Model\Entity\Tag[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
  * @method \MeowBlog\Model\Entity\Tag[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
  * @method \MeowBlog\Model\Entity\Tag[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
- *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class TagsTable extends Table

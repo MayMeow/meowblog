@@ -127,6 +127,7 @@ class UsersController extends AppController
         // If the user is logged in send them away.
         if ($result->isValid()) {
             $target = $this->Authentication->getLoginRedirect() ?? '/home';
+
             return $this->redirect($target);
         }
         if ($this->request->is('post')) {
@@ -138,6 +139,7 @@ class UsersController extends AppController
     {
         $this->Authorization->skipAuthorization();
         $this->Authentication->logout();
+
         return $this->redirect(['controller' => 'Users', 'action' => 'login']);
     }
 }

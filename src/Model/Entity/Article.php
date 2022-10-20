@@ -57,6 +57,7 @@ class Article extends Entity
         $str = $tags->reduce(function ($string, $tag) {
             return $string . $tag->title . ', ';
         }, '');
+
         return trim($str, ', ');
     }
 }

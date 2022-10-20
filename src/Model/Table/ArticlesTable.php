@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace MeowBlog\Model\Table;
 
-use MeowBlog\Model\Entity\Tag;
 use Cake\Event\EventInterface;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
@@ -16,7 +15,6 @@ use Cake\Validation\Validator;
  *
  * @property \MeowBlog\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
  * @property \MeowBlog\Model\Table\TagsTable&\Cake\ORM\Association\BelongsToMany $Tags
- *
  * @method \MeowBlog\Model\Entity\Article newEmptyEntity()
  * @method \MeowBlog\Model\Entity\Article newEntity(array $data, array $options = [])
  * @method \MeowBlog\Model\Entity\Article[] newEntities(array $data, array $options = [])
@@ -30,7 +28,6 @@ use Cake\Validation\Validator;
  * @method \MeowBlog\Model\Entity\Article[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
  * @method \MeowBlog\Model\Entity\Article[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
  * @method \MeowBlog\Model\Entity\Article[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
- *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class ArticlesTable extends Table
@@ -117,7 +114,7 @@ class ArticlesTable extends Table
     }
 
     /**
-     * @param EventInterface $event
+     * @param \Cake\Event\EventInterface $event
      * @param $entity
      * @param $options
      * @return void
@@ -136,9 +133,9 @@ class ArticlesTable extends Table
     }
 
     /**
-     * @param Query $query
+     * @param \Cake\ORM\Query $query
      * @param array $options
-     * @return Query
+     * @return \Cake\ORM\Query
      */
     public function findTagged(Query $query, array $options): Query
     {
@@ -165,7 +162,7 @@ class ArticlesTable extends Table
 
     /**
      * @param string $tagString
-     * @return array<Tag> Array of Tag entities
+     * @return array<\MeowBlog\Model\Entity\Tag> Array of Tag entities
      */
     protected function _buildTags(string $tagString): array
     {
@@ -196,6 +193,7 @@ class ArticlesTable extends Table
         foreach ($newTags as $tag) {
             $out[] = $this->Tags->newEntity(['title' => $tag]);
         }
+
         return $out;
     }
 }
