@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace MeowBlog\Controller;
 
 /**
  * Tags Controller
  *
- * @property \App\Model\Table\TagsTable $Tags
- * @method \App\Model\Entity\Tag[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @property \MeowBlog\Model\Table\TagsTable $Tags
+ * @method \MeowBlog\Model\Entity\Tag[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class TagsController extends AppController
 {

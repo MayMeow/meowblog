@@ -1,16 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Test\TestCase\Controller;
+namespace MeowBlog\Test\TestCase\Controller;
 
-use App\Controller\TagsController;
+use MeowBlog\Controller\TagsController;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Controller\TagsController Test Case
+ * MeowBlog\Controller\TagsController Test Case
  *
- * @uses \App\Controller\TagsController
+ * @uses \MeowBlog\Controller\TagsController
  */
 class TagsControllerTest extends TestCase
 {
@@ -31,7 +31,7 @@ class TagsControllerTest extends TestCase
      * Test index method
      *
      * @return void
-     * @uses \App\Controller\TagsController::index()
+     * @uses \MeowBlog\Controller\TagsController::index()
      */
     public function testIndex(): void
     {
@@ -42,7 +42,7 @@ class TagsControllerTest extends TestCase
      * Test view method
      *
      * @return void
-     * @uses \App\Controller\TagsController::view()
+     * @uses \MeowBlog\Controller\TagsController::view()
      */
     public function testView(): void
     {
@@ -53,7 +53,7 @@ class TagsControllerTest extends TestCase
      * Test add method
      *
      * @return void
-     * @uses \App\Controller\TagsController::add()
+     * @uses \MeowBlog\Controller\TagsController::add()
      */
     public function testAdd(): void
     {
@@ -64,7 +64,7 @@ class TagsControllerTest extends TestCase
      * Test edit method
      *
      * @return void
-     * @uses \App\Controller\TagsController::edit()
+     * @uses \MeowBlog\Controller\TagsController::edit()
      */
     public function testEdit(): void
     {
@@ -75,7 +75,7 @@ class TagsControllerTest extends TestCase
      * Test delete method
      *
      * @return void
-     * @uses \App\Controller\TagsController::delete()
+     * @uses \MeowBlog\Controller\TagsController::delete()
      */
     public function testDelete(): void
     {

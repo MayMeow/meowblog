@@ -1,7 +1,7 @@
 <?php
 /**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Tag[]|\Cake\Collection\CollectionInterface $tags
+ * @var \MeowBlog\View\AppView $this
+ * @var \MeowBlog\Model\Entity\Tag[]|\Cake\Collection\CollectionInterface $tags
  */
 ?>
 <div class="tags index content">

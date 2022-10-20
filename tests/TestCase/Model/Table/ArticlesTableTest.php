@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Test\TestCase\Model\Table;
+namespace MeowBlog\Test\TestCase\Model\Table;
 
-use App\Model\Table\ArticlesTable;
+use MeowBlog\Model\Table\ArticlesTable;
 use Cake\TestSuite\TestCase;
 
 /**
@@ -14,7 +14,7 @@ class ArticlesTableTest extends TestCase
     /**
      * Test subject
      *
-     * @var \App\Model\Table\ArticlesTable
+     * @var \MeowBlog\Model\Table\ArticlesTable
      */
     protected $Articles;
 
@@ -57,7 +57,7 @@ class ArticlesTableTest extends TestCase
      * Test validationDefault method
      *
      * @return void
-     * @uses \App\Model\Table\ArticlesTable::validationDefault()
+     * @uses \MeowBlog\Model\Table\ArticlesTable::validationDefault()
      */
     public function testValidationDefault(): void
     {
@@ -68,7 +68,7 @@ class ArticlesTableTest extends TestCase
      * Test buildRules method
      *
      * @return void
-     * @uses \App\Model\Table\ArticlesTable::buildRules()
+     * @uses \MeowBlog\Model\Table\ArticlesTable::buildRules()
      */
     public function testBuildRules(): void
     {

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Model\Entity;
+namespace MeowBlog\Model\Entity;
 
 use Cake\ORM\Entity;
 
@@ -12,8 +12,8 @@ use Cake\ORM\Entity;
  * @property int $article_id
  * @property int $tag_id
  *
- * @property \App\Model\Entity\Article $article
- * @property \App\Model\Entity\Tag $tag
+ * @property \MeowBlog\Model\Entity\Article $article
+ * @property \MeowBlog\Model\Entity\Tag $tag
  */
 class ArticlesTag extends Entity
 {

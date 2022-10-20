@@ -1,7 +1,7 @@
 <?php
 /**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Article[]|\Cake\Collection\CollectionInterface $articles
+ * @var \MeowBlog\View\AppView $this
+ * @var \MeowBlog\Model\Entity\Article[]|\Cake\Collection\CollectionInterface $articles
  */
 ?>
 <div class="articles index content">

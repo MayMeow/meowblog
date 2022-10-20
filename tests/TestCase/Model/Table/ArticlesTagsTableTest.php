@@ -1,20 +1,20 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Test\TestCase\Model\Table;
+namespace MeowBlog\Test\TestCase\Model\Table;
 
-use App\Model\Table\ArticlesTagsTable;
+use MeowBlog\Model\Table\ArticlesTagsTable;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\ArticlesTagsTable Test Case
+ * MeowBlog\Model\Table\ArticlesTagsTable Test Case
  */
 class ArticlesTagsTableTest extends TestCase
 {
     /**
      * Test subject
      *
-     * @var \App\Model\Table\ArticlesTagsTable
+     * @var \MeowBlog\Model\Table\ArticlesTagsTable
      */
     protected $ArticlesTags;
 
@@ -57,7 +57,7 @@ class ArticlesTagsTableTest extends TestCase
      * Test validationDefault method
      *
      * @return void
-     * @uses \App\Model\Table\ArticlesTagsTable::validationDefault()
+     * @uses \MeowBlog\Model\Table\ArticlesTagsTable::validationDefault()
      */
     public function testValidationDefault(): void
     {
@@ -68,7 +68,7 @@ class ArticlesTagsTableTest extends TestCase
      * Test buildRules method
      *
      * @return void
-     * @uses \App\Model\Table\ArticlesTagsTable::buildRules()
+     * @uses \MeowBlog\Model\Table\ArticlesTagsTable::buildRules()
      */
     public function testBuildRules(): void
     {
