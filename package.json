@@ -4,5 +4,8 @@
   "main": "index.js",
   "repository": "https://github.com/MayMeow/meowblog",
   "author": "May <may@maymeow.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.2.1"
+  }
 }
