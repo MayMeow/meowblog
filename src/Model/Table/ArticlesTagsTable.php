@@ -66,7 +66,7 @@ class ArticlesTagsTable extends Table
             ->notEmptyString('article_id');
 
         $validator
-            ->scalar('tag_id')
+            ->integer('tag_id')
             ->requirePresence('tag_id', 'create')
             ->notEmptyString('tag_id');
 

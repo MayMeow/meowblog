@@ -21,7 +21,7 @@ class ArticlesTagsFixture extends TestFixture
             [
                 'id' => 1,
                 'article_id' => 1,
-                'tag_id' => 'Lorem ipsum dolor sit amet',
+                'tag_id' => 1,
             ],
         ];
         parent::init();
