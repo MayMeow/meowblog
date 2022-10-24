@@ -43,3 +43,5 @@ nbproject/*
 .vscode
 # Sass preprocessor
 .sass-cache/
+# Coverage report
+clover.xml

@@ -53,6 +53,7 @@
         "cs-fix": "phpcbf --colors -p src/ tests/",
         "stan": "phpstan analyse",
         "test": "phpunit --colors=always",
+        "coverage": "XDEBUG_MODE=coverage phpunit --coverage-clover clover.xml",
         "migrate": "php bin/cake.php migrations migrate"
     },
     "prefer-stable": true,
