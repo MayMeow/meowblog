@@ -10,7 +10,6 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Utility\Text;
 use Cake\Validation\Validator;
-use MeowBlog\Model\Entity\Article;
 
 /**
  * Articles Model
