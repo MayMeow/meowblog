@@ -66,11 +66,12 @@ return [
          * The test connection is used during the test suite.
          */
         'test' => [
-            'host' => 'localhost',
-            //'port' => 'non_standard_port_number',
-            'username' => 'my_app',
-            'password' => 'secret',
-            'database' => 'test_myapp',
+            'driver' => \Cake\Database\Driver\Sqlite::class,
+            // 'host' => env('DB_TEST_HOST', null),
+            // 'port' => 'non_standard_port_number',
+            // 'username' => env('DB_TEST_USER', null),
+            // 'password' => env('DB_TEST_PASSWORD', null),
+            'database' => "/tmp/test.db",
             //'schema' => 'myapp',
             'url' => env('DATABASE_TEST_URL', null),
         ],
