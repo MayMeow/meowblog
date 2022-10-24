@@ -14,7 +14,7 @@ declare(strict_types=1);
  * @since     3.3.0
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace App;
+namespace MeowBlog;
 
 use Authentication\AuthenticationService;
 use Authentication\AuthenticationServiceInterface;
@@ -47,7 +47,9 @@ use Psr\Http\Message\ServerRequestInterface;
  * This defines the bootstrapping logic and middleware layers you
  * want to use in your application.
  */
-class Application extends BaseApplication implements AuthenticationServiceProviderInterface, AuthorizationServiceProviderInterface
+class Application extends BaseApplication implements
+    AuthenticationServiceProviderInterface,
+    AuthorizationServiceProviderInterface
 {
     /**
      * Load all the application configuration and bootstrap logic.
@@ -208,6 +210,12 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
         return $service;
     }
 
+    /**
+     * Method getAuthorizationService
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request Server request
+     * @return \Authorization\AuthorizationServiceInterface
+     */
     public function getAuthorizationService(ServerRequestInterface $request): AuthorizationServiceInterface
     {
         $resolver = new OrmResolver();

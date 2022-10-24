@@ -1,16 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Test\TestCase\Controller;
+namespace MeowBlog\Test\TestCase\Controller;
 
-use App\Controller\UsersController;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Controller\UsersController Test Case
+ * MeowBlog\Controller\UsersController Test Case
  *
- * @uses \App\Controller\UsersController
+ * @uses \MeowBlog\Controller\UsersController
  */
 class UsersControllerTest extends TestCase
 {
@@ -30,7 +29,7 @@ class UsersControllerTest extends TestCase
      * Test index method
      *
      * @return void
-     * @uses \App\Controller\UsersController::index()
+     * @uses \MeowBlog\Controller\UsersController::index()
      */
     public function testIndex(): void
     {
@@ -41,7 +40,7 @@ class UsersControllerTest extends TestCase
      * Test view method
      *
      * @return void
-     * @uses \App\Controller\UsersController::view()
+     * @uses \MeowBlog\Controller\UsersController::view()
      */
     public function testView(): void
     {
@@ -52,7 +51,7 @@ class UsersControllerTest extends TestCase
      * Test add method
      *
      * @return void
-     * @uses \App\Controller\UsersController::add()
+     * @uses \MeowBlog\Controller\UsersController::add()
      */
     public function testAdd(): void
     {
@@ -63,7 +62,7 @@ class UsersControllerTest extends TestCase
      * Test edit method
      *
      * @return void
-     * @uses \App\Controller\UsersController::edit()
+     * @uses \MeowBlog\Controller\UsersController::edit()
      */
     public function testEdit(): void
     {
@@ -74,7 +73,7 @@ class UsersControllerTest extends TestCase
      * Test delete method
      *
      * @return void
-     * @uses \App\Controller\UsersController::delete()
+     * @uses \MeowBlog\Controller\UsersController::delete()
      */
     public function testDelete(): void
     {

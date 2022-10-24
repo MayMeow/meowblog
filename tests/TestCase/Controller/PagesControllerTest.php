@@ -14,7 +14,7 @@ declare(strict_types=1);
  * @since         1.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace App\Test\TestCase\Controller;
+namespace MeowBlog\Test\TestCase\Controller;
 
 use Cake\Core\Configure;
 use Cake\TestSuite\IntegrationTestTrait;
@@ -23,7 +23,7 @@ use Cake\TestSuite\TestCase;
 /**
  * PagesControllerTest class
  *
- * @uses \App\Controller\PagesController
+ * @uses \MeowBlog\Controller\PagesController
  */
 class PagesControllerTest extends TestCase
 {

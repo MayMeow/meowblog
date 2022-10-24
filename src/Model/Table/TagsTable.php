@@ -1,9 +1,8 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Model\Table;
+namespace MeowBlog\Model\Table;
 
-use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -11,22 +10,20 @@ use Cake\Validation\Validator;
 /**
  * Tags Model
  *
- * @property \App\Model\Table\ArticlesTable&\Cake\ORM\Association\BelongsToMany $Articles
- *
- * @method \App\Model\Entity\Tag newEmptyEntity()
- * @method \App\Model\Entity\Tag newEntity(array $data, array $options = [])
- * @method \App\Model\Entity\Tag[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Tag get($primaryKey, $options = [])
- * @method \App\Model\Entity\Tag findOrCreate($search, ?callable $callback = null, $options = [])
- * @method \App\Model\Entity\Tag patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Tag[] patchEntities(iterable $entities, array $data, array $options = [])
- * @method \App\Model\Entity\Tag|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Tag saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Tag[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
- * @method \App\Model\Entity\Tag[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
- * @method \App\Model\Entity\Tag[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
- * @method \App\Model\Entity\Tag[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
- *
+ * @property \MeowBlog\Model\Table\ArticlesTable&\Cake\ORM\Association\BelongsToMany $Articles
+ * @method \MeowBlog\Model\Entity\Tag newEmptyEntity()
+ * @method \MeowBlog\Model\Entity\Tag newEntity(array $data, array $options = [])
+ * @method \MeowBlog\Model\Entity\Tag[] newEntities(array $data, array $options = [])
+ * @method \MeowBlog\Model\Entity\Tag get($primaryKey, $options = [])
+ * @method \MeowBlog\Model\Entity\Tag findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \MeowBlog\Model\Entity\Tag patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \MeowBlog\Model\Entity\Tag[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \MeowBlog\Model\Entity\Tag|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \MeowBlog\Model\Entity\Tag saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \MeowBlog\Model\Entity\Tag[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \MeowBlog\Model\Entity\Tag[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \MeowBlog\Model\Entity\Tag[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \MeowBlog\Model\Entity\Tag[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class TagsTable extends Table

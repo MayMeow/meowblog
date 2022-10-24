@@ -17,6 +17,7 @@ declare(strict_types=1);
 
 use Cake\Core\Configure;
 use Cake\Datasource\ConnectionManager;
+use Migrations\TestSuite\Migrator;
 
 /**
  * Test runner bootstrap.
@@ -43,6 +44,10 @@ ConnectionManager::setConfig('test_debug_kit', [
     'cacheMetadata' => true,
     'quoteIdentifiers' => false,
 ]);
+
+// run migrations
+$migrator = new Migrator();
+$migrator->run();
 
 ConnectionManager::alias('test_debug_kit', 'debug_kit');
 

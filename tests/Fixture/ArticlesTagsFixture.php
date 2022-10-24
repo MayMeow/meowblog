@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Test\Fixture;
+namespace MeowBlog\Test\Fixture;
 
 use Cake\TestSuite\Fixture\TestFixture;
 
@@ -21,7 +21,7 @@ class ArticlesTagsFixture extends TestFixture
             [
                 'id' => 1,
                 'article_id' => 1,
-                'tag_id' => 'Lorem ipsum dolor sit amet',
+                'tag_id' => 1,
             ],
         ];
         parent::init();

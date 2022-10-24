@@ -16,31 +16,17 @@ jobs:
         image: postgres:12.4
     steps:
       - uses: actions/checkout@v2
-      - name: Migrate
-        uses: MayMeowHQ/composer-run-action@v7
-        with:
-          composer_script: 'migrate'
-        env:
-          REDIS_HOST: 'redis'
-          REDIS_PORT: '6379'
-          DB_HOST: postgres
-          DB_PASSWORD: cakepass
-          DB_NAME: cake
-          DB_USER: cake
-          POSTGRES_PASSWORD: cakepass
-          POSTGRES_USER: cake
-          POSTGRES_DB: cake
-      - name: Composer run action PHPC_CS
+      - name: Composer run action TEST
         uses: MayMeowHQ/composer-run-action@v7
         with:
           composer_script: 'test'
         env:
           REDIS_HOST: 'redis'
           REDIS_PORT: '6379'
-          DB_HOST: postgres
-          DB_PASSWORD: cakepass
-          DB_NAME: cake
-          DB_USER: cake
+          DB_TEST_HOST: postgres
+          DB_TEST_PASSWORD: cakepass
+          DB_TEST_NAME: cake
+          DB_TEST_USER: cake
           POSTGRES_PASSWORD: cakepass
           POSTGRES_USER: cake
           POSTGRES_DB: cake

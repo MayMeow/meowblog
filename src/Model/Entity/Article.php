@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Model\Entity;
+namespace MeowBlog\Model\Entity;
 
 use Cake\Collection\Collection;
 use Cake\ORM\Entity;
@@ -18,8 +18,9 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  *
- * @property \App\Model\Entity\User $user
- * @property \App\Model\Entity\Tag[] $tags
+ * @property \MeowBlog\Model\Entity\User $user
+ * @property \MeowBlog\Model\Entity\Tag[] $tags
+ * @property string $tag_string
  */
 class Article extends Entity
 {
@@ -45,6 +46,11 @@ class Article extends Entity
         'tag_string' => true,
     ];
 
+    /**
+     * Return tags in string format
+     *
+     * @return string
+     */
     protected function _getTagString()
     {
         if (isset($this->_fields['tag_string'])) {
@@ -57,6 +63,7 @@ class Article extends Entity
         $str = $tags->reduce(function ($string, $tag) {
             return $string . $tag->title . ', ';
         }, '');
+
         return trim($str, ', ');
     }
 }

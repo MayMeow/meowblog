@@ -1,7 +1,7 @@
 <?php
 /**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\User $user
+ * @var \MeowBlog\View\AppView $this
+ * @var \MeowBlog\Model\Entity\User $user
  */
 ?>
 <div class="row">

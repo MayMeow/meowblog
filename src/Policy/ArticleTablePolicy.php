@@ -1,10 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Policy;
-
-use App\Model\Table\ArticleTable;
-use Authorization\IdentityInterface;
+namespace MeowBlog\Policy;
 
 /**
  * Article policy

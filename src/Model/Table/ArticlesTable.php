@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Model\Table;
+namespace MeowBlog\Model\Table;
 
-use App\Model\Entity\Tag;
+use Cake\Datasource\EntityInterface;
 use Cake\Event\EventInterface;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
@@ -14,24 +14,23 @@ use Cake\Validation\Validator;
 /**
  * Articles Model
  *
- * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
- * @property \App\Model\Table\TagsTable&\Cake\ORM\Association\BelongsToMany $Tags
- *
- * @method \App\Model\Entity\Article newEmptyEntity()
- * @method \App\Model\Entity\Article newEntity(array $data, array $options = [])
- * @method \App\Model\Entity\Article[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Article get($primaryKey, $options = [])
- * @method \App\Model\Entity\Article findOrCreate($search, ?callable $callback = null, $options = [])
- * @method \App\Model\Entity\Article patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Article[] patchEntities(iterable $entities, array $data, array $options = [])
- * @method \App\Model\Entity\Article|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Article saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Article[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
- * @method \App\Model\Entity\Article[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
- * @method \App\Model\Entity\Article[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
- * @method \App\Model\Entity\Article[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
- *
+ * @property \MeowBlog\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
+ * @property \MeowBlog\Model\Table\TagsTable&\Cake\ORM\Association\BelongsToMany $Tags
+ * @method \MeowBlog\Model\Entity\Article newEmptyEntity()
+ * @method \MeowBlog\Model\Entity\Article newEntity(array $data, array $options = [])
+ * @method \MeowBlog\Model\Entity\Article[] newEntities(array $data, array $options = [])
+ * @method \MeowBlog\Model\Entity\Article get($primaryKey, $options = [])
+ * @method \MeowBlog\Model\Entity\Article findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \MeowBlog\Model\Entity\Article patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \MeowBlog\Model\Entity\Article[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \MeowBlog\Model\Entity\Article|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \MeowBlog\Model\Entity\Article saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \MeowBlog\Model\Entity\Article[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \MeowBlog\Model\Entity\Article[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \MeowBlog\Model\Entity\Article[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \MeowBlog\Model\Entity\Article[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
+ * @method \MeowBlog\Model\Entity\Article|\Cake\ORM\Query findBySlug($slug)
  */
 class ArticlesTable extends Table
 {
@@ -117,13 +116,14 @@ class ArticlesTable extends Table
     }
 
     /**
-     * @param EventInterface $event
-     * @param $entity
-     * @param $options
+     * @param \Cake\Event\EventInterface $event Event
+     * @param \MeowBlog\Model\Entity\Article|\Cake\Datasource\EntityInterface $entity Entity
+     * @param array $options Options
      * @return void
      */
-    public function beforeSave(EventInterface $event, $entity, $options)
+    public function beforeSave(EventInterface $event, EntityInterface $entity, $options)
     {
+        /** @var \MeowBlog\Model\Entity\Article $entity */
         if ($entity->isNew() && !$entity->slug) {
             $sluggedTitle = Text::slug($entity->title);
             // trim slug to maximum length defined in schema
@@ -136,9 +136,9 @@ class ArticlesTable extends Table
     }
 
     /**
-     * @param Query $query
-     * @param array $options
-     * @return Query
+     * @param \Cake\ORM\Query $query Server Query
+     * @param array $options Options
+     * @return \Cake\ORM\Query
      */
     public function findTagged(Query $query, array $options): Query
     {
@@ -164,8 +164,8 @@ class ArticlesTable extends Table
     }
 
     /**
-     * @param string $tagString
-     * @return array<Tag> Array of Tag entities
+     * @param string $tagString Tag String
+     * @return array<\MeowBlog\Model\Entity\Tag> Array of Tag entities
      */
     protected function _buildTags(string $tagString): array
     {
@@ -196,6 +196,7 @@ class ArticlesTable extends Table
         foreach ($newTags as $tag) {
             $out[] = $this->Tags->newEntity(['title' => $tag]);
         }
+
         return $out;
     }
 }

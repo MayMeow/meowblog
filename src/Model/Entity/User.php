@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Model\Entity;
+namespace MeowBlog\Model\Entity;
 
 use Authentication\PasswordHasher\DefaultPasswordHasher;
 use Cake\ORM\Entity;
@@ -15,7 +15,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  *
- * @property \App\Model\Entity\Article[] $articles
+ * @property \MeowBlog\Model\Entity\Article[] $articles
  */
 class User extends Entity
 {
@@ -45,9 +45,16 @@ class User extends Entity
         'password',
     ];
 
+    /**
+     * Set user password
+     *
+     * @param string $password Password
+     * @return string
+     */
     protected function _setPassword(string $password)
     {
         $hasher = new DefaultPasswordHasher();
+
         return $hasher->hash($password);
     }
 }

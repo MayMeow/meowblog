@@ -1,20 +1,23 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace MeowBlog\Controller;
 
 use Cake\Event\EventInterface;
 
 /**
  * Users Controller
  *
- * @property \App\Model\Table\UsersTable $Users
- * @method \App\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @property \MeowBlog\Model\Table\UsersTable $Users
+ * @method \MeowBlog\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class UsersController extends AppController
 {
     /**
      * beforeFilter method
+     *
+     * @param \Cake\Event\EventInterface $event event
+     * @return void
      */
     public function beforeFilter(EventInterface $event)
     {
@@ -127,6 +130,7 @@ class UsersController extends AppController
         // If the user is logged in send them away.
         if ($result->isValid()) {
             $target = $this->Authentication->getLoginRedirect() ?? '/home';
+
             return $this->redirect($target);
         }
         if ($this->request->is('post')) {
@@ -134,10 +138,16 @@ class UsersController extends AppController
         }
     }
 
+    /**
+     * Logout method
+     *
+     * @return \Cake\Http\Response|null|void
+     */
     public function logout()
     {
         $this->Authorization->skipAuthorization();
         $this->Authentication->logout();
+
         return $this->redirect(['controller' => 'Users', 'action' => 'login']);
     }
 }

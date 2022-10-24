@@ -1,6 +1,6 @@
 <?php
 /**
- * @var \App\View\AppView $this
+ * @var \MeowBlog\View\AppView $this
  * @var \Cake\Database\StatementInterface $error
  * @var string $message
  * @var string $url

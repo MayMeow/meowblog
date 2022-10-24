@@ -1,6 +1,6 @@
 <?php
 /**
- * @var \App\View\AppView $this
+ * @var \MeowBlog\View\AppView $this
  * @var array $params
  * @var string $message
  */
