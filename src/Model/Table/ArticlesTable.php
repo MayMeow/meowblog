@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace MeowBlog\Model\Table;
 
+use Cake\Datasource\EntityInterface;
 use Cake\Event\EventInterface;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
@@ -121,8 +122,9 @@ class ArticlesTable extends Table
      * @param array $options Options
      * @return void
      */
-    public function beforeSave(EventInterface $event, Article $entity, $options)
+    public function beforeSave(EventInterface $event, EntityInterface $entity, $options)
     {
+        /** @var \MeowBlog\Model\Entity\Article $entity */
         if ($entity->isNew() && !$entity->slug) {
             $sluggedTitle = Text::slug($entity->title);
             // trim slug to maximum length defined in schema
