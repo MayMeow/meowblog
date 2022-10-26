@@ -3,7 +3,7 @@ version: "3.7"
 networks:
   frontend:
     external: true
-  cake_backend:
+  backend:
     internal: true
 
 services:
@@ -18,11 +18,11 @@ services:
     working_dir: /var/www/
     networks:
       - frontend
-      - cake_backend
+      - backend
     depends_on:
       - redis
     volumes:
-      - ./data:/data
+      - $MEOWBLOG_DATA:/data # Change owner of this folder to www-data:www-data
 
   nginx:
     build:
@@ -30,7 +30,7 @@ services:
       dockerfile: Dockerfile
     container_name: nginx
     networks:
-      - cake_backend
+      - backend
       - frontend
     volumes_from:
       - app
@@ -42,7 +42,7 @@ services:
       - redis
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.cake.rule=Host(`cake.domain.sk`)"
+      - "traefik.http.routers.cake.rule=Host(`$MEOWBLOG_DOMAIN`)"
       - "traefik.http.routers.cake.entrypoints=web,websecure"
       - "traefik.http.routers.cake.tls.certresolver=le"
       - "traefik.http.routers.cake.tls.options=mytls@file"
@@ -54,7 +54,7 @@ services:
     image: "redis:alpine"
     container_name: redis
     networks:
-      - cake_backend
+      - backend
 
   # if you need graphic acces to application database
   # adminer:
