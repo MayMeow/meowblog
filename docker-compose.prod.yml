@@ -8,10 +8,10 @@ networks:
 
 services:
   app:
-    build:
-      context: ./
-      dockerfile: ./docker/app/Dockerfile
-    # image: ghcr.io/maymeow/cake-notify/cake-notify:latest
+    # build:
+    #   context: ./
+    #   dockerfile: ./docker/app/Dockerfile
+    image: ghcr.io/maymeow/meowblog/meowblog:latest
     env_file: .env
     container_name: app
     restart: unless-stopped
