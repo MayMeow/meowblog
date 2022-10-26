@@ -45,3 +45,7 @@ nbproject/*
 .sass-cache/
 # Coverage report
 clover.xml
+
+# application speciific files
+.env
+data/app.db
