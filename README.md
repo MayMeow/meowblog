@@ -2,6 +2,12 @@
 
 ## Instalation
 
+Application inside container runs under `www-data:www-data` user.
+
+```bash
+sudo chown -R www-data:www-data data/
+```
+
 Create security key
 
 ```bash

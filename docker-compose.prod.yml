@@ -9,13 +9,10 @@ networks:
 services:
   app:
     build:
-    #   args:
-    #     user: cake
-    #     uid: 1000
       context: ./
       dockerfile: ./docker/app/Dockerfile
     # image: ghcr.io/maymeow/cake-notify/cake-notify:latest
-    env_file: .env.production
+    env_file: .env
     container_name: app
     restart: unless-stopped
     working_dir: /var/www/
@@ -23,20 +20,9 @@ services:
       - frontend
       - cake_backend
     depends_on:
-      - db
       - redis
     volumes:
-      - /var/www
-
-  db:
-    image: postgres:12.4
-    container_name: db
-    networks:
-      - cake_backend
-    restart: unless-stopped
-    volumes:
-      - ./data/db:/var/lib/postgresql/data
-    env_file: .env.production
+      - ./data:/data
 
   nginx:
     build:
@@ -48,12 +34,11 @@ services:
       - frontend
     volumes_from:
       - app
-    # ports:
-    #   - "8088:80"
+    ports:
+      - "8088:80"
     restart: unless-stopped
     depends_on:
       - app
-      - db
       - redis
     labels:
       - "traefik.enable=true"
