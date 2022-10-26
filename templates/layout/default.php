@@ -29,29 +29,40 @@ $cakeDescription = 'Meowblog';
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
 
-    <?= $this->Html->css(['bootstrap.min']) ?>
+    <?= $this->Html->css(['bootstrap.min', 'meowblog']) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <nav class="top-nav mb-5">
-        <div class="container mx-auto">
-            <div class="top-nav-title">
-                <a href="<?= $this->Url->build('/') ?>">
-                    <h1>Meowblog</h1>
-                </a>
+    <div class="container mb-5">
+        <header class="blog-header lh-1 py-3">
+            <div class="row flex-nowrap justify-content-between align-items-center">
+                <div class="col-4 pt-1">
+                    <a class="link-secondary" href="#">Subscribe</a>
+                </div>
+                <div class="col-4 text-center">
+                    <a class="blog-header-logo text-dark" href="<?= $this->Url->build('/')?>">Meowblog</a>
+                </div>
+                <div class="col-4 d-flex justify-content-end align-items-center">
+                    <a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
+                </div>
             </div>
-        </div>
-    </nav>
+        </header>
+    </div>
+
     <main class="main">
         <div class="container mx-auto">
-            <?= $this->Flash->render() ?>
-            <?= $this->fetch('content') ?>
+            <div class="row justify-content-md-center"">
+                <div class="col-md-7">
+                    <?= $this->Flash->render() ?>
+                    <?= $this->fetch('content') ?>
+                </div>
+            </div>
         </div>
     </main>
-    <footer>
+    <footer class="blog-footer">
         <div class="container">
             Powered by <a href="https://meowblog.app/" target="_blank">Meowblog</a>
             v0.0.1

@@ -8,7 +8,7 @@
     <?= $this->Html->link(__('New Article'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <?php foreach ($articles as $article): ?>
         <div id="Article-<?= $this->Number->format($article->id) ?>" class="mb-3">
-            <a href="<?= $this->Url->build(['action' => 'view', $article->slug]) ?>">
+            <a href="<?= $this->Url->build(['action' => 'view', $article->slug]) ?>" class="mb-1 text-dark">
                 <h2><?= h($article->title) ?></h2>
             </a>
             <div><?= h($article->created) ?></div>
