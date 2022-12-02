@@ -28,7 +28,6 @@ services:
   app:
     image: ghcr.io/maymeow/php/runtime:8.1.6
     user: "1000:1000"
-    env_file: .env
     restart: unless-stopped
     working_dir: /var/www/
     depends_on:
@@ -37,15 +36,16 @@ services:
       - .:/var/www/
       - ./data:/data
 
-  # db:
-  #   image: postgres:12.4
-  #   networks:
-  #     - cake
-    # ports:
-    #   - "5432:5432"
-  #   volumes:
-  #     - cake_data:/var/lib/postgresql/data
-  #   env_file: .env
+  db:
+    image: postgres:12.4
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: dev
+      POSTGRES_DB: dev
+      POSTGRES_USER: dev
 
   redis:
     image: "redis:alpine"
@@ -62,7 +62,6 @@ services:
     image: minio/minio:RELEASE.2021-08-05T22-01-19Z
     volumes:
       - minio_data:/data
-    env_file: .env
     command: server /data --console-address :9001
     ports:
       - "9000:9000"
@@ -72,4 +71,6 @@ volumes:
   minio_data:
     driver: local
   redis_data:
+    driver: local
+  db_data:
     driver: local
