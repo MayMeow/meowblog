@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace MeowBlog\Controller;
 
 use Cake\Event\EventInterface;
+use MeowBlog\Services\ArticlesManagerServiceInterface;
 
 /**
  * Articles Controller
@@ -30,13 +31,14 @@ class ArticlesController extends AppController
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
-    public function index()
+    public function index(ArticlesManagerServiceInterface $articlesManager)
     {
+        $this->Authorization->skipAuthorization();
+
         $this->paginate = [
             'contain' => ['Users'],
         ];
-        $this->Authorization->skipAuthorization();
-        $articles = $this->paginate($this->Articles);
+        $articles = $this->paginate($articlesManager->getAll());
 
         $this->set(compact('articles'));
     }
@@ -48,12 +50,10 @@ class ArticlesController extends AppController
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view(string $slug)
+    public function view(string $slug, ArticlesManagerServiceInterface $articlesManager)
     {
         /** @var \Cake\ORM\Query $q */
-        $q = $this->Articles->findBySlug($slug);
-
-        $article = $q->contain(['Users', 'Tags'])->firstOrfail();
+        $article = $articlesManager->getArticle($slug);
         $this->Authorization->skipAuthorization();
 
         $this->set(compact('article'));
@@ -64,14 +64,12 @@ class ArticlesController extends AppController
      *
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add(ArticlesManagerServiceInterface $articlesManager)
     {
         $article = $this->Articles->newEmptyEntity();
         $this->Authorization->authorize($article);
         if ($this->request->is('post')) {
-            $article = $this->Articles->patchEntity($article, $this->request->getData());
-            $article->user_id = $this->request->getAttribute('identity')->getIdentifier();
-            if ($this->Articles->save($article)) {
+            if ($articlesManager->saveToDatabase($article, $this->request)) {
                 $this->Flash->success(__('The article has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
