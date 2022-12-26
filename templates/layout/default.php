@@ -45,7 +45,10 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <?= $this->fetch('content') ?>
         </div>
     </main>
-    <footer>
+    <footer class="container">
+        <small>
+            Meowblog v0.18 <a href="https://github.com/MayMeow/meowblog">Source Code</a>
+        </small>
     </footer>
 </body>
 </html>
