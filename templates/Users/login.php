@@ -1,3 +1,4 @@
+<article class="grid">
 <div class="users form content">
     <?= $this->Form->create() ?>
     <fieldset>
@@ -8,3 +9,4 @@
     <?= $this->Form->button(__('Login')); ?>
     <?= $this->Form->end() ?>
 </div>
+</article>
