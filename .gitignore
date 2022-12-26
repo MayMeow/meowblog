@@ -49,3 +49,6 @@ clover.xml
 # application speciific files
 .env
 data/app.db
+
+# Ignore all :Zone.Identifier files
+*:Zone.Identifier
