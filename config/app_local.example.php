@@ -45,10 +45,10 @@ return [
              */
             //'port' => 'non_standard_port_number',
 
-            'username' => env('DB_USER', null),
+            'username' => env('DB_USERNAME', null),
             'password' => env('DB_PASSWORD', null),
 
-            'database' => env('DB_NAME', null),
+            'database' => env('DB_DATABASE', null),
 
             /*
              * If not using the default 'public' schema with the PostgreSQL driver

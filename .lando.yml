@@ -1,8 +1,9 @@
 name: meowblog
-recipe: laravel
+recipe: lamp
 config:
   php: '8.1'
-  via: apache:2.4
   webroot: webroot
   database: postgres
-  cache: redis
+  services:
+    cache:
+      type: redis

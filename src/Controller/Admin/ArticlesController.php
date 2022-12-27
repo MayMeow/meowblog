@@ -44,6 +44,8 @@ class ArticlesController extends AppController
             'contain' => ['Users', 'Tags'],
         ]);
 
+        $this->Authorization->skipAuthorization();
+
         $this->set(compact('article'));
     }
 
@@ -82,6 +84,7 @@ class ArticlesController extends AppController
         $article = $this->Articles->get($id, [
             'contain' => ['Tags'],
         ]);
+        $this->Authorization->authorize($article);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
@@ -107,6 +110,7 @@ class ArticlesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $article = $this->Articles->get($id);
+        $this->Authorization->authorize($article);
         if ($this->Articles->delete($article)) {
             $this->Flash->success(__('The article has been deleted.'));
         } else {
