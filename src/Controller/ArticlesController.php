@@ -37,6 +37,7 @@ class ArticlesController extends AppController
 
         $this->paginate = [
             'contain' => ['Users'],
+            'order' => ['Articles.created' => 'DESC'],
         ];
         $articles = $this->paginate($articlesManager->getAll());
 

@@ -6,16 +6,20 @@
 ?>
 <div class="articles index content">
     <h3><?= __('Latest Articles') ?></h3>
-    <ul>
+    <div style="margin-bottom: 1em;">
     <?php foreach ($articles as $article): ?>
-        <li>
+        <div>
             <?= $this->Html->link($article->title, [
                 'action' => 'view',
                 $article->slug
             ])?>
-        </li>
+            <small>
+                <?= __('on') ?>
+                <?= $article->created->format('d/m/Y') ?>
+            </small>
+        </div>
     <?php endforeach; ?>
-    </ul>
+    </div>
     <div class="paginator">
         <ul class="pagination">
             <?= $this->Paginator->first('<< ' . __('first')) ?>
