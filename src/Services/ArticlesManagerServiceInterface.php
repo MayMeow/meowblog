@@ -13,23 +13,23 @@ interface ArticlesManagerServiceInterface
      * getArticle function
      *
      * @param string $slug
-     * @return Article
+     * @return \MeowBlog\Model\Entity\Article
      */
     public function getArticle(string $slug): Article;
 
     /**
      * getAll function
      *
-     * @return Table
+     * @return \Cake\ORM\Table
      */
     public function getAll(): Table;
 
     /**
      * saveToDatabase function
      *
-     * @param Article $article model
-     * @param ServerRequest $request from passed request
-     * @return Article|false
+     * @param \MeowBlog\Model\Entity\Article $article model
+     * @param \Cake\Http\ServerRequest $request from passed request
+     * @return \MeowBlog\Model\Entity\Article|false
      */
-    public function saveToDatabase(Article $article, ServerRequest $request): Article|false;
+    public function saveToDatabase(Article $article, ServerRequest $request): Article | false;
 }

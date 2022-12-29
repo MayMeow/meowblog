@@ -11,6 +11,7 @@ use MeowBlog\Model\Entity\Article;
 class ArticlesManagerService implements ArticlesManagerServiceInterface
 {
     use LocatorAwareTrait;
+
     protected Table $articles;
 
     public function __construct()
@@ -27,10 +28,11 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
      * getArticle function
      *
      * @param string $slug
-     * @return Article
+     * @return \MeowBlog\Model\Entity\Article
      */
     public function getArticle(string $slug): Article
     {
+        /** @var \Cake\ORM\Query $q */
         $q = $this->articles->findBySlug($slug);
 
         return $q->contain(['Users', 'Tags'])->firstOrfail();
@@ -39,13 +41,15 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
     /**
      * saveToDatabase function
      *
-     * @param Article $article model
-     * @param ServerRequest $request from passed request
-     * @return Article|false
+     * @param \MeowBlog\Model\Entity\Article $article model
+     * @param \Cake\Http\ServerRequest $request from passed request
+     * @return \MeowBlog\Model\Entity\Article|false
      */
-    public function saveToDatabase(Article $article, ServerRequest $request): Article|false
+    public function saveToDatabase(Article $article, ServerRequest $request): Article | false
     {
         $article = $this->articles->patchEntity($article, $request->getData());
+
+        /** @var \MeowBlog\Model\Entity\Article $article */
         $article->user_id = $request->getAttribute('identity')->getIdentifier();
 
         return $this->articles->save($article);

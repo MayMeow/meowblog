@@ -53,7 +53,6 @@ class ArticlesController extends AppController
      */
     public function view(string $slug, ArticlesManagerServiceInterface $articlesManager)
     {
-        /** @var \Cake\ORM\Query $q */
         $article = $articlesManager->getArticle($slug);
         $this->Authorization->skipAuthorization();
 

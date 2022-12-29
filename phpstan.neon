@@ -7,3 +7,4 @@ parameters:
         - plugins
     excludes_analyse:
         - src/Console/Installer.php
+        - plugins/Markdown/vendor

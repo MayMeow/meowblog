@@ -5,7 +5,6 @@ namespace MeowBlog\Test\TestCase\Controller;
 
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
-use MeowBlog\Controller\HomeController;
 
 /**
  * MeowBlog\Controller\HomeController Test Case

@@ -5,7 +5,6 @@ namespace MeowBlog\Controller;
 
 /**
  * Home Controller
- *
  */
 class HomeController extends AppController
 {
