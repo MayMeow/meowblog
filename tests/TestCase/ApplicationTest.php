@@ -29,6 +29,7 @@ use MeowBlog\Application;
  */
 class ApplicationTest extends IntegrationTestCase
 {
+    const APP_PLUGIN_COUNT = 7;
     /**
      * testBootstrap
      *
@@ -40,7 +41,7 @@ class ApplicationTest extends IntegrationTestCase
         $app->bootstrap();
         $plugins = $app->getPlugins();
 
-        $this->assertCount(6, $plugins);
+        $this->assertCount(static::APP_PLUGIN_COUNT, $plugins);
         $this->assertSame('Bake', $plugins->get('Bake')->getName());
         $this->assertSame('DebugKit', $plugins->get('DebugKit')->getName());
         $this->assertSame('Migrations', $plugins->get('Migrations')->getName());
