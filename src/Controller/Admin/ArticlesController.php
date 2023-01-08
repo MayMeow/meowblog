@@ -52,6 +52,7 @@ class ArticlesController extends AppController
     /**
      * Add method
      *
+     * @param \MeowBlog\Services\ArticlesManagerServiceInterface $articlesManager articlesManager
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
     public function add(ArticlesManagerServiceInterface $articlesManager)

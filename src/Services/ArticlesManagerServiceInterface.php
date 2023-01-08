@@ -12,7 +12,7 @@ interface ArticlesManagerServiceInterface
     /**
      * getArticle function
      *
-     * @param string $slug
+     * @param string $slug slug
      * @return \MeowBlog\Model\Entity\Article
      */
     public function getArticle(string $slug): Article;

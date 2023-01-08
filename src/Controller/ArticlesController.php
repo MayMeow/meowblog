@@ -29,6 +29,7 @@ class ArticlesController extends AppController
     /**
      * Index method
      *
+     * @param \MeowBlog\Services\ArticlesManagerServiceInterface $articlesManager articlesManager
      * @return \Cake\Http\Response|null|void Renders view
      */
     public function index(ArticlesManagerServiceInterface $articlesManager)
@@ -48,6 +49,7 @@ class ArticlesController extends AppController
      * View method
      *
      * @param string $slug slug
+     * @param \MeowBlog\Services\ArticlesManagerServiceInterface $articlesManager articlesManager
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
@@ -62,6 +64,7 @@ class ArticlesController extends AppController
     /**
      * Add method
      *
+     * @param \MeowBlog\Services\ArticlesManagerServiceInterface $articlesManager articlesManager
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
     public function add(ArticlesManagerServiceInterface $articlesManager)

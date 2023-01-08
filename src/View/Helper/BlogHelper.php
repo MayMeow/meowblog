@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace MeowBlog\View\Helper;
 
 use Cake\View\Helper;
-use Cake\View\View;
 
 /**
  * Blog helper
@@ -33,5 +32,4 @@ class BlogHelper extends Helper
 
         return false;
     }
-
 }

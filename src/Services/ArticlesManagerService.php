@@ -12,13 +12,24 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
 {
     use LocatorAwareTrait;
 
+    /**
+     * @var \Cake\ORM\Table $articles
+     */
     protected Table $articles;
 
+    /**
+     * __construct function
+     */
     public function __construct()
     {
         $this->articles = $this->fetchTable('Articles');
     }
 
+    /**
+     * getAll function
+     *
+     * @return \Cake\ORM\Table
+     */
     public function getAll(): Table
     {
         return $this->articles;
@@ -27,7 +38,7 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
     /**
      * getArticle function
      *
-     * @param string $slug
+     * @param string $slug slug
      * @return \MeowBlog\Model\Entity\Article
      */
     public function getArticle(string $slug): Article
