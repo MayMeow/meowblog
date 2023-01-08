@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace MeowBlog\Controller;
+namespace MeowBlog\Controller\Admin;
 
-use Cake\Event\EventInterface;
+use MeowBlog\Controller\AppController;
 use MeowBlog\Services\ArticlesManagerServiceInterface;
 
 /**
@@ -15,32 +15,18 @@ use MeowBlog\Services\ArticlesManagerServiceInterface;
 class ArticlesController extends AppController
 {
     /**
-     * beforeFilter method
-     *
-     * @param \Cake\Event\EventInterface $event event
-     * @return void
-     */
-    public function beforeFilter(EventInterface $event)
-    {
-        parent::beforeFilter($event);
-        $this->Authentication->allowUnauthenticated(['index', 'tags', 'view']);
-    }
-
-    /**
      * Index method
      *
-     * @param \MeowBlog\Services\ArticlesManagerServiceInterface $articlesManager articlesManager
      * @return \Cake\Http\Response|null|void Renders view
      */
-    public function index(ArticlesManagerServiceInterface $articlesManager)
+    public function index()
     {
         $this->Authorization->skipAuthorization();
 
         $this->paginate = [
             'contain' => ['Users'],
-            'order' => ['Articles.created' => 'DESC'],
         ];
-        $articles = $this->paginate($articlesManager->getAll());
+        $articles = $this->paginate($this->Articles);
 
         $this->set(compact('articles'));
     }
@@ -48,14 +34,16 @@ class ArticlesController extends AppController
     /**
      * View method
      *
-     * @param string $slug slug
-     * @param \MeowBlog\Services\ArticlesManagerServiceInterface $articlesManager articlesManager
+     * @param string|null $id Article id.
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view(string $slug, ArticlesManagerServiceInterface $articlesManager)
+    public function view($id = null)
     {
-        $article = $articlesManager->getArticle($slug);
+        $article = $this->Articles->get($id, [
+            'contain' => ['Users', 'Tags'],
+        ]);
+
         $this->Authorization->skipAuthorization();
 
         $this->set(compact('article'));
@@ -71,6 +59,7 @@ class ArticlesController extends AppController
     {
         $article = $this->Articles->newEmptyEntity();
         $this->Authorization->authorize($article);
+
         if ($this->request->is('post')) {
             if ($articlesManager->saveToDatabase($article, $this->request)) {
                 $this->Flash->success(__('The article has been saved.'));
@@ -87,17 +76,15 @@ class ArticlesController extends AppController
     /**
      * Edit method
      *
-     * @param string $slug Article islug
+     * @param string|null $id Article id.
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit(string $slug)
+    public function edit($id = null)
     {
-        /** @var \Cake\ORM\Query $q */
-        $q = $this->Articles->findBySlug($slug);
-
-        /** @var \Cake\Datasource\EntityInterface $article */
-        $article = $q->contain(['Tags'])->firstOrFail();
+        $article = $this->Articles->get($id, [
+            'contain' => ['Tags'],
+        ]);
         $this->Authorization->authorize($article);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
@@ -116,19 +103,14 @@ class ArticlesController extends AppController
     /**
      * Delete method
      *
-     * @param string $slug slug
+     * @param string|null $id Article id.
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete(string $slug)
+    public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-
-        /** @var \Cake\ORM\Query $q */
-        $q = $this->Articles->findBySlug($slug);
-
-        /** @var \Cake\Datasource\EntityInterface $article */
-        $article = $q->firstOrFail();
+        $article = $this->Articles->get($id);
         $this->Authorization->authorize($article);
         if ($this->Articles->delete($article)) {
             $this->Flash->success(__('The article has been deleted.'));
@@ -137,23 +119,5 @@ class ArticlesController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
-    }
-
-    /**
-     * @param string ...$tags tags
-     * @return void
-     */
-    public function tags(string ...$tags)
-    {
-        $articles = $this->Articles->find('tagged', [
-            'tags' => $tags,
-        ])->contain(['Tags'])->all();
-        $this->Authorization->skipAuthorization();
-
-        $this->set([
-            'articles' => $articles,
-            'tags' => $tags,
-            //'_serialize' => ['articles', 'tags']
-        ]);
     }
 }

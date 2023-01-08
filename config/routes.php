@@ -78,6 +78,10 @@ $routes->scope('/', function (RouteBuilder $builder) {
         $builder->connect('/v/{slug}', ['controller' => 'Articles', 'action' => 'view'])->setPass(['slug']);
     });
 
+    $builder->prefix('Admin', function (RouteBuilder $builder) {
+        $builder->fallbacks();
+    });
+
     $builder->fallbacks();
 });
 

@@ -10,6 +10,6 @@
         at <?= $article->created ?> by <?= $article->user->email ?>
     </div>
     <div>
-        <?= $article->body ?>
+        <?= $this->Markdown->parse($article->body); ?>
     </div>
 </div>

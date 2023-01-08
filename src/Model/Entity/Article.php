@@ -21,6 +21,7 @@ use Cake\ORM\Entity;
  * @property \MeowBlog\Model\Entity\User $user
  * @property \MeowBlog\Model\Entity\Tag[] $tags
  * @property string $tag_string
+ * @method \MeowBlog\Model\Entity\Article findBySlug($slug)
  */
 class Article extends Entity
 {
