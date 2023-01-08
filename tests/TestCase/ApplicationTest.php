@@ -29,7 +29,8 @@ use MeowBlog\Application;
  */
 class ApplicationTest extends IntegrationTestCase
 {
-    const APP_PLUGIN_COUNT = 7;
+    protected const APP_PLUGIN_COUNT = 7;
+
     /**
      * testBootstrap
      *
