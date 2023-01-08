@@ -92,7 +92,7 @@ class ArticlesController extends AppController
         $article = $this->Articles->get($id, [
             'contain' => ['Tags'],
         ]);
-        
+
         try {
             $this->Authorization->authorize($article);
         } catch (ForbiddenException $e) {
@@ -134,7 +134,7 @@ class ArticlesController extends AppController
 
             return $this->redirect($this->referer());
         }
-        
+
         if ($this->Articles->delete($article)) {
             $this->Flash->success(__('The article has been deleted.'));
         } else {
