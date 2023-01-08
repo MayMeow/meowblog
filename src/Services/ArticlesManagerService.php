@@ -43,10 +43,16 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
      */
     public function getArticle(string $slug): Article
     {
-        /** @var \Cake\ORM\Query $q */
-        $q = $this->articles->findBySlug($slug);
+        /** @var \MeowBlog\Model\Entity\Article $at */
+        $at = $this->articles;
 
-        return $q->contain(['Users', 'Tags'])->firstOrfail();
+        /** @var \Cake\ORM\Query $q */
+        $q = $at->findBySlug($slug);
+
+        /** @var \MeowBlog\Model\Entity\Article $article */
+        $article = $q->contain(['Users', 'Tags'])->firstOrfail();
+
+        return $article;
     }
 
     /**
@@ -63,6 +69,9 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
         /** @var \MeowBlog\Model\Entity\Article $article */
         $article->user_id = $request->getAttribute('identity')->getIdentifier();
 
-        return $this->articles->save($article);
+        /** @var \MeowBlog\Model\Entity\Article $savedArticle */
+        $savedArticle = $this->articles->save($article);
+
+        return $savedArticle;
     }
 }
