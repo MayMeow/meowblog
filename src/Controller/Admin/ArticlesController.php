@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace MeowBlog\Controller\Admin;
 
+use Authorization\Exception\ForbiddenException;
 use MeowBlog\Controller\AppController;
 use MeowBlog\Services\ArticlesManagerServiceInterface;
 
@@ -58,7 +59,13 @@ class ArticlesController extends AppController
     public function add(ArticlesManagerServiceInterface $articlesManager)
     {
         $article = $this->Articles->newEmptyEntity();
-        $this->Authorization->authorize($article);
+        try {
+            $this->Authorization->authorize($article);
+        } catch (ForbiddenException $e) {
+            $this->Flash->error(__('You are not allowed to create articles.'));
+
+            return $this->redirect($this->referer());
+        }
 
         if ($this->request->is('post')) {
             if ($articlesManager->saveToDatabase($article, $this->request)) {
@@ -85,7 +92,15 @@ class ArticlesController extends AppController
         $article = $this->Articles->get($id, [
             'contain' => ['Tags'],
         ]);
-        $this->Authorization->authorize($article);
+
+        try {
+            $this->Authorization->authorize($article);
+        } catch (ForbiddenException $e) {
+            $this->Flash->error(__('You are not allowed to edit this article.'));
+
+            return $this->redirect($this->referer());
+        }
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
@@ -111,7 +126,15 @@ class ArticlesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $article = $this->Articles->get($id);
-        $this->Authorization->authorize($article);
+
+        try {
+            $this->Authorization->authorize($article);
+        } catch (ForbiddenException $e) {
+            $this->Flash->error(__('You are not allowed to delete this article.'));
+
+            return $this->redirect($this->referer());
+        }
+
         if ($this->Articles->delete($article)) {
             $this->Flash->success(__('The article has been deleted.'));
         } else {

@@ -43,7 +43,7 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
      */
     public function getArticle(string $slug): Article
     {
-        /** @var \MeowBlog\Model\Entity\Article $at */
+        /** @var \MeowBlog\Model\Table\ArticlesTable $at */
         $at = $this->articles;
 
         /** @var \Cake\ORM\Query $q */
