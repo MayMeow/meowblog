@@ -81,6 +81,10 @@ class UsersTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->isUnique(['email']), ['errorField' => 'email']);
+        $rules->addDelete($rules->isNotLinkedTo(
+            'Articles',
+            message: 'This user has articles. Please delete them first.'
+        ));
 
         return $rules;
     }
