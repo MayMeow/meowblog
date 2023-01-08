@@ -37,9 +37,23 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <main class="container">
         <div id="app">
             <div id="header">
-                <h1>
-                    <?= $this->Html->link('Meowblog.app', url:'/') ?>
-                </h1>
+                <nav>
+                    <ul>
+                        <li>
+                            <strong>
+                                <?= $this->Html->link('Meowblog.app', url:'/') ?>
+                            </strong>
+                        </li>
+                    </ul>
+                    <ul>
+                        <?php if ($this->Blog->isLoggedIn()) : ?>
+                            <li><a href="/home">Admin</a></li>
+                            <li><a href="/users/logout" role="button">Logout</a></li>
+                        <?php else : ?>
+                            <li><a href="/users/login" role="button">Login</a></li>
+                        <?php endif; ?>
+                    </ul>
+                </nav>
             </div>
             <?= $this->Flash->render() ?>
             <?= $this->fetch('content') ?>

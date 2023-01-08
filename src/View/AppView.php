@@ -24,6 +24,7 @@ use Cake\View\View;
  *
  * @link https://book.cakephp.org/4/en/views.html#the-app-view
  * @property \Markdown\View\Helper\MarkdownHelper $Markdown
+ * @property \MeowBlog\View\Helper\BlogHelper $Blog
  */
 class AppView extends View
 {
@@ -39,5 +40,6 @@ class AppView extends View
     public function initialize(): void
     {
         $this->loadHelper('Markdown.Markdown');
+        $this->loadHelper('Blog');
     }
 }
