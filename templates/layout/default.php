@@ -42,7 +42,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                         <li>
                             <strong>
                                 <?= $this->Html->link('Meowblog.app', url:'/') ?>
-                            </strong>
+                            </strong> <br />
+                            <small>Simple blogging app made with PHP</small>
                         </li>
                     </ul>
                     <ul>

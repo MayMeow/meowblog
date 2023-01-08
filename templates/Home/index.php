@@ -16,10 +16,17 @@
         ]); ?>
         </li>
         <li>
-        <?= $this->Html->link('Logout', [
-            'action' => 'Logout',
-            'controller' => 'Users',
-            'prefix' => false
+        <?= $this->Html->link('Tags', [
+            'action' => 'Index',
+            'controller' => 'Articles',
+            'prefix' => 'Admin'
+        ]); ?>
+        </li>
+        <li>
+        <?= $this->Html->link('Users', [
+            'action' => 'Index',
+            'controller' => 'Articles',
+            'prefix' => 'Admin'
         ]); ?>
         </li>
     </ul>
