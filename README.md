@@ -48,7 +48,7 @@ lando composer install
 lando php bin/cake.php migrations migrate
 ```
 
-## For frontend
+### For frontend
 
 ```bash
 fnm install # to install node - optionally
@@ -59,3 +59,5 @@ yarn build
 Source codes for frontend are stored in `webroot_src`, currently only styles which is slightly modified picocss.
 
 ‼️ After successfull build you need to change css path in `templates/layout/default.php`. (not ideal but for now it is like it is).
+
+Application build is located in `webroot/app`.
