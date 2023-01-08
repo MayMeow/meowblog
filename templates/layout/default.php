@@ -27,7 +27,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css(['pico.min']) ?>
+    <?= $this->Html->css(['/app/assets/index-4dfde9ce']) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
