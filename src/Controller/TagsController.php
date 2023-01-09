@@ -5,6 +5,7 @@ namespace MeowBlog\Controller;
 
 use Cake\Event\EventInterface;
 use Authorization\Exception\ForbiddenException;
+use MeowBlog\Services\TagsManagerService;
 use MeowBlog\Services\TagsManagerServiceInterface;
 
 /**
@@ -42,13 +43,11 @@ class TagsController extends AppController
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view($id = null, TagsManagerServiceInterface $tagsManager)
     {
         $this->Authorization->skipAuthorization();
 
-        $tag = $this->Tags->get($id, [
-            'contain' => ['Articles'],
-        ]);
+        $tag = $tagsManager->getOne((int)$id);
 
         $this->set(compact('tag'));
     }
@@ -58,13 +57,13 @@ class TagsController extends AppController
      *
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add(TagsManagerServiceInterface $tagsManager)
     {
         $tag = $this->Tags->newEmptyEntity();
         $this->Authorization->authorize($tag);
+
         if ($this->request->is('post')) {
-            $tag = $this->Tags->patchEntity($tag, $this->request->getData());
-            if ($this->Tags->save($tag)) {
+            if ($tagsManager->saveToDatabase($tag, $this->request)) {
                 $this->Flash->success(__('The tag has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
@@ -82,15 +81,13 @@ class TagsController extends AppController
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit(TagsManagerServiceInterface $tagsManager, $id = null)
     {
-        $tag = $this->Tags->get($id, [
-            'contain' => ['Articles'],
-        ]);
+        $tag = $tagsManager->getOne((int)$id);
+
         $this->Authorization->authorize($tag);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $tag = $this->Tags->patchEntity($tag, $this->request->getData());
-            if ($this->Tags->save($tag)) {
+            if ($tagsManager->saveToDatabase($tag, $this->request)) {
                 $this->Flash->success(__('The tag has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
@@ -108,14 +105,12 @@ class TagsController extends AppController
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
+    public function delete($id = null, TagsManagerServiceInterface $tagsManager)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $tag = $this->Tags->find()
-            ->where(['id' => $id])
-            ->contain(['Articles'])
-            ->firstOrFail();
+        $tag = $tagsManager->getOne((int)$id);
         $this->Authorization->authorize($tag);
+
         if ($this->Tags->delete($tag)) {
             $this->Flash->success(__('The tag has been deleted.'));
         } else {
