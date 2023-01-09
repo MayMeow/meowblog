@@ -5,6 +5,7 @@ namespace MeowBlog\Controller;
 
 use Cake\Event\EventInterface;
 use Authorization\Exception\ForbiddenException;
+use MeowBlog\Services\TagsManagerServiceInterface;
 
 /**
  * Tags Controller
@@ -25,11 +26,11 @@ class TagsController extends AppController
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
-    public function index()
+    public function index(TagsManagerServiceInterface $tagsManager)
     {
         $this->Authorization->skipAuthorization();
 
-        $tags = $this->paginate($this->Tags);
+        $tags = $this->paginate($tagsManager->getAll());
 
         $this->set(compact('tags'));
     }

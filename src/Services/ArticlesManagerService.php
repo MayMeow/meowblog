@@ -7,6 +7,7 @@ use Cake\Http\ServerRequest;
 use Cake\ORM\Locator\LocatorAwareTrait;
 use Cake\ORM\Table;
 use MeowBlog\Model\Entity\Article;
+use MeowBlog\Model\Table\ArticlesTable;
 
 class ArticlesManagerService implements ArticlesManagerServiceInterface
 {
@@ -15,7 +16,7 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
     /**
      * @var \Cake\ORM\Table $articles
      */
-    protected Table $articles;
+    protected Table|ArticlesTable $articles;
 
     /**
      * __construct function
