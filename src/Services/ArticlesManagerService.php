@@ -16,7 +16,7 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
     /**
      * @var \Cake\ORM\Table $articles
      */
-    protected Table|ArticlesTable $articles;
+    protected Table | ArticlesTable $articles;
 
     /**
      * __construct function

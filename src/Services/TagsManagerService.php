@@ -17,10 +17,13 @@ class TagsManagerService implements TagsManagerServiceInterface
     /**
      * Undocumented variable
      *
-     * @var Table|TagsTable
+     * @var \Cake\ORM\Table|\MeowBlog\Model\Table\TagsTable
      */
-    protected Table|TagsTable $tags;
+    protected Table | TagsTable $tags;
 
+    /**
+     * TagsManagerService constructor.
+     */
     public function __construct()
     {
         $this->tags = $this->fetchTable('Tags');
@@ -29,9 +32,9 @@ class TagsManagerService implements TagsManagerServiceInterface
     /**
      * Undocumented function
      *
-     * @return Table|TagsTable
+     * @return \Cake\ORM\Table|\MeowBlog\Model\Table\TagsTable
      */
-    public function getAll(): Table|TagsTable
+    public function getAll(): Table | TagsTable
     {
         return $this->tags;
     }
@@ -39,10 +42,10 @@ class TagsManagerService implements TagsManagerServiceInterface
     /**
      * getOne function
      *
-     * @param integer $id Tag ID
-     * @return EntityInterface|Tag
+     * @param int $id Tag ID
+     * @return \Cake\Datasource\EntityInterface|\MeowBlog\Model\Entity\Tag
      */
-    public function getOne(int $id): EntityInterface|Tag
+    public function getOne(int $id): EntityInterface | Tag
     {
         return $this->tags->get($id, [
             'contain' => ['Articles'],
@@ -52,11 +55,11 @@ class TagsManagerService implements TagsManagerServiceInterface
     /**
      * saveToDatabase function
      *
-     * @param Tag $tag Tag
-     * @param ServerRequest $request Request
-     * @return Tag|false
+     * @param \MeowBlog\Model\Entity\Tag $tag Tag
+     * @param \Cake\Http\ServerRequest $request Request
+     * @return \MeowBlog\Model\Entity\Tag|false
      */
-    public function saveToDatabase(Tag $tag, ServerRequest $request): Tag|false
+    public function saveToDatabase(Tag $tag, ServerRequest $request): Tag | false
     {
         $tag = $this->tags->patchEntity($tag, $request->getData());
 

@@ -15,7 +15,7 @@ class TagPolicy
      * Check if $user can add Tag
      *
      * @param \Authorization\IdentityInterface $user The user.
-     * @param \MeowBlog\Model\Entity\Tag $tag
+     * @param \MeowBlog\Model\Entity\Tag $tag Tag
      * @return bool
      */
     public function canAdd(IdentityInterface $user, Tag $tag)
@@ -27,7 +27,7 @@ class TagPolicy
      * Check if $user can edit Tag
      *
      * @param \Authorization\IdentityInterface $user The user.
-     * @param \MeowBlog\Model\Entity\Tag $tag
+     * @param \MeowBlog\Model\Entity\Tag $tag Tag
      * @return bool
      */
     public function canEdit(IdentityInterface $user, Tag $tag)
@@ -39,7 +39,7 @@ class TagPolicy
      * Check if $user can delete Tag
      *
      * @param \Authorization\IdentityInterface $user The user.
-     * @param \MeowBlog\Model\Entity\Tag $tag
+     * @param \MeowBlog\Model\Entity\Tag $tag Tag
      * @return bool
      */
     public function canDelete(IdentityInterface $user, Tag $tag)
@@ -51,10 +51,11 @@ class TagPolicy
      * Check if $user can view Tag
      *
      * @param \Authorization\IdentityInterface $user The user.
-     * @param \MeowBlog\Model\Entity\Tag $tag
+     * @param \MeowBlog\Model\Entity\Tag $tag Tag
      * @return bool
      */
     public function canView(IdentityInterface $user, Tag $tag)
     {
+        return true;
     }
 }

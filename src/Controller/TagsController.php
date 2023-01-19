@@ -4,8 +4,6 @@ declare(strict_types=1);
 namespace MeowBlog\Controller;
 
 use Cake\Event\EventInterface;
-use Authorization\Exception\ForbiddenException;
-use MeowBlog\Services\TagsManagerService;
 use MeowBlog\Services\TagsManagerServiceInterface;
 
 /**
@@ -16,6 +14,12 @@ use MeowBlog\Services\TagsManagerServiceInterface;
  */
 class TagsController extends AppController
 {
+    /**
+     * beforeFilter function
+     *
+     * @param \Cake\Event\EventInterface $event Event Interface
+     * @return void
+     */
     public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
@@ -25,6 +29,7 @@ class TagsController extends AppController
     /**
      * Index method
      *
+     * @param \MeowBlog\Services\TagsManagerServiceInterface $tagsManager Tags manager service.
      * @return \Cake\Http\Response|null|void Renders view
      */
     public function index(TagsManagerServiceInterface $tagsManager)
@@ -39,11 +44,12 @@ class TagsController extends AppController
     /**
      * View method
      *
-     * @param string|null $id Tag id.
+     * @param string $id Tag id.
+     * @param \MeowBlog\Services\TagsManagerServiceInterface $tagsManager Tags manager service.
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null, TagsManagerServiceInterface $tagsManager)
+    public function view(string $id, TagsManagerServiceInterface $tagsManager)
     {
         $this->Authorization->skipAuthorization();
 
@@ -55,6 +61,7 @@ class TagsController extends AppController
     /**
      * Add method
      *
+     * @param \MeowBlog\Services\TagsManagerServiceInterface $tagsManager Tags manager service.
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
     public function add(TagsManagerServiceInterface $tagsManager)
@@ -77,11 +84,12 @@ class TagsController extends AppController
     /**
      * Edit method
      *
-     * @param string|null $id Tag id.
+     * @param \MeowBlog\Services\TagsManagerServiceInterface $tagsManager Tags manager service.
+     * @param string $id Tag id.
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit(TagsManagerServiceInterface $tagsManager, $id = null)
+    public function edit(TagsManagerServiceInterface $tagsManager, string $id)
     {
         $tag = $tagsManager->getOne((int)$id);
 
@@ -101,11 +109,12 @@ class TagsController extends AppController
     /**
      * Delete method
      *
-     * @param string|null $id Tag id.
+     * @param string $id Tag id.
+     * @param \MeowBlog\Services\TagsManagerServiceInterface $tagsManager Tags manager service.
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null, TagsManagerServiceInterface $tagsManager)
+    public function delete(string $id, TagsManagerServiceInterface $tagsManager)
     {
         $this->request->allowMethod(['post', 'delete']);
         $tag = $tagsManager->getOne((int)$id);

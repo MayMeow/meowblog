@@ -7,31 +7,30 @@ use Cake\Datasource\EntityInterface;
 use Cake\Http\ServerRequest;
 use Cake\ORM\Table;
 use MeowBlog\Model\Entity\Tag;
-use MeowBlog\Model\Table\TagsTable;
 
 interface TagsManagerServiceInterface
 {
     /**
      * getAll function
      *
-     * @return Table|TagsTable
+     * @return \Cake\ORM\Table|\MeowBlog\Services\TagsTable
      */
-    public function getAll(): Table|TagsTable;
+    public function getAll(): Table | TagsTable;
 
     /**
      * getOne function
      *
-     * @param integer $id Tag ID
-     * @return EntityInterface|Tag
+     * @param int $id Tag ID
+     * @return \Cake\Datasource\EntityInterface|\MeowBlog\Model\Entity\Tag
      */
-    public function getOne(int $id): EntityInterface|Tag;
+    public function getOne(int $id): EntityInterface | Tag;
 
     /**
      * saveToDatabase function
      *
-     * @param Tag $tag Tag
-     * @param ServerRequest $request Request
-     * @return Tag|false
+     * @param \MeowBlog\Model\Entity\Tag $tag Tag
+     * @param \Cake\Http\ServerRequest $request Request
+     * @return \MeowBlog\Model\Entity\Tag|false
      */
     public function saveToDatabase(Tag $tag, ServerRequest $request): Tag | false;
 }
