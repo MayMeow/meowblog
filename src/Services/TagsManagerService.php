@@ -22,7 +22,7 @@ class TagsManagerService implements TagsManagerServiceInterface
     protected Table | TagsTable $tags;
 
     /**
-     * TagsManagerService constructor.
+     * TagsManagerService 
      */
     public function __construct()
     {

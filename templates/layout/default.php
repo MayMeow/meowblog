@@ -27,7 +27,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css(['/app/assets/index-4dfde9ce']) ?>
+    <?= $this->Html->css(['/app/assets/index-4dfde9ce', 'https://cdn.maymeow.com/css/prism.css']) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -65,5 +65,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             Meowblog v0.18 <a href="https://github.com/MayMeow/meowblog">Source Code</a>
         </small>
     </footer>
+
+    <?= $this->Html->script(['https://cdn.maymeow.com/js/prism.js']) ?>
 </body>
 </html>
