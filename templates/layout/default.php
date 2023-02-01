@@ -13,7 +13,7 @@ $appDescription = 'Meowblog';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css(['/app/assets/index-55952cb6', 'https://cdn.maymeow.com/css/prism.css']) ?>
+    <?= $this->Html->css(['/app/assets/index-62d919fa', 'https://cdn.maymeow.com/css/prism.css']) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>

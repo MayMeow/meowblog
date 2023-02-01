@@ -49,9 +49,16 @@
             </table>
             <div class="text">
                 <strong><?= __('Body') ?></strong>
-                <blockquote>
-                    <?= $this->Text->autoParagraph(h($article->body)); ?>
-                </blockquote>
+                <div class="grid">
+                    <div>
+                    <blockquote>
+                        <?= $this->Text->autoParagraph(h($article->body)); ?>
+                    </blockquote>
+                    </div>
+                    <div>
+                        <?= $this->Markdown->parse($article->body) ?>
+                    </div>
+                </div>
             </div>
             <div class="related">
                 <h4><?= __('Related Tags') ?></h4>
