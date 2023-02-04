@@ -1,20 +1,5 @@
 <?php
-/**
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         0.10.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- * @var \MeowBlog\View\AppView $this
- */
-
-$cakeDescription = 'CakePHP: the rapid development php framework';
+$appVersion = '0.19';
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,7 +12,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css(['/app/assets/index-4dfde9ce']) ?>
+    <?= $this->Html->css(['/app/assets/index-4dfde9ce', 'https://cdn.maymeow.com/css/prism.css']) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -47,6 +32,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                         </li>
                     </ul>
                     <ul>
+                        <li><a href="/tags">Tags</a></li>
                         <?php if ($this->Blog->isLoggedIn()) : ?>
                             <li><a href="/home">Admin</a></li>
                             <li><a href="/users/logout" role="button">Logout</a></li>
@@ -62,8 +48,10 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </main>
     <footer class="container">
         <small>
-            Meowblog v0.18 <a href="https://github.com/MayMeow/meowblog">Source Code</a>
+            Meowblog v<?= $appVersion ?> <a href="https://github.com/MayMeow/meowblog">Source Code</a>
         </small>
     </footer>
+
+    <?= $this->Html->script(['https://cdn.maymeow.com/js/prism.js']) ?>
 </body>
 </html>

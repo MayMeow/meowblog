@@ -41,6 +41,8 @@ use Cake\Routing\Middleware\RoutingMiddleware;
 use Cake\Routing\Router;
 use MeowBlog\Services\ArticlesManagerService;
 use MeowBlog\Services\ArticlesManagerServiceInterface;
+use MeowBlog\Services\TagsManagerService;
+use MeowBlog\Services\TagsManagerServiceInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
@@ -149,6 +151,7 @@ class Application extends BaseApplication implements
     public function services(ContainerInterface $container): void
     {
         $container->add(ArticlesManagerServiceInterface::class, ArticlesManagerService::class);
+        $container->add(TagsManagerServiceInterface::class, TagsManagerService::class);
     }
 
     /**

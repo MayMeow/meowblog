@@ -80,6 +80,11 @@ class TagsTable extends Table
     {
         $rules->add($rules->isUnique(['title']), ['errorField' => 'title']);
 
+        $rules->addDelete($rules->isNotLinkedTo(
+            'Articles',
+            message: 'This tag cannot be deleted because it is linked to articles.'
+        ));
+
         return $rules;
     }
 }

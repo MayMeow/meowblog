@@ -50,9 +50,18 @@ services:
       - "traefik.http.routers.cake.service=cake"
       - "traefik.docker.network=frontend"
 
+  postgres:
+    image: postgres:12.4
+    container_name: database
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    env_file: .env
+    networks:
+      - backend
+
   redis:
     image: "redis:alpine"
-    container_name: redis
+    container_name: cache
     networks:
       - backend
 
