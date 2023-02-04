@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace MeowBlog\Controller\Admin;
 
 use MeowBlog\Controller\AppController;
+use MeowBlog\Services\UsersManagerServiceInterface;
 
 /**
  * Users Controller
@@ -18,9 +19,10 @@ class UsersController extends AppController
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
-    public function index()
+    public function index(UsersManagerServiceInterface $usersManager)
     {
-        $users = $this->paginate($this->Users);
+        $this->Authorization->skipAuthorization();
+        $users = $this->paginate($usersManager->getAll());
 
         $this->set(compact('users'));
     }
@@ -32,11 +34,10 @@ class UsersController extends AppController
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view($id, UsersManagerServiceInterface $usersManager)
     {
-        $user = $this->Users->get($id, [
-            'contain' => ['Articles'],
-        ]);
+        $user = $usersManager->getOne($id, true);
+        $this->Authorization->authorize($user);
 
         $this->set(compact('user'));
     }
@@ -46,12 +47,13 @@ class UsersController extends AppController
      *
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add(UsersManagerServiceInterface $usersManager)
     {
         $user = $this->Users->newEmptyEntity();
+        $this->Authorization->authorize($user);
+
         if ($this->request->is('post')) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
-            if ($this->Users->save($user)) {
+            if ($usersManager->saveToDatabase($user, $this->request)) {
                 $this->Flash->success(__('The user has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
@@ -68,14 +70,13 @@ class UsersController extends AppController
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit($id, UsersManagerServiceInterface $userManager)
     {
-        $user = $this->Users->get($id, [
-            'contain' => [],
-        ]);
+        $user = $userManager->getOne($id);
+        $this->Authorization->authorize($user);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
-            if ($this->Users->save($user)) {
+            if ($userManager->saveToDatabase($user, $this->request)) {
                 $this->Flash->success(__('The user has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
@@ -92,10 +93,12 @@ class UsersController extends AppController
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
+    public function delete($id, UsersManagerServiceInterface $usersManager)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $user = $this->Users->get($id);
+        $user = $usersManager->getOne($id);
+        $this->Authorization->authorize($user);
+        
         if ($this->Users->delete($user)) {
             $this->Flash->success(__('The user has been deleted.'));
         } else {

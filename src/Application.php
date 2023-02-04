@@ -43,6 +43,7 @@ use MeowBlog\Services\ArticlesManagerService;
 use MeowBlog\Services\ArticlesManagerServiceInterface;
 use MeowBlog\Services\TagsManagerService;
 use MeowBlog\Services\TagsManagerServiceInterface;
+use MeowBlog\Services\UsersManagerService;
 use MeowBlog\Services\UsersManagerServiceInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

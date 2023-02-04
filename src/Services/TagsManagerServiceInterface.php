@@ -7,6 +7,7 @@ use Cake\Datasource\EntityInterface;
 use Cake\Http\ServerRequest;
 use Cake\ORM\Table;
 use MeowBlog\Model\Entity\Tag;
+use MeowBlog\Model\Table\TagsTable;
 
 interface TagsManagerServiceInterface
 {
