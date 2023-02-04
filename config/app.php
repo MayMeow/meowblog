@@ -419,6 +419,12 @@ return [
      * To use database sessions, load the SQL file located at config/schema/sessions.sql
      */
     'Session' => [
-        'defaults' => 'php',
+        'defaults' => 'cache',
     ],
+
+    'MeowBlog' => [
+        'name' => env('APP_NAME', 'MeowBlog'),
+        'description' => env('APP_DESCRIPTION', ''),
+        'theme' => env('APP_THEME', 'blue'),
+    ]
 ];
