@@ -12,7 +12,7 @@
             <?= $this->Html->link($article->title, [
                 'action' => 'view',
                 $article->slug
-            ])?>
+            ], ['class' => 'contrast'])?>
             <small>
                 <?= __('on') ?>
                 <?= $article->created->format('d/m/Y') ?>

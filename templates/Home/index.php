@@ -18,7 +18,7 @@
         <li>
         <?= $this->Html->link('Tags', [
             'action' => 'Index',
-            'controller' => 'Articles',
+            'controller' => 'Tags',
             'prefix' => 'Admin'
         ]); ?>
         </li>
