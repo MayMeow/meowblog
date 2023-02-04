@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace MeowBlog\View\Helper;
 
+use Cake\Core\Configure;
 use Cake\View\Helper;
 
 /**
@@ -31,5 +32,20 @@ class BlogHelper extends Helper
         }
 
         return false;
+    }
+
+    public function getName(): string
+    {
+        return Configure::read('MeowBlog.name');
+    }
+
+    public function getDescription(): string
+    {
+        return Configure::read('MeowBlog.description');
+    }
+
+    public function getTheme(): string
+    {
+        return 'themes/' . Configure::read('MeowBlog.theme');
     }
 }

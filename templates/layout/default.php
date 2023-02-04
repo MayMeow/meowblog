@@ -13,7 +13,7 @@ $appDescription = 'Meowblog';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css(['/app/assets/index-62d919fa', 'https://cdn.maymeow.com/css/prism.css']) ?>
+    <?= $this->Html->css(['/app/assets/index-62d919fa', 'https://cdn.maymeow.com/css/prism.css', $this->Blog->getTheme()]) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -27,9 +27,9 @@ $appDescription = 'Meowblog';
                     <ul>
                         <li>
                             <strong>
-                                <?= $this->Html->link('Meowblog.app', url:'/') ?>
+                                <?= $this->Html->link($this->Blog->getName(), url:'/') ?>
                             </strong> <br />
-                            <small>Simple blogging app made with PHP</small>
+                            <small><?= $this->Blog->getDescription() ?></small>
                         </li>
                     </ul>
                     <ul>
