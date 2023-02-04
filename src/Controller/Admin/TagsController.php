@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace MeowBlog\Controller\Admin;
 
 use MeowBlog\Controller\AppController;
+use MeowBlog\Model\Entity\Tag;
 use MeowBlog\Services\TagsManagerServiceInterface;
 
 /**
@@ -55,6 +56,7 @@ class TagsController extends AppController
         $this->Authorization->authorize($tag);
 
         if ($this->request->is('post')) {
+            /** @var Tag $tag */
             if ($tagsManager->saveToDatabase($tag, $this->request)) {
                 $this->Flash->success(__('The tag has been saved.'));
 
@@ -79,6 +81,7 @@ class TagsController extends AppController
         $this->Authorization->authorize($tag);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
+            /** @var Tag $tag */
             if ($tagsManager->saveToDatabase($tag, $this->request)) {
                 $this->Flash->success(__('The tag has been saved.'));
 

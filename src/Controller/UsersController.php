@@ -49,7 +49,7 @@ class UsersController extends AppController
     public function add(UsersManagerServiceInterface $usersManager)
     {
         $user = $this->Users->newEmptyEntity();
-        $this->Authorization->authorize($user);
+        $this->Authorization->skipAuthorization();
 
         if ($this->request->is('post')) {
             if ($usersManager->saveToDatabase($user, $this->request)) {

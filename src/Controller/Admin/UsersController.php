@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace MeowBlog\Controller\Admin;
 
 use MeowBlog\Controller\AppController;
+use MeowBlog\Model\Entity\User;
 use MeowBlog\Services\UsersManagerServiceInterface;
 
 /**
@@ -53,6 +54,7 @@ class UsersController extends AppController
         $this->Authorization->authorize($user);
 
         if ($this->request->is('post')) {
+            /** @var User $user */
             if ($usersManager->saveToDatabase($user, $this->request)) {
                 $this->Flash->success(__('The user has been saved.'));
 
@@ -76,6 +78,7 @@ class UsersController extends AppController
         $this->Authorization->authorize($user);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
+            /** @var User $user */
             if ($userManager->saveToDatabase($user, $this->request)) {
                 $this->Flash->success(__('The user has been saved.'));
 

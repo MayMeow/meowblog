@@ -59,10 +59,11 @@ class TagsManagerService implements TagsManagerServiceInterface
      * @param \Cake\Http\ServerRequest $request Request
      * @return \MeowBlog\Model\Entity\Tag|false
      */
-    public function saveToDatabase(Tag $tag, ServerRequest $request): Tag | false
+    public function saveToDatabase(Tag|EntityInterface $tag, ServerRequest $request): Tag | false
     {
         $tag = $this->tags->patchEntity($tag, $request->getData());
 
-        return $this->tags->save($tag);
+        /** @var \MeowBlog\Model\Entity\Tag $tag */
+        return $tag = $this->tags->save($tag) !== false ? $tag : false;
     }
 }

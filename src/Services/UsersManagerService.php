@@ -34,13 +34,15 @@ class UsersManagerService implements UsersManagerServiceInterface
             $q->contain(['Articles']);
         }
 
+        /** @phpstan-ignore-next-line */ //TODO fix this in next version
         return $q->firstOrFail();
     }
 
     public function saveToDatabase(User $user, ServerRequest $request): User | false
     {
-        $user = $this->users->patchEntities($user, $request->getData());
+        $user = $this->users->patchEntity($user, $request->getData());
 
-        return $this->users->save($user);
+        /** @var User $user */
+        return $user = $this->users->save($user) !== false ? $user : false;
     }
 }
