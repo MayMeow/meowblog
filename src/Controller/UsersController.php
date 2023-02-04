@@ -30,6 +30,7 @@ class UsersController extends AppController
      * View method
      *
      * @param string|null $id User id.
+     * @param \MeowBlog\Services\UsersManagerServiceInterface $usersManager Users Manager
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
@@ -44,6 +45,7 @@ class UsersController extends AppController
     /**
      * Add method
      *
+     * @param \MeowBlog\Services\UsersManagerServiceInterface $usersManager Users Manager
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
     public function add(UsersManagerServiceInterface $usersManager)

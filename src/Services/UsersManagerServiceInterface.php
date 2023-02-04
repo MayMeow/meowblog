@@ -7,23 +7,22 @@ use Cake\Datasource\EntityInterface;
 use Cake\Http\ServerRequest;
 use Cake\ORM\Table;
 use MeowBlog\Model\Entity\User;
-use MeowBlog\Model\Table\UsersTable;
 
 interface UsersManagerServiceInterface
 {
     /**
      * getAll function
      *
-     * @param bool $withRelations
-     * @return \Cake\ORM\Table|\MeowBlog\Model\Table\UsersTable
+     * @param bool $withRelations Whether to fetch relations
+     * @return \Cake\ORM\Table
      */
-    public function getAll(bool $withRelations = false): Table | UsersTable;
+    public function getAll(bool $withRelations = false): Table;
 
     /**
      * getOne function
      *
      * @param string $id User ID
-     * @param bool $withRelations
+     * @param bool $withRelations Whether to fetch relations
      * @return \Cake\Datasource\EntityInterface|\MeowBlog\Model\Entity\User
      */
     public function getOne(string $id, bool $withRelations = false): EntityInterface | User;
