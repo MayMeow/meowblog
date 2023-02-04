@@ -34,16 +34,31 @@ class BlogHelper extends Helper
         return false;
     }
 
+    /**
+     * getLoggedUser method
+     *
+     * @return string
+     */
     public function getName(): string
     {
         return Configure::read('MeowBlog.name');
     }
 
+    /**
+     * getLoggedUser method
+     *
+     * @return string
+     */
     public function getDescription(): string
     {
         return Configure::read('MeowBlog.description');
     }
 
+    /**
+     * getTheme method
+     *
+     * @return string
+     */
     public function getTheme(): string
     {
         return 'themes/' . Configure::read('MeowBlog.theme');

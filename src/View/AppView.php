@@ -42,6 +42,6 @@ class AppView extends View
     {
         $this->loadHelper('Markdown.Markdown');
         $this->loadHelper('Blog');
-        $this->loadHelper("Shortcodes");
+        $this->loadHelper('Shortcodes');
     }
 }

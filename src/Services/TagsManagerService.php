@@ -22,7 +22,7 @@ class TagsManagerService implements TagsManagerServiceInterface
     protected Table | TagsTable $tags;
 
     /**
-     * TagsManagerService 
+     * TagsManagerService
      */
     public function __construct()
     {
@@ -32,9 +32,9 @@ class TagsManagerService implements TagsManagerServiceInterface
     /**
      * Undocumented function
      *
-     * @return \Cake\ORM\Table|\MeowBlog\Model\Table\TagsTable
+     * @return \Cake\ORM\Table
      */
-    public function getAll(): Table | TagsTable
+    public function getAll(): Table
     {
         return $this->tags;
     }
@@ -59,10 +59,11 @@ class TagsManagerService implements TagsManagerServiceInterface
      * @param \Cake\Http\ServerRequest $request Request
      * @return \MeowBlog\Model\Entity\Tag|false
      */
-    public function saveToDatabase(Tag $tag, ServerRequest $request): Tag | false
+    public function saveToDatabase(Tag | EntityInterface $tag, ServerRequest $request): Tag | false
     {
         $tag = $this->tags->patchEntity($tag, $request->getData());
 
-        return $this->tags->save($tag);
+        /** @var \MeowBlog\Model\Entity\Tag $tag */
+        return $tag = $this->tags->save($tag) !== false ? $tag : false;
     }
 }

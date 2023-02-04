@@ -17,6 +17,7 @@ class TagsController extends AppController
     /**
      * Index method
      *
+     * @param \MeowBlog\Services\TagsManagerServiceInterface $tagsManager Tags manager service.
      * @return \Cake\Http\Response|null|void Renders view
      */
     public function index(TagsManagerServiceInterface $tagsManager)
@@ -32,6 +33,7 @@ class TagsController extends AppController
      * View method
      *
      * @param string|null $id Tag id.
+     * @param \MeowBlog\Services\TagsManagerServiceInterface $tagsManager Tags manager service.
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
@@ -47,6 +49,7 @@ class TagsController extends AppController
     /**
      * Add method
      *
+     * @param \MeowBlog\Services\TagsManagerServiceInterface $tagsManager Tags manager service.
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
     public function add(TagsManagerServiceInterface $tagsManager)
@@ -55,6 +58,7 @@ class TagsController extends AppController
         $this->Authorization->authorize($tag);
 
         if ($this->request->is('post')) {
+            /** @var \MeowBlog\Model\Entity\Tag $tag */
             if ($tagsManager->saveToDatabase($tag, $this->request)) {
                 $this->Flash->success(__('The tag has been saved.'));
 
@@ -70,6 +74,7 @@ class TagsController extends AppController
      * Edit method
      *
      * @param string|null $id Tag id.
+     * @param \MeowBlog\Services\TagsManagerServiceInterface $tagsManager Tags Manager
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
@@ -79,6 +84,7 @@ class TagsController extends AppController
         $this->Authorization->authorize($tag);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
+            /** @var \MeowBlog\Model\Entity\Tag $tag */
             if ($tagsManager->saveToDatabase($tag, $this->request)) {
                 $this->Flash->success(__('The tag has been saved.'));
 
@@ -94,6 +100,7 @@ class TagsController extends AppController
      * Delete method
      *
      * @param string|null $id Tag id.
+     * @param \MeowBlog\Services\TagsManagerServiceInterface $tagsManager Tags Manager
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
@@ -102,7 +109,7 @@ class TagsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $tag = $tagsManager->getOne((int)$id);
         $this->Authorization->authorize($tag);
-        
+
         if ($this->Tags->delete($tag)) {
             $this->Flash->success(__('The tag has been deleted.'));
         } else {
