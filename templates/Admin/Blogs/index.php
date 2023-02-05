@@ -13,11 +13,8 @@
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('title') ?></th>
-                    <th><?= $this->Paginator->sort('description') ?></th>
                     <th><?= $this->Paginator->sort('domain') ?></th>
                     <th><?= $this->Paginator->sort('theme') ?></th>
-                    <th><?= $this->Paginator->sort('created') ?></th>
-                    <th><?= $this->Paginator->sort('modified') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -26,11 +23,8 @@
                 <tr>
                     <td><?= $this->Number->format($blog->id) ?></td>
                     <td><?= h($blog->title) ?></td>
-                    <td><?= h($blog->description) ?></td>
-                    <td><?= h($blog->domain) ?></td>
+                    <td><?= $this->Html->link($blog->domain, 'https://' . $blog->domain) ?></td>
                     <td><?= h($blog->theme) ?></td>
-                    <td><?= h($blog->created) ?></td>
-                    <td><?= h($blog->modified) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $blog->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $blog->id]) ?>

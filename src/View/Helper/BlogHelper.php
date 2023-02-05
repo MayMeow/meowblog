@@ -3,8 +3,11 @@ declare(strict_types=1);
 
 namespace MeowBlog\View\Helper;
 
+use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\View\Helper;
+use MeowBlog\Services\BlogsManagerService;
+use MeowBlog\Services\UsersManagerService;
 
 /**
  * Blog helper
@@ -61,6 +64,11 @@ class BlogHelper extends Helper
      */
     public function getTheme(): string
     {
-        return 'themes/' . Configure::read('MeowBlog.theme');
+        $manager = new BlogsManagerService();
+        $request = $this->getView()->getRequest();
+        
+        return Cache::remember('blog_theme_' . $request->getUri()->getHost(), function () use ($manager, $request) {
+            return 'themes/'. $manager->getTheme($request);
+        });
     }
 }

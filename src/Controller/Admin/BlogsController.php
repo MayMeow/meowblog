@@ -21,6 +21,7 @@ class BlogsController extends AppController
     public function index()
     {
         $blogs = $this->paginate($this->Blogs);
+        $this->Authorization->skipAuthorization();
 
         $this->set(compact('blogs'));
     }
@@ -38,6 +39,8 @@ class BlogsController extends AppController
             'contain' => [],
         ]);
 
+        $this->Authorization->authorize($blog);
+
         $this->set(compact('blog'));
     }
 
@@ -49,6 +52,7 @@ class BlogsController extends AppController
     public function add()
     {
         $blog = $this->Blogs->newEmptyEntity();
+        $this->Authorization->authorize($blog);
         if ($this->request->is('post')) {
             $blog = $this->Blogs->patchEntity($blog, $this->request->getData());
             if ($this->Blogs->save($blog)) {
@@ -73,6 +77,7 @@ class BlogsController extends AppController
         $blog = $this->Blogs->get($id, [
             'contain' => [],
         ]);
+        $this->Authorization->authorize($blog);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $blog = $this->Blogs->patchEntity($blog, $this->request->getData());
             if ($this->Blogs->save($blog)) {
@@ -96,6 +101,7 @@ class BlogsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $blog = $this->Blogs->get($id);
+        $this->Authorization->authorize($blog);
         if ($this->Blogs->delete($blog)) {
             $this->Flash->success(__('The blog has been deleted.'));
         } else {

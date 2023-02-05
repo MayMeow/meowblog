@@ -25,6 +25,7 @@ use Cake\Validation\Validator;
  * @method \MeowBlog\Model\Entity\Blog[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
  * @method \MeowBlog\Model\Entity\Blog[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  *
+ * @method \MeowBlog\Model\Entity\Blog|\Cake\ORM\Query findByDomain($domain)
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class BlogsTable extends Table
