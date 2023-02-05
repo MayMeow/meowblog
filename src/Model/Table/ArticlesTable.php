@@ -15,6 +15,7 @@ use Cake\Validation\Validator;
  * Articles Model
  *
  * @property \MeowBlog\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
+ * @property \MeowBlog\Model\Table\BlogsTable&\Cake\ORM\Association\BelongsTo $Blogs
  * @property \MeowBlog\Model\Table\TagsTable&\Cake\ORM\Association\BelongsToMany $Tags
  * @method \MeowBlog\Model\Entity\Article newEmptyEntity()
  * @method \MeowBlog\Model\Entity\Article newEntity(array $data, array $options = [])
@@ -52,6 +53,10 @@ class ArticlesTable extends Table
 
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
+            'joinType' => 'INNER',
+        ]);
+        $this->belongsTo('Blogs',[
+            'foreignKey' => 'blog_id',
             'joinType' => 'INNER',
         ]);
         $this->belongsToMany('Tags', [
@@ -111,6 +116,8 @@ class ArticlesTable extends Table
     {
         $rules->add($rules->isUnique(['slug']), ['errorField' => 'slug']);
         $rules->add($rules->existsIn('user_id', 'Users'), ['errorField' => 'user_id']);
+        $rules->add($rules->existsIn('blog_id', 'Blogs'), ['errorField' => 'blog_id']);
+        // $rules->add($rules->isUnique(['slug', 'blog_id'], 'This slug is already in use on current blog'));
 
         return $rules;
     }

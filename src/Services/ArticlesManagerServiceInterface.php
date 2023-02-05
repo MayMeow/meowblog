@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace MeowBlog\Services;
 
 use Cake\Http\ServerRequest;
+use Cake\ORM\Query;
 use Cake\ORM\Table;
 use MeowBlog\Model\Entity\Article;
 
@@ -20,9 +21,10 @@ interface ArticlesManagerServiceInterface
     /**
      * getAll function
      *
-     * @return \Cake\ORM\Table
+     * @param \Cake\Http\ServerRequest $request from passed request
+     * @return \Cake\ORM\Table|\Cake\ORM\Query
      */
-    public function getAll(): Table;
+    public function getAll(ServerRequest $request): Table | Query;
 
     /**
      * saveToDatabase function

@@ -11,6 +11,7 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property int $user_id
+ * @property int $blog_id
  * @property string $title
  * @property string $slug
  * @property string $body
@@ -19,6 +20,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime $modified
  *
  * @property \MeowBlog\Model\Entity\User $user
+ * @property \MeowBlog\Model\Entity\Blog $blog
  * @property \MeowBlog\Model\Entity\Tag[] $tags
  * @property string $tag_string
  * @method \MeowBlog\Model\Entity\Article findBySlug($slug)
@@ -36,6 +38,7 @@ class Article extends Entity
      */
     protected $_accessible = [
         'user_id' => true,
+        'blog_id' => true,
         'title' => true,
         'slug' => true,
         'body' => true,

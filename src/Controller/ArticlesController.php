@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace MeowBlog\Controller;
 
+use Cake\Database\Query;
 use Cake\Event\EventInterface;
 use MeowBlog\Services\ArticlesManagerServiceInterface;
 
@@ -37,12 +38,16 @@ class ArticlesController extends AppController
         $this->Authorization->skipAuthorization();
 
         $this->paginate = [
-            'contain' => ['Users'],
+            'contain' => ['Users', 'Blogs'],
             'order' => ['Articles.created' => 'DESC'],
         ];
-        $articles = $this->paginate($articlesManager->getAll());
 
-        $this->set(compact('articles'));
+        $q = $articlesManager->getAll($this->request);
+        $q instanceof Query ? $currentBlog = true : $currentBlog = false;
+        
+        $articles = $this->paginate($q);
+
+        $this->set(compact('articles', 'currentBlog'));
     }
 
     /**

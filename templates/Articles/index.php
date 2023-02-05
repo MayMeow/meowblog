@@ -2,6 +2,7 @@
 /**
  * @var \MeowBlog\View\AppView $this
  * @var \MeowBlog\Model\Entity\Article[]|\Cake\Collection\CollectionInterface $articles
+ * @var bool $currentBlog
  */
 ?>
 <div class="articles index content">
@@ -16,6 +17,10 @@
             <small>
                 <?= __('on') ?>
                 <?= $article->created->format('d/m/Y') ?>
+                <?php if (!$currentBlog) : ?>
+                    <?= __('in') ?>
+                    <?= $this->Html->link($article->blog->title, 'https://' . $article->blog->domain) ?>
+                <?php endif; ?>
             </small>
         </div>
     <?php endforeach; ?>

@@ -42,7 +42,7 @@ class ArticlesController extends AppController
     public function view($id = null)
     {
         $article = $this->Articles->get($id, [
-            'contain' => ['Users', 'Tags'],
+            'contain' => ['Users', 'Tags', 'Blogs'],
         ]);
 
         $this->Authorization->skipAuthorization();
@@ -75,9 +75,10 @@ class ArticlesController extends AppController
             }
             $this->Flash->error(__('The article could not be saved. Please, try again.'));
         }
-        $users = $this->Articles->Users->find('list', ['limit' => 200])->all();
-        $tags = $this->Articles->Tags->find('list', ['limit' => 200])->all();
-        $this->set(compact('article', 'users', 'tags'));
+        // $users = $this->Articles->Users->find('list', ['limit' => 200])->all();
+        // $tags = $this->Articles->Tags->find('list', ['limit' => 200])->all();
+        $blogs = $this->Articles->Blogs->find('list', ['limit' => 200])->all();
+        $this->set(compact('blogs', 'article'));
     }
 
     /**
@@ -110,9 +111,10 @@ class ArticlesController extends AppController
             }
             $this->Flash->error(__('The article could not be saved. Please, try again.'));
         }
-        $users = $this->Articles->Users->find('list', ['limit' => 200])->all();
-        $tags = $this->Articles->Tags->find('list', ['limit' => 200])->all();
-        $this->set(compact('article', 'users', 'tags'));
+        // $users = $this->Articles->Users->find('list', ['limit' => 200])->all();
+        // $tags = $this->Articles->Tags->find('list', ['limit' => 200])->all();
+        $blogs = $this->Articles->Blogs->find('list', ['limit' => 200])->all();
+        $this->set(compact('blogs', 'article'));
     }
 
     /**

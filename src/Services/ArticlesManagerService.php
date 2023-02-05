@@ -5,6 +5,7 @@ namespace MeowBlog\Services;
 
 use Cake\Http\ServerRequest;
 use Cake\ORM\Locator\LocatorAwareTrait;
+use Cake\ORM\Query;
 use Cake\ORM\Table;
 use MeowBlog\Model\Entity\Article;
 use MeowBlog\Model\Table\ArticlesTable;
@@ -29,10 +30,18 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
     /**
      * getAll function
      *
-     * @return \Cake\ORM\Table
+     * @return \Cake\ORM\Table|\Cake\ORM\Query
      */
-    public function getAll(): Table
-    {
+    public function getAll(ServerRequest $request): Table | Query
+    {   
+        try {
+            $blog = $this->articles->Blogs->find()->where(['Blogs.domain' => $request->getUri()->getHost()])->firstOrFail();
+
+            return $this->articles->find()->where(['Articles.blog_id' => $blog->id]);
+        } catch (\Exception $e) {
+            // do nothing here
+        }
+
         return $this->articles;
     }
 
@@ -51,7 +60,7 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
         $q = $at->findBySlug($slug);
 
         /** @var \MeowBlog\Model\Entity\Article $article */
-        $article = $q->contain(['Users', 'Tags'])->firstOrfail();
+        $article = $q->contain(['Users', 'Tags', 'Blogs'])->firstOrfail();
 
         return $article;
     }

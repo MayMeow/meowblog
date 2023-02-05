@@ -35,6 +35,10 @@
                     <td><?= $this->Number->format($article->id) ?></td>
                 </tr>
                 <tr>
+                    <th><?= __('Blog') ?></th>
+                    <td><?= $article->has('blog') ? $this->Html->link($article->blog->title, ['controller' => 'Users', 'action' => 'view', $article->blog->id]) : '' ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Created') ?></th>
                     <td><?= h($article->created) ?></td>
                 </tr>
