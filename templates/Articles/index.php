@@ -10,10 +10,11 @@
     <div style="margin-bottom: 1em;">
     <?php foreach ($articles as $article): ?>
         <div>
-            <?= $this->Html->link($article->title, [
+            <a href="<?= !$currentBlog ? 'https://'. $article->blog->domain : '' ?><?= $this->Url->build([
+                'controller' => 'Articles',
                 'action' => 'view',
                 $article->slug
-            ], ['class' => 'contrast'])?>
+            ]) ?>" class="contrast"><?= $article->title ?></a>
             <small>
                 <?= __('on') ?>
                 <?= $article->created->format('d/m/Y') ?>

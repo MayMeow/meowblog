@@ -14,9 +14,10 @@ interface ArticlesManagerServiceInterface
      * getArticle function
      *
      * @param string $slug slug
+     * @param \Cake\Http\ServerRequest $request from passed request
      * @return \MeowBlog\Model\Entity\Article
      */
-    public function getArticle(string $slug): Article;
+    public function getArticle(string $slug, ServerRequest $request): Article;
 
     /**
      * getAll function

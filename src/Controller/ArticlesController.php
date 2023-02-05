@@ -60,7 +60,7 @@ class ArticlesController extends AppController
      */
     public function view(string $slug, ArticlesManagerServiceInterface $articlesManager)
     {
-        $article = $articlesManager->getArticle($slug);
+        $article = $articlesManager->getArticle($slug, $this->request);
         $this->Authorization->skipAuthorization();
 
         $this->set(compact('article'));
