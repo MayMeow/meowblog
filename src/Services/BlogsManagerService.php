@@ -39,4 +39,32 @@ class BlogsManagerService implements BlogsManagerServiceInterface
 
         return Configure::read('MeowBlog.theme');
     }
+
+    public function getName(ServerRequest $request): string
+    {
+        try {
+            /** @var Blog $blog */
+            $blog = $this->blogs->findByDomain($request->getUri()->getHost())->firstOrFail();
+
+            return $blog->title;
+        } catch (\Exception $e) {
+            // do nothing here
+        }
+
+        return Configure::read('MeowBlog.name');
+    }
+
+    public function getDescription(ServerRequest $request): string
+    {
+        try {
+            /** @var Blog $blog */
+            $blog = $this->blogs->findByDomain($request->getUri()->getHost())->firstOrFail();
+
+            return $blog->description;
+        } catch (\Exception $e) {
+            // do nothing here
+        }
+
+        return Configure::read('MeowBlog.description');
+    }
 }
