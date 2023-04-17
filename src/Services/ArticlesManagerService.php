@@ -35,13 +35,16 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
     public function getAll(ServerRequest $request): Table | Query
     {   
         try {
+            // try to get the blog from the request
             $blog = $this->articles->Blogs->find()->where(['Blogs.domain' => $request->getUri()->getHost()])->firstOrFail();
 
             return $this->articles->find()->where(['Articles.blog_id' => $blog->id]);
         } catch (\Exception $e) {
+            // blog does not exist
             // do nothing here
         }
 
+        // return all articles
         return $this->articles;
     }
 
