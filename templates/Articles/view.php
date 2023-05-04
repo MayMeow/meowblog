@@ -6,7 +6,7 @@
 ?>
 <div class="headings">
     <h2><?= $article->title ?></h2>
-    <h3>at <?= $article->created ?> by <?= $article->user->email ?></h3>
+    <h3>at <?= $article->created ?>
 </div>
 <div id="article">
     <div>
