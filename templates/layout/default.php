@@ -1,5 +1,5 @@
 <?php
-$appVersion = '0.23.2';
+$appVersion = '0.24.0';
 $appDescription = 'Meowblog';
 ?>
 <!DOCTYPE html>
@@ -13,7 +13,7 @@ $appDescription = 'Meowblog';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css(['/app/assets/index-62d919fa', 'https://cdn.maymeow.com/css/prism.css', $this->Blog->getTheme()]) ?>
+    <?= $this->Html->css(['/app/assets/index-b2816176', 'https://cdn.maymeow.com/css/prism.css', $this->Blog->getTheme()]) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>

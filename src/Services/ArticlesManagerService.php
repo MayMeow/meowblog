@@ -57,11 +57,11 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
      */
     public function getArticle(string $slug, ServerRequest $request): Article
     {
-        /** @var \MeowBlog\Model\Table\ArticlesTable $at */
-        $at = $this->articles;
+        /** @var \MeowBlog\Model\Table\ArticlesTable $articleTable */
+        $articleTable = $this->articles;
 
         /** @var \Cake\ORM\Query $q */
-        $q = $at->findBySlug($slug)->where(['Blogs.domain' => $request->getUri()->getHost()]);
+        $q = $articleTable->findBySlug($slug)->where(['Blogs.domain' => $request->getUri()->getHost()]);
 
         /** @var \MeowBlog\Model\Entity\Article $article */
         $article = $q->contain(['Users', 'Tags', 'Blogs'])->firstOrfail();
