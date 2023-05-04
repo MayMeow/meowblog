@@ -29,6 +29,13 @@
             'prefix' => 'Admin'
         ]); ?>
         </li>
+        <li>
+        <?= $this->Html->link('Blogs', [
+            'action' => 'Index',
+            'controller' => 'Blogs',
+            'prefix' => 'Admin'
+        ]); ?>
+        </li>
     </ul>
 
 </div>

@@ -7,3 +7,8 @@ config:
   services:
     cache:
       type: redis
+
+proxy:
+  appserver:
+    - meowblog.lndo.site
+    - "*.meowblog.lndo.site"

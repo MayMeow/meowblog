@@ -58,6 +58,7 @@ class Installer
         $rootDir = dirname(dirname(__DIR__));
 
         static::createAppLocalConfig($rootDir, $io);
+        static::createEnvFile($rootDir, $io);
         static::createWritableDirectories($rootDir, $io);
 
         static::setFolderPermissions($rootDir, $io);
@@ -83,6 +84,24 @@ class Installer
         if (!file_exists($appLocalConfig)) {
             copy($appLocalConfigTemplate, $appLocalConfig);
             $io->write('Created `config/app_local.php` file');
+        }
+    }
+
+    /**
+     * Create Env File
+     *
+     * @param string $dir The application's root directory.
+     * @param \Composer\IO\IOInterface $io IO interface to write to console.
+     * @return void
+     */
+    public static function createEnvFile($dir, $io)
+    {
+        $envFileTemplate = $dir . '/.env.example';
+        $envFile = $dir . '/.env';
+
+        if (!file_exists($envFile)) {
+            copy($envFileTemplate, $envFile);
+            $io->write('Created `.env` file');
         }
     }
 

@@ -2,6 +2,7 @@
 /**
  * @var \MeowBlog\View\AppView $this
  * @var \MeowBlog\Model\Entity\Article[]|\Cake\Collection\CollectionInterface $articles
+ * @var bool $currentBlog
  */
 ?>
 <div class="articles index content">
@@ -9,13 +10,18 @@
     <div style="margin-bottom: 1em;">
     <?php foreach ($articles as $article): ?>
         <div>
-            <?= $this->Html->link($article->title, [
+            <a href="<?= !$currentBlog ? 'https://'. $article->blog->domain : '' ?><?= $this->Url->build([
+                'controller' => 'Articles',
                 'action' => 'view',
                 $article->slug
-            ], ['class' => 'contrast'])?>
+            ]) ?>" class="contrast"><?= $article->title ?></a>
             <small>
                 <?= __('on') ?>
                 <?= $article->created->format('d/m/Y') ?>
+                <?php if (!$currentBlog) : ?>
+                    <?= __('in') ?>
+                    <?= $this->Html->link($article->blog->title, 'https://' . $article->blog->domain) ?>
+                <?php endif; ?>
             </small>
         </div>
     <?php endforeach; ?>

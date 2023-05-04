@@ -3,8 +3,12 @@ declare(strict_types=1);
 
 namespace MeowBlog\View\Helper;
 
+use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\View\Helper;
+use MeowBlog\Services\BlogsManagerService;
+use MeowBlog\Services\BlogsManagerServiceInterface;
+use MeowBlog\Services\UsersManagerService;
 
 /**
  * Blog helper
@@ -17,6 +21,17 @@ class BlogHelper extends Helper
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [];
+
+    protected BlogsManagerServiceInterface $blogManager;
+
+    public function initialize(array $config): void
+    {
+        parent::initialize($config);
+
+        if (!isset($this->blogManager)) {
+            $this->blogManager = new BlogsManagerService();
+        }
+    }
 
     /**
      * isLoggedIn method
@@ -41,7 +56,12 @@ class BlogHelper extends Helper
      */
     public function getName(): string
     {
-        return Configure::read('MeowBlog.name');
+        $manager = $this->blogManager;
+        $request = $this->getView()->getRequest();
+        
+        return Cache::remember('blog_name_' . $request->getUri()->getHost(), function () use ($manager, $request) {
+            return $manager->getName($request);
+        });
     }
 
     /**
@@ -51,7 +71,12 @@ class BlogHelper extends Helper
      */
     public function getDescription(): string
     {
-        return Configure::read('MeowBlog.description');
+        $manager = $this->blogManager;
+        $request = $this->getView()->getRequest();
+        
+        return Cache::remember('blog_description_' . $request->getUri()->getHost(), function () use ($manager, $request) {
+            return $manager->getDescription($request);
+        });
     }
 
     /**
@@ -61,6 +86,11 @@ class BlogHelper extends Helper
      */
     public function getTheme(): string
     {
-        return 'themes/' . Configure::read('MeowBlog.theme');
+        $manager = $this->blogManager;
+        $request = $this->getView()->getRequest();
+        
+        return Cache::remember('blog_theme_' . $request->getUri()->getHost(), function () use ($manager, $request) {
+            return 'themes/'. $manager->getTheme($request);
+        });
     }
 }
