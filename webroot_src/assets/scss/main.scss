@@ -2,3 +2,7 @@
 @import "@picocss/pico/scss/pico.scss";
 
 @import "typography";
+
+main, footer {
+    max-width: 40em;
+}
