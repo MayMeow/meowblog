@@ -1,5 +1,5 @@
 <?php
-$appVersion = '0.24.0';
+$appVersion = '0.26.2';
 $appDescription = 'Meowblog';
 ?>
 <!DOCTYPE html>
@@ -26,9 +26,9 @@ $appDescription = 'Meowblog';
                 <nav>
                     <ul>
                         <li>
-                            <strong>
+                            <span style="font-size: 2em; font-family: VC Honey Deck,serif;">
                                 <?= $this->Html->link($this->Blog->getName(), url:'/') ?>
-                            </strong> <br />
+                            </span> <br />
                             <small><?= $this->Blog->getDescription() ?></small>
                         </li>
                     </ul>

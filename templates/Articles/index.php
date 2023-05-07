@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \MeowBlog\View\AppView $this
- * @var \MeowBlog\Model\Entity\Article[]|\Cake\Collection\CollectionInterface $articles
+ * @var array<\MeowBlog\Model\View\ArticleViewModel> $articles
  * @var bool $currentBlog
  */
 ?>
@@ -10,15 +10,15 @@
     <div style="margin-bottom: 1em;">
     <?php foreach ($articles as $article): ?>
         <div>
-            <a href="<?= !$currentBlog ? 'https://'. $article->blog->domain : '' ?><?= $this->Url->build([
+            <a href="<?= !$article->isCurrentBlog() ? 'https://'. $article->getArticle()->blog->domain : '' ?><?= $this->Url->build([
                 'controller' => 'Articles',
                 'action' => 'view',
-                $article->slug
-            ]) ?>" class="contrast"><?= $article->title ?></a>
+                $article->getArticle()->slug
+            ]) ?>" class="contrast"><?= $article->getArticle()->title ?></a>
             <small>
-                <?php if (!$currentBlog) : ?>
+                <?php if (!$article->isCurrentBlog()) : ?>
                     <?= __('in') ?>
-                    <?= $this->Html->link($article->blog->title, 'https://' . $article->blog->domain) ?>
+                    <?= $this->Html->link($article->getArticle()->blog->title, 'https://' . $article->getArticle()->blog->domain) ?>
                 <?php endif; ?>
             </small>
         </div>

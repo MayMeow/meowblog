@@ -6,6 +6,7 @@ namespace MeowBlog\Services;
 use Cake\Http\ServerRequest;
 use Cake\ORM\Query;
 use Cake\ORM\Table;
+use MeowBlog\Controller\AppController;
 use MeowBlog\Model\Entity\Article;
 
 interface ArticlesManagerServiceInterface
@@ -23,9 +24,9 @@ interface ArticlesManagerServiceInterface
      * getAll function
      *
      * @param \Cake\Http\ServerRequest $request from passed request
-     * @return \Cake\ORM\Table|\Cake\ORM\Query
+     * @return array<\MeowBlog\Model\View\ArticleViewModel> array of articles
      */
-    public function getAll(ServerRequest $request): Table | Query;
+    public function getAll(ServerRequest $request, AppController $controller): array;
 
     /**
      * saveToDatabase function

@@ -40,14 +40,12 @@ class ArticlesController extends AppController
         $this->paginate = [
             'contain' => ['Users', 'Blogs'],
             'order' => ['Articles.created' => 'DESC'],
+            'limit' => 10,
         ];
 
-        $q = $articlesManager->getAll($this->request);
-        $q instanceof Query ? $currentBlog = true : $currentBlog = false;
-        
-        $articles = $this->paginate($q);
+        $articles = $articlesManager->getAll($this->request, $this);
 
-        $this->set(compact('articles', 'currentBlog'));
+        $this->set(compact('articles'));
     }
 
     /**

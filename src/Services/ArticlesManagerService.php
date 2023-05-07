@@ -7,8 +7,10 @@ use Cake\Http\ServerRequest;
 use Cake\ORM\Locator\LocatorAwareTrait;
 use Cake\ORM\Query;
 use Cake\ORM\Table;
+use MeowBlog\Controller\AppController;
 use MeowBlog\Model\Entity\Article;
 use MeowBlog\Model\Table\ArticlesTable;
+use MeowBlog\Model\View\ArticleViewModel;
 
 class ArticlesManagerService implements ArticlesManagerServiceInterface
 {
@@ -32,20 +34,25 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
      *
      * @return \Cake\ORM\Table|\Cake\ORM\Query
      */
-    public function getAll(ServerRequest $request): Table | Query
+    public function getAll(ServerRequest $request, AppController $controller): array
     {   
-        try {
-            // try to get the blog from the request
-            $blog = $this->articles->Blogs->find()->where(['Blogs.domain' => $request->getUri()->getHost()])->firstOrFail();
+        $blog = $this->articles->Blogs->find()->where(['Blogs.domain' => $request->getUri()->getHost()])->first();
 
-            return $this->articles->find()->where(['Articles.blog_id' => $blog->id]);
-        } catch (\Exception $e) {
-            // blog does not exist
-            // do nothing here
+        if ($blog) {
+            $articles = $this->articles->find()->where(['Articles.blog_id' => $blog->id]);
+        } else {
+            $articles = $this->articles;
         }
 
-        // return all articles
-        return $this->articles;
+        $articles = $controller->paginate($articles);
+
+        $av = [];
+        foreach ($articles as $article) {
+            $current = $blog ? true : false;
+            $av [] = new ArticleViewModel($article, $current);
+        }
+
+        return $av;
     }
 
     /**
