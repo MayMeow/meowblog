@@ -24,9 +24,10 @@ interface ArticlesManagerServiceInterface
      * getAll function
      *
      * @param \Cake\Http\ServerRequest $request from passed request
+     * @param bool $paginate whether to paginate or not
      * @return array<\MeowBlog\Model\View\ArticleViewModel> array of articles
      */
-    public function getAll(ServerRequest $request, AppController $controller): array;
+    public function getAll(ServerRequest $request, AppController $controller, bool $paginate = true): array;
 
     /**
      * saveToDatabase function

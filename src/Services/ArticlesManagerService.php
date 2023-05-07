@@ -34,7 +34,7 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
      *
      * @return \Cake\ORM\Table|\Cake\ORM\Query
      */
-    public function getAll(ServerRequest $request, AppController $controller): array
+    public function getAll(ServerRequest $request, AppController $controller, bool $paginate = true): array
     {   
         $blog = $this->articles->Blogs->find()->where(['Blogs.domain' => $request->getUri()->getHost()])->first();
 
@@ -43,8 +43,10 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
         } else {
             $articles = $this->articles;
         }
-
-        $articles = $controller->paginate($articles);
+        
+        if ($paginate) {
+            $articles = $controller->paginate($articles);
+        }
 
         $av = [];
         foreach ($articles as $article) {
