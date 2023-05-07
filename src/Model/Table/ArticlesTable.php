@@ -99,6 +99,11 @@ class ArticlesTable extends Table
             ->notEmptyString('body');
 
         $validator
+            ->scalar('article_type')
+            ->requirePresence('article_type', 'create')
+            ->notEmptyString('article_type');
+
+        $validator
             ->boolean('published')
             ->notEmptyString('published');
 

@@ -21,7 +21,7 @@
                 <?php
                     echo $this->Form->control('blog_id', ['options' => $blogs]);
                     echo $this->Form->control('title');
-                    // echo $this->Form->control('slug');
+                    echo $this->Form->control('article_type', ['options' => $articleTypes]);
                     echo $this->Form->control('body');
                     echo $this->Form->control('published');
                     //echo $this->Form->control('tags._ids', ['options' => $tags]);

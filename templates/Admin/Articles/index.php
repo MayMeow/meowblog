@@ -27,10 +27,10 @@ use MeowBlog\Model\Entity\ArticleType;
             <tbody>
                 <?php foreach ($articles as $article): ?>
                 <tr>
-                    <td><?= $article->has('user') ? $this->Html->link($article->user->id, ['controller' => 'Users', 'action' => 'view', $article->user->id]) : '' ?></td>
+                    <td><td><?= $this->Number->format($article->id) ?></td></td>
                     <td>
                         <?= h($article->title) ?>
-                        <mark><?= ArticleType::from($article->article_type)->name?></mark>
+                        <mark><?= ArticleType::from($article->article_type)->name ?></mark>
                     </td>
                     <td><?= h($article->slug) ?></td>
                     <td><?= h($article->published) ?></td>
