@@ -78,5 +78,25 @@ class BlogsManagerService implements BlogsManagerServiceInterface
         } catch (\Exception $e) {
             // do nothing here
         }
+
+        return null;
+    }
+
+    public function getLinks(ServerRequest $request): ?array
+    {
+        try {
+            /** @var Blog $blog */
+            $blog = $this->blogs->findByDomain($request->getUri()->getHost())->contain([
+                'Links' => [
+                    'sort' => ['Links.weight' => 'ASC']
+                ]
+            ])->firstOrFail();
+
+            return $blog->links;
+        } catch (\Exception $e) {
+            // do nothing here
+        }
+
+        return null;
     }
 }

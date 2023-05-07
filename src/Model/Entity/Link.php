@@ -6,21 +6,18 @@ namespace MeowBlog\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Blog Entity
+ * Link Entity
  *
  * @property int $id
+ * @property int $blog_id
  * @property string $title
- * @property string $description
- * @property string $domain
- * @property string $theme
- * @property string $verification
- * @property string $default_route
- * @property \Cake\I18n\FrozenTime $created
- * @property \Cake\I18n\FrozenTime $modified
- * 
- * @property \MeowBlog\Model\Entity\Link[] $links
+ * @property string $url
+ * @property int $weight
+ * @property bool $external
+ *
+ * @property \MeowBlog\Model\Entity\Blog $blog
  */
-class Blog extends Entity
+class Link extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -32,14 +29,11 @@ class Blog extends Entity
      * @var array<string, bool>
      */
     protected $_accessible = [
+        'blog_id' => true,
         'title' => true,
-        'description' => true,
-        'domain' => true,
-        'theme' => true,
-        'verification' => true,
-        'created' => true,
-        'modified' => true,
-        'default_route' => true,
-        'links' => true,
+        'url' => true,
+        'weight' => true,
+        'external' => true,
+        'blog' => true,
     ];
 }

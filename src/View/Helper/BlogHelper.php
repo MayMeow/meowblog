@@ -93,4 +93,19 @@ class BlogHelper extends Helper
             return 'themes/'. $manager->getTheme($request);
         });
     }
+
+    /**
+     * getLinks method
+     *
+     * @return array<\MeowBlog\Model\Entity\Link>|null
+     */
+    public function getLinks(): ?array
+    {
+        $manager = $this->blogManager;
+        $request = $this->getView()->getRequest();
+
+        return Cache::remember('blog_links_' . $request->getUri()->getHost(), function () use ($manager, $request) {
+            return $manager->getLinks($request);
+        });
+    }
 }
