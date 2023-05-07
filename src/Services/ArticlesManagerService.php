@@ -9,6 +9,7 @@ use Cake\ORM\Query;
 use Cake\ORM\Table;
 use MeowBlog\Controller\AppController;
 use MeowBlog\Model\Entity\Article;
+use MeowBlog\Model\Entity\ArticleType;
 use MeowBlog\Model\Table\ArticlesTable;
 use MeowBlog\Model\View\ArticleViewModel;
 
@@ -34,14 +35,19 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
      *
      * @return \Cake\ORM\Table|\Cake\ORM\Query
      */
-    public function getAll(ServerRequest $request, AppController $controller, bool $paginate = true): array
+    public function getAll(ServerRequest $request, AppController $controller, bool $paginate = true, ArticleType $articleType = ArticleType::Article): array
     {   
         $blog = $this->articles->Blogs->find()->where(['Blogs.domain' => $request->getUri()->getHost()])->first();
 
         if ($blog) {
-            $articles = $this->articles->find()->where(['Articles.blog_id' => $blog->id]);
+            $articles = $this->articles->find()->where([
+                'Articles.blog_id' => $blog->id,
+                'Articles.article_type' => $articleType->value
+            ]);
         } else {
-            $articles = $this->articles;
+            $articles = $this->articles->find()->where([
+                'Articles.article_type' => $articleType->value
+            ]);
         }
         
         if ($paginate) {
