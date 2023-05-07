@@ -26,7 +26,7 @@
                     echo $this->Form->control('description');
                     echo $this->Form->control('domain');
                     echo $this->Form->control('theme');
-                    // echo $this->Form->control('verification');
+                    echo $this->Form->control('default_route');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

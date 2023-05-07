@@ -12,4 +12,6 @@ interface BlogsManagerServiceInterface
     public function getName(ServerRequest $request): string;
 
     public function getDescription(ServerRequest $request): string;
+
+    public function getDefaultRoute(ServerRequest $request): ?string;
 }

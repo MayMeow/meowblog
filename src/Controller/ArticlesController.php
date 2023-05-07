@@ -7,6 +7,7 @@ use Cake\Database\Query;
 use Cake\Event\EventInterface;
 use MeowBlog\Model\Entity\ArticleType;
 use MeowBlog\Services\ArticlesManagerServiceInterface;
+use MeowBlog\Services\BlogsManagerServiceInterface;
 
 /**
  * Articles Controller
@@ -34,9 +35,15 @@ class ArticlesController extends AppController
      * @param \MeowBlog\Services\ArticlesManagerServiceInterface $articlesManager articlesManager
      * @return \Cake\Http\Response|null|void Renders view
      */
-    public function index(ArticlesManagerServiceInterface $articlesManager)
+    public function index(ArticlesManagerServiceInterface $articlesManager, BlogsManagerServiceInterface $blogsManager)
     {
         $this->Authorization->skipAuthorization();
+
+        // Redirect to default route if it exists
+        $dr = $blogsManager->getDefaultRoute($this->request);
+        if (!is_null($dr) && $dr != '') {
+            return $this->redirect($dr);
+        }
 
         $this->paginate = [
             'contain' => ['Users', 'Blogs'],

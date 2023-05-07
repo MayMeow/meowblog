@@ -14,6 +14,7 @@ use Cake\ORM\Entity;
  * @property string $domain
  * @property string $theme
  * @property string $verification
+ * @property string $default_route
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  */
@@ -36,5 +37,6 @@ class Blog extends Entity
         'verification' => true,
         'created' => true,
         'modified' => true,
+        'default_route' => true,
     ];
 }
