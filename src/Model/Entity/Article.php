@@ -49,6 +49,7 @@ class Article extends Entity
         'user' => true,
         'tags' => true,
         'tag_string' => true,
+        'article_type' => true,
     ];
 
     /**

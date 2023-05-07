@@ -35,19 +35,23 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
      *
      * @return \Cake\ORM\Table|\Cake\ORM\Query
      */
-    public function getAll(ServerRequest $request, AppController $controller, bool $paginate = true, ArticleType $articleType = ArticleType::Article): array
+    public function getAll(ServerRequest $request, AppController $controller, bool $paginate = true, ArticleType $articleType = ArticleType::Article, bool $publishedOnly = true): array
     {   
         $blog = $this->articles->Blogs->find()->where(['Blogs.domain' => $request->getUri()->getHost()])->first();
 
         if ($blog) {
             $articles = $this->articles->find()->where([
                 'Articles.blog_id' => $blog->id,
-                'Articles.article_type' => $articleType->value
+                'Articles.article_type' => $articleType->value,
             ]);
         } else {
             $articles = $this->articles->find()->where([
-                'Articles.article_type' => $articleType->value
+                'Articles.article_type' => $articleType->value,
             ]);
+        }
+
+        if ($publishedOnly) {
+            $articles = $articles->where(['Articles.published' => 1]);
         }
         
         if ($paginate) {

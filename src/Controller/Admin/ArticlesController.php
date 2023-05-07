@@ -5,6 +5,7 @@ namespace MeowBlog\Controller\Admin;
 
 use Authorization\Exception\ForbiddenException;
 use MeowBlog\Controller\AppController;
+use MeowBlog\Model\Entity\ArticleType;
 use MeowBlog\Services\ArticlesManagerServiceInterface;
 
 /**
@@ -75,10 +76,13 @@ class ArticlesController extends AppController
             }
             $this->Flash->error(__('The article could not be saved. Please, try again.'));
         }
+
+        $articleTypes = ArticleType::list();
+
         // $users = $this->Articles->Users->find('list', ['limit' => 200])->all();
         // $tags = $this->Articles->Tags->find('list', ['limit' => 200])->all();
         $blogs = $this->Articles->Blogs->find('list', ['limit' => 200])->all();
-        $this->set(compact('blogs', 'article'));
+        $this->set(compact('blogs', 'article', 'articleTypes'));
     }
 
     /**
@@ -111,10 +115,13 @@ class ArticlesController extends AppController
             }
             $this->Flash->error(__('The article could not be saved. Please, try again.'));
         }
+
+        $articleTypes = ArticleType::list();
+
         // $users = $this->Articles->Users->find('list', ['limit' => 200])->all();
         // $tags = $this->Articles->Tags->find('list', ['limit' => 200])->all();
         $blogs = $this->Articles->Blogs->find('list', ['limit' => 200])->all();
-        $this->set(compact('blogs', 'article'));
+        $this->set(compact('blogs', 'article', 'articleTypes'));
     }
 
     /**

@@ -27,9 +27,10 @@ interface ArticlesManagerServiceInterface
      * @param \Cake\Http\ServerRequest $request from passed request
      * @param bool $paginate whether to paginate or not
      * @param ArticleType $articleType article type
+     * @param bool $publishedOnly whether to only get published articles
      * @return array<\MeowBlog\Model\View\ArticleViewModel> array of articles
      */
-    public function getAll(ServerRequest $request, AppController $controller, bool $paginate = true, ArticleType $articleType = ArticleType::Article): array;
+    public function getAll(ServerRequest $request, AppController $controller, bool $paginate = true, ArticleType $articleType = ArticleType::Article, bool $publishedOnly = true): array;
 
     /**
      * saveToDatabase function

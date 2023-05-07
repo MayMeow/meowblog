@@ -3,6 +3,9 @@
  * @var \MeowBlog\View\AppView $this
  * @var \MeowBlog\Model\Entity\Article $article
  */
+
+use MeowBlog\Model\Entity\ArticleType;
+
 ?>
 <div class="row">
     <aside class="column">
@@ -16,7 +19,7 @@
     </aside>
     <div class="column-responsive column-80">
         <div class="articles view content">
-            <h3><?= h($article->title) ?></h3>
+            <h3><?= h($article->title) ?> <mark><?= ArticleType::from($article->article_type)->name ?></mark></h3>
             <table>
                 <tr>
                     <th><?= __('User') ?></th>
