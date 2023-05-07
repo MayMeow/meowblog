@@ -16,8 +16,6 @@
                 $article->slug
             ]) ?>" class="contrast"><?= $article->title ?></a>
             <small>
-                <?= __('on') ?>
-                <?= $article->created->format('d/m/Y') ?>
                 <?php if (!$currentBlog) : ?>
                     <?= __('in') ?>
                     <?= $this->Html->link($article->blog->title, 'https://' . $article->blog->domain) ?>

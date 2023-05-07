@@ -48,11 +48,10 @@ $appDescription = 'Meowblog';
         </div>
     </main>
     <footer class="container">
-        <div class="grid">
-            <div>
+            <div style="text-align: center;">
                 <small>Meowblog v<?= $appVersion ?> <a href="https://github.com/MayMeow/meowblog">Source Code</a></small>
             </div>
-            <div style="text-align: right;">
+            <!--<div style="text-align: center;">
                 <small>
                     Made with 
                     <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -62,8 +61,7 @@ $appDescription = 'Meowblog';
                     <ellipse cx="23.4771" cy="12.5937" rx="2.83554" ry="4.78125" transform="rotate(30 23.4771 12.5937)" fill="#F37366"/>
                     </svg>
                     <a href="https://maymeow.com/">May</a></small>
-            </div>
-        </div>
+            </div>-->
     </footer>
 
     <?= $this->Html->script(['https://cdn.maymeow.com/js/prism.js']) ?>
