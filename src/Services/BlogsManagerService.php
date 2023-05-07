@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace MeowBlog\Services;
 
+use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Http\ServerRequest;
 use Cake\ORM\Locator\LocatorAwareTrait;
@@ -98,5 +99,12 @@ class BlogsManagerService implements BlogsManagerServiceInterface
         }
 
         return null;
+    }
+
+    public function clearLinkCache(int $id): void
+    {
+        $blog = $this->blogs->get($id);
+
+        Cache::delete('blog_links_' . $blog->domain, '_blogs_long_');
     }
 }

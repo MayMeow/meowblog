@@ -150,5 +150,23 @@ return [
             'serialize' => true,
             'duration' => '+1 years',
         ],
+
+        '_blogs_short_' => [
+            'className' => \Cake\Cache\Engine\RedisEngine::class,
+            'prefix' => 'blog_short_',
+            'host' => env('REDIS_HOST', null),
+            'port' => env('REDIS_PORT', null),
+            'serialize' => true,
+            'duration' => '+10 minutes',
+        ],
+
+        '_blogs_long_' => [
+            'className' => \Cake\Cache\Engine\RedisEngine::class,
+            'prefix' => 'blog_long_',
+            'host' => env('REDIS_HOST', null),
+            'port' => env('REDIS_PORT', null),
+            'serialize' => true,
+            'duration' => '+1 hours',
+        ],
     ]
 ];

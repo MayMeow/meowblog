@@ -61,7 +61,7 @@ class BlogHelper extends Helper
         
         return Cache::remember('blog_name_' . $request->getUri()->getHost(), function () use ($manager, $request) {
             return $manager->getName($request);
-        });
+        }, '_blogs_long_');
     }
 
     /**
@@ -76,7 +76,7 @@ class BlogHelper extends Helper
         
         return Cache::remember('blog_description_' . $request->getUri()->getHost(), function () use ($manager, $request) {
             return $manager->getDescription($request);
-        });
+        }, '_blogs_long_');
     }
 
     /**
@@ -91,7 +91,7 @@ class BlogHelper extends Helper
         
         return Cache::remember('blog_theme_' . $request->getUri()->getHost(), function () use ($manager, $request) {
             return 'themes/'. $manager->getTheme($request);
-        });
+        }, '_blogs_long_');
     }
 
     /**
@@ -106,6 +106,6 @@ class BlogHelper extends Helper
 
         return Cache::remember('blog_links_' . $request->getUri()->getHost(), function () use ($manager, $request) {
             return $manager->getLinks($request);
-        });
+        }, '_blogs_long_');
     }
 }

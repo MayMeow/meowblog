@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace MeowBlog\Controller\Admin;
 
 use MeowBlog\Controller\AppController;
+use MeowBlog\Services\BlogsManagerServiceInterface;
 
 /**
  * Links Controller
@@ -53,7 +54,7 @@ class LinksController extends AppController
      *
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add(BlogsManagerServiceInterface $blogsManager)
     {
         $link = $this->Links->newEmptyEntity();
         $this->Authorization->authorize($link);
@@ -62,6 +63,8 @@ class LinksController extends AppController
             $link = $this->Links->patchEntity($link, $this->request->getData());
             if ($this->Links->save($link)) {
                 $this->Flash->success(__('The link has been saved.'));
+
+                $blogsManager->clearLinkCache($link->blog_id);
 
                 return $this->redirect(['action' => 'index']);
             }
@@ -78,7 +81,7 @@ class LinksController extends AppController
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit(BlogsManagerServiceInterface $blogsManager, $id = null)
     {
         $link = $this->Links->get($id, [
             'contain' => [],
@@ -89,6 +92,8 @@ class LinksController extends AppController
             $link = $this->Links->patchEntity($link, $this->request->getData());
             if ($this->Links->save($link)) {
                 $this->Flash->success(__('The link has been saved.'));
+
+                $blogsManager->clearLinkCache($link->blog_id);
 
                 return $this->redirect(['action' => 'index']);
             }
@@ -105,13 +110,15 @@ class LinksController extends AppController
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
+    public function delete(BlogsManagerServiceInterface $blogsManager, $id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $link = $this->Links->get($id);
         $this->Authorization->authorize($link);
         
         if ($this->Links->delete($link)) {
+            $blogsManager->clearLinkCache($link->blog_id);
+            
             $this->Flash->success(__('The link has been deleted.'));
         } else {
             $this->Flash->error(__('The link could not be deleted. Please, try again.'));
