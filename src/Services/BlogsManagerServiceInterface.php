@@ -14,4 +14,20 @@ interface BlogsManagerServiceInterface
     public function getDescription(ServerRequest $request): string;
 
     public function getDefaultRoute(ServerRequest $request): ?string;
+
+    /**
+     * Undocumented function
+     *
+     * @param ServerRequest $request
+     * @return null|array<\MeowBlog\Model\Entity\Link>
+     */
+    public function getLinks(ServerRequest $request): ?array;
+
+    /**
+     * Clear the cache for the links that are showed in the header
+     *
+     * @param int $id Blog ID
+     * @return void
+     */
+    public function clearLinkCache(int $id): void;
 }

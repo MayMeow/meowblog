@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace MeowBlog\Services;
 
+use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Http\ServerRequest;
 use Cake\ORM\Locator\LocatorAwareTrait;
@@ -78,5 +79,32 @@ class BlogsManagerService implements BlogsManagerServiceInterface
         } catch (\Exception $e) {
             // do nothing here
         }
+
+        return null;
+    }
+
+    public function getLinks(ServerRequest $request): ?array
+    {
+        try {
+            /** @var Blog $blog */
+            $blog = $this->blogs->findByDomain($request->getUri()->getHost())->contain([
+                'Links' => [
+                    'sort' => ['Links.weight' => 'ASC']
+                ]
+            ])->firstOrFail();
+
+            return $blog->links;
+        } catch (\Exception $e) {
+            // do nothing here
+        }
+
+        return null;
+    }
+
+    public function clearLinkCache(int $id): void
+    {
+        $blog = $this->blogs->get($id);
+
+        Cache::delete('blog_links_' . $blog->domain, '_blogs_long_');
     }
 }

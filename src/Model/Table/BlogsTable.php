@@ -11,6 +11,7 @@ use Cake\Validation\Validator;
 /**
  * Blogs Model
  *
+ * @property \MeowBlog\Model\Table\LinksTable&\Cake\ORM\Association\HasMany $Links
  * @method \MeowBlog\Model\Entity\Blog newEmptyEntity()
  * @method \MeowBlog\Model\Entity\Blog newEntity(array $data, array $options = [])
  * @method \MeowBlog\Model\Entity\Blog[] newEntities(array $data, array $options = [])
@@ -45,6 +46,10 @@ class BlogsTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+
+        $this->hasMany('Links', [
+            'foreignKey' => 'blog_id',
+        ]);
     }
 
     /**
@@ -80,5 +85,15 @@ class BlogsTable extends Table
             ->notEmptyString('theme');
 
         return $validator;
+    }
+
+    public function buildRules(RulesChecker $rules): RulesChecker
+    {
+        $rules->addDelete($rules->isNotLinkedTo(
+            'Links',
+            message: 'This Blog has Links. Please delete them first.'
+        ));
+
+        return $rules;
     }
 }

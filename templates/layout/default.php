@@ -1,5 +1,5 @@
 <?php
-$appVersion = '0.27.5';
+$appVersion = '0.29.2';
 $appDescription = 'Meowblog';
 ?>
 <!DOCTYPE html>
@@ -31,12 +31,14 @@ $appDescription = 'Meowblog';
                             </span> <br />
                             <small><?= $this->Blog->getDescription() ?></small><br />
                             <ul>
-                                <li><a href="/tags">Tags</a></li>
+                                <?php if ($this->Blog->getLinks() != null) : ?>
+                                    <?php foreach ($this->Blog->getLinks() as $link) : ?>
+                                        <li><?= $this->Html->link($link->title, $link->url, ['target' => $link->external ? '_blank': null]) ?></li>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                                 <?php if ($this->Blog->isLoggedIn()) : ?>
                                     <li><a href="/home">Admin</a></li>
                                     <li><a href="/users/logout">Logout</a></li>
-                                <?php else : ?>
-                                    <li><a href="/users/login">Login</a></li>
                                 <?php endif; ?>
                             </ul>
                         </li>
