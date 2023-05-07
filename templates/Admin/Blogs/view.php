@@ -35,6 +35,10 @@
                     <td><?= h($blog->theme) ?></td>
                 </tr>
                 <tr>
+                    <th><?= __('Default route') ?></th>
+                    <td><?= h($blog->default_route) ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($blog->id) ?></td>
                 </tr>

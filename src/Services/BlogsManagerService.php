@@ -67,4 +67,16 @@ class BlogsManagerService implements BlogsManagerServiceInterface
 
         return Configure::read('MeowBlog.description');
     }
+
+    public function getDefaultRoute(ServerRequest $request): ?string
+    {
+        try {
+            /** @var Blog $blog */
+            $blog = $this->blogs->findByDomain($request->getUri()->getHost())->firstOrFail();
+
+            return $blog->default_route;
+        } catch (\Exception $e) {
+            // do nothing here
+        }
+    }
 }
