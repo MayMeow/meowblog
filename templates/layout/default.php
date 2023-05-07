@@ -1,5 +1,5 @@
 <?php
-$appVersion = '0.26.2';
+$appVersion = '0.26.5';
 $appDescription = 'Meowblog';
 ?>
 <!DOCTYPE html>
@@ -30,15 +30,15 @@ $appDescription = 'Meowblog';
                                 <?= $this->Html->link($this->Blog->getName(), url:'/') ?>
                             </span> <br />
                             <small><?= $this->Blog->getDescription() ?></small><br />
-                            <small>
-                                <a style="margin-right: 10px;" href="/tags">Tags</a>
+                            <ul>
+                                <li><a href="/tags">Tags</a></li>
                                 <?php if ($this->Blog->isLoggedIn()) : ?>
-                                    <a style="margin-right: 10px;" href="/home">Admin</a>
-                                    <a style="margin-right: 10px;" href="/users/logout">Logout</a>
+                                    <li><a href="/home">Admin</a></li>
+                                    <li><a href="/users/logout">Logout</a></li>
                                 <?php else : ?>
-                                    <a style="margin-right: 10px;" href="/users/login">Login</a>
+                                    <li><a href="/users/login">Login</a></li>
                                 <?php endif; ?>
-                            </small>
+                            </ul>
                         </li>
                     </ul>
                 </nav>
