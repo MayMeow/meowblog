@@ -13,7 +13,7 @@ $appDescription = 'Meowblog';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css(['/app/assets/index-866500b1', 'https://cdn.maymeow.com/css/prism.css', $this->Blog->getTheme()]) ?>
+    <?= $this->Html->css(['/app/assets/index-877a6f05', 'https://cdn.maymeow.com/css/prism.css', $this->Blog->getTheme()]) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -26,7 +26,7 @@ $appDescription = 'Meowblog';
                 <nav>
                     <ul>
                         <li>
-                            <span style="font-size: 2em; font-family: VC Honey Deck,serif;">
+                            <span style="font-size: 2em; font-family: VC Honey Deck,Noto Serif KR,serif;">
                                 <?= $this->Html->link($this->Blog->getName(), url:'/') ?>
                             </span> <br />
                             <small><?= $this->Blog->getDescription() ?></small><br />
