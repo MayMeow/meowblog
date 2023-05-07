@@ -25,13 +25,17 @@
     <?php endforeach; ?>
     </div>
     <div class="paginator">
+        <nav>
         <ul class="pagination">
             <?= $this->Paginator->first('<< ' . __('first')) ?>
             <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
+            <?php //$this->Paginator->numbers() ?>
             <?= $this->Paginator->next(__('next') . ' >') ?>
             <?= $this->Paginator->last(__('last') . ' >>') ?>
         </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
+        </nav>
+        <p>
+            <small><?= $this->Paginator->counter(__('This blog has {{count}} article(s) total')) ?></small>
+        </p>
     </div>
 </div>
