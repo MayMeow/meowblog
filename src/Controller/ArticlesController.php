@@ -59,6 +59,10 @@ class ArticlesController extends AppController
      */
     public function view(string $slug, ArticlesManagerServiceInterface $articlesManager)
     {
+        if ($this->request->getParam('_matchedRoute') == '/page/{slug}') {
+            $this->viewBuilder()->setTemplate('view_page');
+        }
+        
         $article = $articlesManager->getArticle($slug, $this->request);
         $this->Authorization->skipAuthorization();
 
