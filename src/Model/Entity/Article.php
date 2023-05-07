@@ -16,6 +16,7 @@ use Cake\ORM\Entity;
  * @property string $slug
  * @property string $body
  * @property bool $published
+ * @property string $article_type
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  *

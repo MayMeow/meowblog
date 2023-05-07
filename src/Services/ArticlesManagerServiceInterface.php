@@ -8,6 +8,7 @@ use Cake\ORM\Query;
 use Cake\ORM\Table;
 use MeowBlog\Controller\AppController;
 use MeowBlog\Model\Entity\Article;
+use MeowBlog\Model\Entity\ArticleType;
 
 interface ArticlesManagerServiceInterface
 {
@@ -25,9 +26,10 @@ interface ArticlesManagerServiceInterface
      *
      * @param \Cake\Http\ServerRequest $request from passed request
      * @param bool $paginate whether to paginate or not
+     * @param ArticleType $articleType article type
      * @return array<\MeowBlog\Model\View\ArticleViewModel> array of articles
      */
-    public function getAll(ServerRequest $request, AppController $controller, bool $paginate = true): array;
+    public function getAll(ServerRequest $request, AppController $controller, bool $paginate = true, ArticleType $articleType = ArticleType::Article): array;
 
     /**
      * saveToDatabase function

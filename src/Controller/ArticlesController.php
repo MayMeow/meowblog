@@ -5,6 +5,7 @@ namespace MeowBlog\Controller;
 
 use Cake\Database\Query;
 use Cake\Event\EventInterface;
+use MeowBlog\Model\Entity\ArticleType;
 use MeowBlog\Services\ArticlesManagerServiceInterface;
 
 /**

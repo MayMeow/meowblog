@@ -3,6 +3,9 @@
  * @var \MeowBlog\View\AppView $this
  * @var iterable<\MeowBlog\Model\Entity\Article> $articles
  */
+
+use MeowBlog\Model\Entity\ArticleType;
+
 ?>
 <div class="articles index content">
     <?= $this->Html->link(__('New Article'), ['action' => 'add'], ['class' => 'button float-right']) ?>
@@ -12,11 +15,11 @@
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('user_id') ?></th>
-                    <th><?= $this->Paginator->sort('title') ?></th>
+                    <th>
+                        <?= $this->Paginator->sort('title') ?>
+                    </th>
                     <th><?= $this->Paginator->sort('slug') ?></th>
                     <th><?= $this->Paginator->sort('published') ?></th>
-                    <th><?= $this->Paginator->sort('created') ?></th>
                     <th><?= $this->Paginator->sort('modified') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
@@ -24,12 +27,13 @@
             <tbody>
                 <?php foreach ($articles as $article): ?>
                 <tr>
-                    <td><?= $this->Number->format($article->id) ?></td>
                     <td><?= $article->has('user') ? $this->Html->link($article->user->id, ['controller' => 'Users', 'action' => 'view', $article->user->id]) : '' ?></td>
-                    <td><?= h($article->title) ?></td>
+                    <td>
+                        <?= h($article->title) ?>
+                        <mark><?= ArticleType::from($article->article_type)->name?></mark>
+                    </td>
                     <td><?= h($article->slug) ?></td>
                     <td><?= h($article->published) ?></td>
-                    <td><?= h($article->created) ?></td>
                     <td><?= h($article->modified) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $article->id]) ?>
