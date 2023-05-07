@@ -1,5 +1,5 @@
 <?php
-$appVersion = '0.27.5';
+$appVersion = '0.29.2';
 $appDescription = 'Meowblog';
 ?>
 <!DOCTYPE html>
