@@ -6,6 +6,9 @@
  */
 ?>
 <div class="articles index content">
+
+    <?= $homePage ? $this->Markdown->parse($homePage) : '' ?>
+
     <h3><?= __('Latest Articles') ?></h3>
     <div style="margin-bottom: 1em;">
     <?php foreach ($articles as $article): ?>

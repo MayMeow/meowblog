@@ -19,7 +19,9 @@ use MeowBlog\Model\Entity\ArticleType;
     </aside>
     <div class="column-responsive column-80">
         <div class="articles view content">
-            <h3><?= h($article->title) ?> <mark><?= ArticleType::from($article->article_type)->name ?></mark></h3>
+            <h3><?= h($article->title) ?> 
+                <mark><?= $article->title == $article->blog->domain ? __('Home Page of {0}', $article->blog->title) : ArticleType::from($article->article_type)->name ?></mark>
+            </h3>
             <table>
                 <tr>
                     <th><?= __('User') ?></th>

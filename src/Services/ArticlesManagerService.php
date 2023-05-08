@@ -7,6 +7,7 @@ use Cake\Http\ServerRequest;
 use Cake\ORM\Locator\LocatorAwareTrait;
 use Cake\ORM\Query;
 use Cake\ORM\Table;
+use Cake\Utility\Text;
 use MeowBlog\Controller\AppController;
 use MeowBlog\Model\Entity\Article;
 use MeowBlog\Model\Entity\ArticleType;
@@ -106,5 +107,23 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
         $savedArticle = $this->articles->save($article);
 
         return $savedArticle;
+    }
+
+    public function getHomePageContent(ServerRequest $request): ?string
+    {
+        /** @var \MeowBlog\Model\Table\ArticlesTable $articleTable */
+        $articleTable = $this->articles;
+
+        /** @var \Cake\ORM\Query $q */
+        $q = $articleTable->findBySlug(Text::slug($request->getUri()->getHost()))->where([
+            'Blogs.domain' => $request->getUri()->getHost(),
+            'Articles.article_type' => ArticleType::Page->value,
+            'Articles.published' => 1,
+        ]);
+
+        /** @var \MeowBlog\Model\Entity\Article $savedArticle */
+        $article = $q->contain(['Blogs'])->first();
+
+        return $article ? $article->body : null;
     }
 }

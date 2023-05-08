@@ -18,7 +18,6 @@ use MeowBlog\Model\Entity\ArticleType;
                     <th>
                         <?= $this->Paginator->sort('title') ?>
                     </th>
-                    <th><?= $this->Paginator->sort('slug') ?></th>
                     <th><?= $this->Paginator->sort('published') ?></th>
                     <th><?= $this->Paginator->sort('modified') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
@@ -27,13 +26,23 @@ use MeowBlog\Model\Entity\ArticleType;
             <tbody>
                 <?php foreach ($articles as $article): ?>
                 <tr>
-                    <td><td><?= $this->Number->format($article->id) ?></td></td>
+                    <td><?= $this->Number->format($article->id) ?></td>
                     <td>
-                        <?= h($article->title) ?>
+                        <?= $article->blog->title ?> /
+                        <?php if ($article->title == $article->blog->domain) : ?>
+                        <span data-tooltip="<?= __('This Is Homepage of {0} blog', $article->blog->title) ?>">
+                            <?= h($article->title) ?>
+                        </span>
+                        <?php else : ?>
+                            <?= h($article->title) ?>
+                        <?php endif; ?>
                         <mark><?= ArticleType::from($article->article_type)->name ?></mark>
                     </td>
-                    <td><?= h($article->slug) ?></td>
-                    <td><?= h($article->published) ?></td>
+                    <td>
+                        <span data-tooltip="<?= $article->slug ?>">
+                            <?= $article->published ? __('Yes') : __('No') ?>
+                        </span>
+                    </td>
                     <td><?= h($article->modified) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $article->id]) ?>
