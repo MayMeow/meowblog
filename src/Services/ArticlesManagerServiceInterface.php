@@ -40,4 +40,13 @@ interface ArticlesManagerServiceInterface
      * @return \MeowBlog\Model\Entity\Article|false
      */
     public function saveToDatabase(Article $article, ServerRequest $request): Article | false;
+
+    /**
+     * Return content of the homepage articles
+     * Home-page articles are articles that have title matched with the blog domain
+     *
+     * @param ServerRequest $request
+     * @return string|null
+     */
+    public function getHomePageContent(ServerRequest $request): ?string;
 }

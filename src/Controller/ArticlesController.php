@@ -45,6 +45,8 @@ class ArticlesController extends AppController
             return $this->redirect($dr);
         }
 
+        $homePage = $articlesManager->getHomePageContent($this->request);
+
         $this->paginate = [
             'contain' => ['Users', 'Blogs'],
             'order' => ['Articles.created' => 'DESC'],
@@ -53,7 +55,7 @@ class ArticlesController extends AppController
 
         $articles = $articlesManager->getAll($this->request, $this);
 
-        $this->set(compact('articles'));
+        $this->set(compact('articles', 'homePage'));
     }
 
     /**
