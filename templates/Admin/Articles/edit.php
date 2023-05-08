@@ -31,6 +31,7 @@
                     echo $this->Form->control('published');
                     // echo $this->Form->control('tags._ids', ['options' => $tags]);
                     echo $this->Form->control('tag_string', ['type' => 'text']);
+                    echo $this->Form->control('created');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
