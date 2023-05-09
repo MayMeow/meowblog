@@ -26,7 +26,7 @@ class ArticlesController extends AppController
     public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
-        $this->Authentication->allowUnauthenticated(['index', 'tags', 'view']);
+        $this->Authentication->allowUnauthenticated(['index', 'tags', 'view', 'now']);
     }
 
     /**
@@ -172,5 +172,19 @@ class ArticlesController extends AppController
             'tags' => $tags,
             //'_serialize' => ['articles', 'tags']
         ]);
+    }
+
+    /**
+     * Returns latest article tagged with NOW
+     *
+     * @param ArticlesManagerServiceInterface $articlesManager
+     * @return void
+     */
+    public function now(ArticlesManagerServiceInterface $articlesManager)
+    {
+        $content = $articlesManager->getLatestNowPageContent($this->request);
+        $this->Authorization->skipAuthorization();
+
+        $this->set(compact('content'));
     }
 }
