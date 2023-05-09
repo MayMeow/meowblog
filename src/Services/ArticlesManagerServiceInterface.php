@@ -43,10 +43,18 @@ interface ArticlesManagerServiceInterface
 
     /**
      * Return content of the homepage articles
-     * Home-page articles are articles that have title matched with the blog domain
+     * Home-page articles are articles that have title matched with the blog domain type must be Page
      *
      * @param ServerRequest $request
      * @return string|null
      */
     public function getHomePageContent(ServerRequest $request): ?string;
+
+    /**
+     * Return content of latest article (type: Article) tagged with Now
+     *
+     * @param ServerRequest $request
+     * @return Article|null
+     */
+    public function getLatestNowPageContent(ServerRequest $request): ?Article;
 }

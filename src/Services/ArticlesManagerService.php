@@ -126,4 +126,24 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
 
         return $article ? $article->body : null;
     }
+
+    public function getLatestNowPageContent(ServerRequest $request): ?Article
+    {
+        /** @var \MeowBlog\Model\Table\ArticlesTable $articleTable */
+        $articleTable = $this->articles;
+
+        /** @var \Cake\ORM\Query $q */
+        $q = $articleTable->find('tagged', [
+            'tags' => 'now',
+        ])->where([
+            'Blogs.Domain' => $request->getUri()->getHost(),
+            'Articles.article_type' => ArticleType::Article->value,
+            'Articles.published' => 1,
+        ])->order(['Articles.created' => 'DESC']);
+
+        /** @var \MeowBlog\Model\Entity\Article $savedArticle */
+        $article = $q->contain(['Blogs', 'Tags'])->first();
+
+        return $article ? $article : null;
+    }
 }
