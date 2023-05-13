@@ -9,6 +9,7 @@ use Cake\Http\ServerRequest;
 use Cake\ORM\Locator\LocatorAwareTrait;
 use Cake\ORM\Table;
 use MeowBlog\Model\Entity\Blog;
+use MeowBlog\Model\Entity\ColorScheme;
 use MeowBlog\Model\Table\BlogsTable;
 
 class BlogsManagerService implements BlogsManagerServiceInterface
@@ -33,7 +34,7 @@ class BlogsManagerService implements BlogsManagerServiceInterface
             /** @var Blog $blog */
             $blog = $this->blogs->findByDomain($request->getUri()->getHost())->firstOrFail();
 
-            return $blog->theme;
+            return ColorScheme::from($blog->theme)->value;
         } catch (\Exception $e) {
             // do nothing here
         }
