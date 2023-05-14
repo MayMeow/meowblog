@@ -25,7 +25,7 @@
                     echo $this->Form->control('title');
                     echo $this->Form->control('description');
                     echo $this->Form->control('domain');
-                    echo $this->Form->control('theme');
+                    echo $this->Form->control('theme', ['options' => $colorSchemes]);
                     echo $this->Form->control('default_route');
                 ?>
             </fieldset>

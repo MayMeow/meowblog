@@ -32,7 +32,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Theme') ?></th>
-                    <td><?= h($blog->theme) ?></td>
+                    <td><?= h($this->Blog->getThemeName($blog->theme)) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Default route') ?></th>

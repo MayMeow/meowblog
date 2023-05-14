@@ -2,6 +2,7 @@
 /**
  * @var \MeowBlog\View\AppView $this
  * @var \MeowBlog\Model\Entity\Blog $blog
+ * @var string $colorSchemes
  */
 ?>
 <div class="row">
@@ -20,7 +21,7 @@
                     echo $this->Form->control('title');
                     echo $this->Form->control('description');
                     echo $this->Form->control('domain');
-                    echo $this->Form->control('theme');
+                    echo $this->Form->control('theme', ['options' => $colorSchemes]);
                     // echo $this->Form->control('verification');
                 ?>
             </fieldset>

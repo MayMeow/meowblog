@@ -3,6 +3,7 @@
  * @var \MeowBlog\View\AppView $this
  * @var iterable<\MeowBlog\Model\Entity\Blog> $blogs
  */
+
 ?>
 <div class="blogs index content">
     <?= $this->Html->link(__('New Blog'), ['action' => 'add'], ['class' => 'button float-right']) ?>
@@ -24,7 +25,7 @@
                     <td><?= $this->Number->format($blog->id) ?></td>
                     <td><?= h($blog->title) ?></td>
                     <td><?= $this->Html->link($blog->domain, 'https://' . $blog->domain) ?></td>
-                    <td><?= h($blog->theme) ?></td>
+                    <td><?= h($this->Blog->getThemeName($blog->theme)) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $blog->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $blog->id]) ?>
