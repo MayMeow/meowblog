@@ -26,7 +26,7 @@ class ArticlesController extends AppController
     public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
-        $this->Authentication->allowUnauthenticated(['index', 'tags', 'view', 'now']);
+        $this->Authentication->allowUnauthenticated(['index', 'tags', 'view', 'now', 'micro']);
     }
 
     /**
@@ -186,5 +186,19 @@ class ArticlesController extends AppController
         $this->Authorization->skipAuthorization();
 
         $this->set(compact('content'));
+    }
+
+    public function micro(ArticlesManagerServiceInterface $articlesManager)
+    {
+        $this->Authorization->skipAuthorization();
+
+        $this->paginate = [
+            'order' => ['Articles.created' => 'DESC'],
+            'limit' => 50,
+        ];
+
+        $articles = $articlesManager->getAll($this->request, $this, articleType: ArticleType::Micro);
+
+        $this->set(compact('articles'));
     }
 }
