@@ -6,3 +6,15 @@
 main, footer {
     max-width: 40em!important;
 }
+
+.micro-post {
+    padding-top: 2em;
+    padding-bottom: 2em;
+
+    border-bottom: 1px solid var(--muted-border-color);
+
+    p {
+        margin: 0;
+        padding: 0;
+    }
+}

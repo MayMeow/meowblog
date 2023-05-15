@@ -77,6 +77,7 @@ $routes->scope('/', function (RouteBuilder $builder) {
     $builder->connect('/page/{slug}', ['controller' => 'Articles', 'action' => 'view'])->setPass(['slug']);
 
     $builder->connect('/now', ['controller' => 'Articles', 'action' => 'now']);
+    $builder->connect('/micro', ['controller' => 'Articles', 'action' => 'micro']);
 
     $builder->scope("/articles", function (RouteBuilder $builder) {
         $builder->connect('/tagged/*', ['controller' => 'Articles', 'action' => 'tags']);
