@@ -84,6 +84,12 @@ class BlogsTable extends Table
             ->requirePresence('theme', 'create')
             ->notEmptyString('theme');
 
+        $validator
+            ->scalar('scheme')
+            ->maxLength('scheme', 255)
+            ->requirePresence('scheme', 'create')
+            ->notEmptyString('scheme');
+
         return $validator;
     }
 
