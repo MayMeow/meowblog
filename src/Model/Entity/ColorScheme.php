@@ -22,6 +22,7 @@ enum ColorScheme: string
     case Red = 'themes/red';
     case Teal = 'themes/teal';
     case Yellow = 'themes/yellow';
+    case Catppuccin = 'themes/catppuccin';
 
     /**
      * Return list of cases that is uuitable for use with Html Selects
