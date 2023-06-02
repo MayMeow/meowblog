@@ -10,6 +10,7 @@ use Cake\ORM\Locator\LocatorAwareTrait;
 use Cake\ORM\Table;
 use MeowBlog\Model\Entity\Blog;
 use MeowBlog\Model\Entity\ColorScheme;
+use MeowBlog\Model\Entity\ColorSchemeVariant;
 use MeowBlog\Model\Table\BlogsTable;
 
 class BlogsManagerService implements BlogsManagerServiceInterface
@@ -40,6 +41,26 @@ class BlogsManagerService implements BlogsManagerServiceInterface
         }
 
         return Configure::read('MeowBlog.theme');
+    }
+
+    /**
+     * Get Color scheme variant
+     *
+     * @param ServerRequest $request
+     * @return string
+     */
+    public function getSchemeVariant(ServerRequest $request): string
+    {
+        try {
+            /** @var Blog $blog */
+            $blog = $this->blogs->findByDomain($request->getUri()->getHost())->firstOrFail();
+
+            return ColorSchemeVariant::from($blog->scheme)->value;
+        } catch (\Exception $e) {
+            // do nothing here
+        }
+
+        return ColorSchemeVariant::Default->value;
     }
 
     public function getName(ServerRequest $request): string

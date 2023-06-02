@@ -3,7 +3,7 @@ $appVersion = '0.33.1';
 $appDescription = $this->Blog->getName() ?? 'Meowblog';
 ?>
 <!DOCTYPE html>
-<html>
+<html <?= $this->Blog->getSchemeVariant() ?>>
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">

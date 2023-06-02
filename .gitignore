@@ -52,3 +52,6 @@ data/app.db
 
 # Ignore all :Zone.Identifier files
 *:Zone.Identifier
+
+# Schema dump lock file
+config/Migrations/schema-dump-default.lock

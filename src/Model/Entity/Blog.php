@@ -13,6 +13,7 @@ use Cake\ORM\Entity;
  * @property string $description
  * @property string $domain
  * @property string $theme
+ * @property string $scheme
  * @property string $verification
  * @property string $default_route
  * @property \Cake\I18n\FrozenTime $created
@@ -36,6 +37,7 @@ class Blog extends Entity
         'description' => true,
         'domain' => true,
         'theme' => true,
+        'scheme' => true,
         'verification' => true,
         'created' => true,
         'modified' => true,
