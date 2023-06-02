@@ -6,6 +6,7 @@ use Cake\Database\Driver\Mysql;
 use Cake\Error\ExceptionRenderer;
 use Cake\Log\Engine\FileLog;
 use Cake\Mailer\Transport\MailTransport;
+use MeowBlog\Model\Entity\ColorScheme;
 
 return [
     /*
@@ -425,6 +426,6 @@ return [
     'MeowBlog' => [
         'name' => env('APP_NAME', 'MeowBlog'),
         'description' => env('APP_DESCRIPTION', ''),
-        'theme' => env('APP_THEME', 'blue'),
+        'theme' => env('APP_THEME', ColorScheme::Blue->value),
     ]
 ];

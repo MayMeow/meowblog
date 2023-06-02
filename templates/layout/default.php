@@ -13,7 +13,7 @@ $appDescription = $this->Blog->getName() ?? 'Meowblog';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css(['/app/assets/index-9a65a18a', 'https://cdn.maymeow.com/css/prism.css', $this->Blog->getTheme()]) ?>
+    <?= $this->Html->css(['/app/assets/index-283b9b1f', 'https://cdn.maymeow.com/css/prism.css', $this->Blog->getTheme()]) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
