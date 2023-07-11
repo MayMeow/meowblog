@@ -13,7 +13,7 @@ $appDescription = $this->Blog->getName() ?? 'Meowblog';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css(['/app/assets/index-9a65a18a', 'https://cdn.maymeow.com/css/prism.css', $this->Blog->getTheme()]) ?>
+    <?= $this->Html->css(['/app/assets/index-59c536ad', 'https://cdn.maymeow.com/css/prism.css', $this->Blog->getTheme()]) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -27,7 +27,7 @@ $appDescription = $this->Blog->getName() ?? 'Meowblog';
                     <ul>
                         <li>
                             <span style="font-size: 2em; font-family: VC Honey Deck,Noto Serif KR,serif;">
-                                <?= $this->Html->link($this->Blog->getName(), url:'/') ?>
+                                <?= $this->Html->link($this->Blog->getName() . ' 헬로 월드', url:'/') ?>
                             </span> <br />
                             <small><?= $this->Blog->getDescription() ?></small><br />
                             <ul>

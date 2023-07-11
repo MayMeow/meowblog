@@ -52,3 +52,5 @@ data/app.db
 
 # Ignore all :Zone.Identifier files
 *:Zone.Identifier
+
+*schema-dump-default.lock
