@@ -38,7 +38,7 @@ class LinksController extends AppController
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view(?string $id = null)
     {
         $link = $this->Links->get($id, [
             'contain' => ['Blogs'],
@@ -81,7 +81,7 @@ class LinksController extends AppController
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit(BlogsManagerServiceInterface $blogsManager, $id = null)
+    public function edit(BlogsManagerServiceInterface $blogsManager, ?string $id = null)
     {
         $link = $this->Links->get($id, [
             'contain' => [],
@@ -110,7 +110,7 @@ class LinksController extends AppController
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete(BlogsManagerServiceInterface $blogsManager, $id = null)
+    public function delete(BlogsManagerServiceInterface $blogsManager, ?string $id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $link = $this->Links->get($id);
