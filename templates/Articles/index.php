@@ -1,10 +1,9 @@
 <?php
 /**
  * @var \MeowBlog\View\AppView $this
- * @var array<\MeowBlog\Model\View\ArticleViewModel> $articles
+ * @var \Meowblog\Model\Entity\Article[] $articles
  * @var bool $currentBlog
  */
-$this->Paginator->setPaginated($articles);
 ?>
 <div class="articles index content">
 
@@ -14,15 +13,15 @@ $this->Paginator->setPaginated($articles);
     <div style="margin-bottom: 1em;">
     <?php foreach ($articles as $article): ?>
         <div>
-            <a href="<?= !$article->isCurrentBlog() ? 'https://'. $article->getArticle()->blog->domain : '' ?><?= $this->Url->build([
+            <a href="<?= !false ? 'https://'. $article->blog->domain : '' ?><?= $this->Url->build([
                 'controller' => 'Articles',
                 'action' => 'view',
-                $article->getArticle()->slug
-            ]) ?>" class="contrast"><?= $article->getArticle()->title ?></a>
+                $article->slug
+            ]) ?>" class="contrast"><?= $article->title ?></a>
             <small>
-                <?php if (!$article->isCurrentBlog()) : ?>
+                <?php if (!false) : ?>
                     <?= __('in') ?>
-                    <?= $this->Html->link($article->getArticle()->blog->title, 'https://' . $article->getArticle()->blog->domain) ?>
+                    <?= $this->Html->link($article->blog->title, 'https://' . $article->blog->domain) ?>
                 <?php endif; ?>
             </small>
         </div>

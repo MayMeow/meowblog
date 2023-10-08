@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace MeowBlog\Model\View;
 
+use Cake\Datasource\Paging\PaginatedInterface;
 use MeowBlog\Model\Entity\Article;
 
 class ArticleViewModel

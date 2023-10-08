@@ -3,9 +3,12 @@ declare(strict_types=1);
 
 namespace MeowBlog\Services;
 
+use Cake\Datasource\Paging\PaginatedResultSet;
+use Cake\Datasource\ResultSetInterface;
 use Cake\Http\ServerRequest;
 use Cake\ORM\Locator\LocatorAwareTrait;
 use Cake\ORM\Query;
+use Cake\ORM\ResultSet;
 use Cake\ORM\Table;
 use Cake\Utility\Text;
 use MeowBlog\Controller\AppController;
@@ -36,12 +39,12 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
      *
      * @return \Cake\ORM\Table|\Cake\ORM\Query
      */
-    public function getAll(ServerRequest $request, AppController $controller, bool $paginate = true, ArticleType $articleType = ArticleType::Article, bool $publishedOnly = true): array
+    public function getAll(ServerRequest $request, AppController $controller, bool $paginate = true, ArticleType $articleType = ArticleType::Article, bool $publishedOnly = true): ResultSetInterface|PaginatedResultSet
     {   
         $blog = $this->articles->Blogs->find()->where(['Blogs.domain' => $request->getUri()->getHost()])->first();
 
         if ($blog) {
-            $articles = $this->articles->find()->where([
+            $articles = $this->articles->find()->contain(['Users', 'Blogs'])->where([
                 'Articles.blog_id' => $blog->id,
                 'Articles.article_type' => $articleType->value,
             ]);
@@ -59,13 +62,7 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
             $articles = $controller->paginate($articles);
         }
 
-        $av = [];
-        foreach ($articles as $article) {
-            $current = $blog ? true : false;
-            $av [] = new ArticleViewModel($article, $current);
-        }
-
-        return $av;
+        return $articles;
     }
 
     /**
@@ -133,13 +130,11 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
         $articleTable = $this->articles;
 
         /** @var \Cake\ORM\Query $q */
-        $q = $articleTable->find('tagged', [
-            'tags' => 'now',
-        ])->where([
+        $q = $articleTable->find('tagged', tags: 'now')->where([
             'Blogs.Domain' => $request->getUri()->getHost(),
             'Articles.article_type' => ArticleType::Article->value,
             'Articles.published' => 1,
-        ])->order(['Articles.created' => 'DESC']);
+        ])->orderBy(['Articles.created' => 'DESC']);
 
         /** @var \MeowBlog\Model\Entity\Article $savedArticle */
         $article = $q->contain(['Blogs', 'Tags'])->first();
