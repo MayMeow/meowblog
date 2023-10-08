@@ -28,7 +28,7 @@ class Link extends Entity
      *
      * @var array<string, bool>
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'blog_id' => true,
         'title' => true,
         'url' => true,

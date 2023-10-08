@@ -47,9 +47,7 @@ class TagsManagerService implements TagsManagerServiceInterface
      */
     public function getOne(int $id): EntityInterface | Tag
     {
-        return $this->tags->get($id, [
-            'contain' => ['Articles'],
-        ]);
+        return $this->tags->get($id, contain: ['Articles']);
     }
 
     /**

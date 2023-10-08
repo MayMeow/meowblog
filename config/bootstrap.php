@@ -68,6 +68,8 @@ use Cake\Error\ExceptionTrap;
 //         ->toServer();
 // }
 
+require CAKE . 'functions.php';
+
 if (!env('APP_NAME') && file_exists(ROOT . DS . '.env')) {
     $dotenv = new \josegonzalez\Dotenv\Loader([ROOT . DS . '.env']);
     $dotenv->parse()->putenv()->toEnv()->toServer();

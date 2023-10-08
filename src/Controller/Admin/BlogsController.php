@@ -37,9 +37,7 @@ class BlogsController extends AppController
      */
     public function view($id = null)
     {
-        $blog = $this->Blogs->get($id, [
-            'contain' => [],
-        ]);
+        $blog = $this->Blogs->get($id, contain: []);
 
         $this->Authorization->authorize($blog);
 
@@ -80,9 +78,7 @@ class BlogsController extends AppController
      */
     public function edit($id = null)
     {
-        $blog = $this->Blogs->get($id, [
-            'contain' => [],
-        ]);
+        $blog = $this->Blogs->get($id, contain: []);
         $this->Authorization->authorize($blog);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $blog = $this->Blogs->patchEntity($blog, $this->request->getData());

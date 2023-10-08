@@ -33,7 +33,7 @@ class GenerateSecurityKeyCommand extends Command
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return null|void|int The exit code or null for success
      */
-    public function execute(Arguments $args, ConsoleIo $io)
+    public function execute(Arguments $args, ConsoleIo $io): ?int
     {
         $key = Security::hash(Security::randomBytes(256), 'sha256', false);
         $io->info($key);

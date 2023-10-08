@@ -4,6 +4,7 @@
  * @var array<\MeowBlog\Model\View\ArticleViewModel> $articles
  * @var bool $currentBlog
  */
+$this->Paginator->setPaginated($articles);
 ?>
 <div class="articles index content">
 

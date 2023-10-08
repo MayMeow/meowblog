@@ -26,7 +26,7 @@ class ArticlesTag extends Entity
      *
      * @var array<string, bool>
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'article_id' => true,
         'tag_id' => true,
         'article' => true,

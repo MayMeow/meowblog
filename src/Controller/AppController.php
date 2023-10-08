@@ -31,7 +31,7 @@ use Cake\Controller\Controller;
  */
 class AppController extends Controller
 {
-    use ServiceAwareTrait;
+    //use ServiceAwareTrait;
 
     /**
      * Initialization hook method.
@@ -46,7 +46,7 @@ class AppController extends Controller
     {
         parent::initialize();
 
-        $this->loadComponent('RequestHandler');
+        # $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
 
         /*
