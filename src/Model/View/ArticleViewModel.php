@@ -6,6 +6,10 @@ namespace MeowBlog\Model\View;
 use Cake\Datasource\Paging\PaginatedInterface;
 use MeowBlog\Model\Entity\Article;
 
+/**
+ * @deprecated
+ * @see https://github.com/MayMeow/meowblog/pull/48
+ */
 class ArticleViewModel
 {
     protected bool $isCurrentBlog;

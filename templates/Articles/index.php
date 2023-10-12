@@ -13,13 +13,13 @@
     <div style="margin-bottom: 1em;">
     <?php foreach ($articles as $article): ?>
         <div>
-            <a href="<?= !false ? 'https://'. $article->blog->domain : '' ?><?= $this->Url->build([
+            <a href="<?= !$this->Articles->isInCurrentBlog($article) ? 'https://'. $article->blog->domain : '' ?><?= $this->Url->build([
                 'controller' => 'Articles',
                 'action' => 'view',
                 $article->slug
             ]) ?>" class="contrast"><?= $article->title ?></a>
             <small>
-                <?php if (!false) : ?>
+                <?php if (!$this->Articles->isInCurrentBlog($article)) : ?>
                     <?= __('in') ?>
                     <?= $this->Html->link($article->blog->title, 'https://' . $article->blog->domain) ?>
                 <?php endif; ?>

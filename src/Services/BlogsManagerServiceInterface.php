@@ -17,6 +17,8 @@ interface BlogsManagerServiceInterface
 
     public function getDefaultRoute(ServerRequest $request): ?string;
 
+    public function getId(ServerRequest $request): ?int;
+
     /**
      * Undocumented function
      *
