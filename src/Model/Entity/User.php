@@ -12,8 +12,8 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $email
  * @property string $password
- * @property \Cake\I18n\FrozenTime $created
- * @property \Cake\I18n\FrozenTime $modified
+ * @property \Cake\I18n\DateTime $created
+ * @property \Cake\I18n\DateTime $modified
  *
  * @property \MeowBlog\Model\Entity\Article[] $articles
  */
@@ -28,7 +28,7 @@ class User extends Entity
      *
      * @var array<string, bool>
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'email' => true,
         'password' => true,
         'created' => true,
@@ -41,7 +41,7 @@ class User extends Entity
      *
      * @var array<string>
      */
-    protected $_hidden = [
+    protected array $_hidden = [
         'password',
     ];
 

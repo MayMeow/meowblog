@@ -40,9 +40,7 @@ class LinksController extends AppController
      */
     public function view(?string $id = null)
     {
-        $link = $this->Links->get($id, [
-            'contain' => ['Blogs'],
-        ]);
+        $link = $this->Links->get($id, contain: ['Blogs']);
 
         $this->Authorization->authorize($link);
 
@@ -83,9 +81,7 @@ class LinksController extends AppController
      */
     public function edit(BlogsManagerServiceInterface $blogsManager, ?string $id = null)
     {
-        $link = $this->Links->get($id, [
-            'contain' => [],
-        ]);
+        $link = $this->Links->get($id, contain: []);
         $this->Authorization->authorize($link);
 
         if ($this->request->is(['patch', 'post', 'put'])) {

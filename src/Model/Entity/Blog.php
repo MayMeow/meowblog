@@ -16,9 +16,9 @@ use Cake\ORM\Entity;
  * @property string $scheme
  * @property string $verification
  * @property string $default_route
- * @property \Cake\I18n\FrozenTime $created
- * @property \Cake\I18n\FrozenTime $modified
- * 
+ * @property \Cake\I18n\DateTime $created
+ * @property \Cake\I18n\DateTime $modified
+ *
  * @property \MeowBlog\Model\Entity\Link[] $links
  */
 class Blog extends Entity
@@ -32,7 +32,7 @@ class Blog extends Entity
      *
      * @var array<string, bool>
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'title' => true,
         'description' => true,
         'domain' => true,

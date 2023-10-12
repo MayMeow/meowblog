@@ -162,9 +162,7 @@ class ArticlesController extends AppController
      */
     public function tags(string ...$tags)
     {
-        $articles = $this->Articles->find('tagged', [
-            'tags' => $tags,
-        ])->contain(['Tags'])->all();
+        $articles = $this->Articles->find('tagged', tags: $tags)->contain(['Tags'])->all();
         $this->Authorization->skipAuthorization();
 
         $this->set([

@@ -17,8 +17,8 @@ use Cake\ORM\Entity;
  * @property string $body
  * @property bool $published
  * @property string $article_type
- * @property \Cake\I18n\FrozenTime $created
- * @property \Cake\I18n\FrozenTime $modified
+ * @property \Cake\I18n\DateTime $created
+ * @property \Cake\I18n\DateTime $modified
  *
  * @property \MeowBlog\Model\Entity\User $user
  * @property \MeowBlog\Model\Entity\Blog $blog
@@ -37,7 +37,7 @@ class Article extends Entity
      *
      * @var array<string, bool>
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'user_id' => true,
         'blog_id' => true,
         'title' => true,

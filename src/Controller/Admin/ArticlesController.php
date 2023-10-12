@@ -42,9 +42,7 @@ class ArticlesController extends AppController
      */
     public function view($id = null)
     {
-        $article = $this->Articles->get($id, [
-            'contain' => ['Users', 'Tags', 'Blogs'],
-        ]);
+        $article = $this->Articles->get($id, contain: ['Users', 'Tags', 'Blogs']);
 
         $this->Authorization->skipAuthorization();
 
@@ -94,9 +92,7 @@ class ArticlesController extends AppController
      */
     public function edit($id = null)
     {
-        $article = $this->Articles->get($id, [
-            'contain' => ['Tags'],
-        ]);
+        $article = $this->Articles->get($id, contain: ['Tags']);
 
         try {
             $this->Authorization->authorize($article);

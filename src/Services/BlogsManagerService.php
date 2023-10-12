@@ -129,4 +129,18 @@ class BlogsManagerService implements BlogsManagerServiceInterface
 
         Cache::delete('blog_links_' . $blog->domain, '_blogs_long_');
     }
+
+    public function getId(ServerRequest $request): ?int
+    {
+        try {
+            /** @var Blog $blog */
+            $blog = $this->blogs->findByDomain($request->getUri()->getHost())->firstOrFail();
+
+            return $blog->id;
+        } catch (\Exception $e) {
+            // do nothing here
+        }
+
+        return null;
+    }
 }
