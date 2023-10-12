@@ -17,7 +17,7 @@
             <nav>
                 <ul>
                     <?php foreach ($article->tags as $tag) : ?>
-                        <li><?= $this->Html->link($tag->title, ['controller' => 'Tags', 'action' => 'view', $tag->id], ['role' => 'button']) ?></li>
+                        <li><?= $this->Html->link($tag->title, ['controller' => 'Articles', 'action' => 'tags', $tag->title], ['role' => 'button']) ?></li>
                     <?php endforeach; ?>
                 </ul>
             </nav>

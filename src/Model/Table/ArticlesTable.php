@@ -6,6 +6,7 @@ namespace MeowBlog\Model\Table;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\EventInterface;
 use Cake\ORM\Query;
+use Cake\ORM\Query\SelectQuery;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Utility\Text;
@@ -154,11 +155,11 @@ class ArticlesTable extends Table
     }
 
     /**
-     * @param \Cake\ORM\Query $query Server Query
-     * @param array $options Options
-     * @return \Cake\ORM\Query
+     * @param \Cake\ORM\Query\SelectQuery $query Server Query
+     * @param array $tags Tags
+     * @return \Cake\ORM\Query\SelectQuery
      */
-    public function findTagged(Query $query, array $options): Query
+    public function findTagged(SelectQuery $query, array $tags = []): SelectQuery
     {
         $columns = [
             'Articles.id', 'Articles.user_id', 'Articles.title',
@@ -168,14 +169,14 @@ class ArticlesTable extends Table
 
         $query = $query->select($columns)->distinct($columns);
 
-        if (empty($options['tags'])) {
+        if (empty($tags)) {
             // If there are no tags provided, find articles that have no tags.
             $query->leftJoinWith('Tags')
                 ->where(['Tags.title IS' => null]);
         } else {
             // Find articles that have one or more of the provided tags.
             $query->innerJoinWith('Tags')
-                ->where(['Tags.title IN' => $options['tags']]);
+                ->where(['Tags.title IN' => $tags]);
         }
 
         return $query->group(['Articles.id']);
