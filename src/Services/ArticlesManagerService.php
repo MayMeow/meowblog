@@ -43,13 +43,14 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
     {   
         $blog = $this->articles->Blogs->find()->where(['Blogs.domain' => $request->getUri()->getHost()])->first();
 
+        // if blog exists find only blog's article otherwise find show all
         if ($blog) {
             $articles = $this->articles->find()->contain(['Users', 'Blogs'])->where([
                 'Articles.blog_id' => $blog->id,
                 'Articles.article_type' => $articleType->value,
             ]);
         } else {
-            $articles = $this->articles->find()->where([
+            $articles = $this->articles->find()->contain(['Users', 'Blogs'])->where([
                 'Articles.article_type' => $articleType->value,
             ]);
         }

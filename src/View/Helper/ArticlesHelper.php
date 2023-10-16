@@ -46,7 +46,7 @@ class ArticlesHelper extends Helper
     }
 
     public function isInCurrentBlog(Article $article): bool
-    {
-        return $this->getBlogId($this->getView()->getRequest()) == $article->blog->id ? true : false;
+    {        
+        return $this->getBlogId($this->getView()->getRequest()) == $article->blog?->id ? true : false;
     }
 }

@@ -48,7 +48,6 @@ class ArticlesController extends AppController
         $homePage = $articlesManager->getHomePageContent($this->request);
 
         $this->paginate = [
-            'contain' => ['Users', 'Blogs'],
             'order' => ['Articles.created' => 'DESC'],
             'limit' => 10,
         ];
