@@ -3,10 +3,12 @@ declare(strict_types=1);
 
 namespace MeowBlog\Services;
 
+use Cake\Database\Query\SelectQuery;
 use Cake\Datasource\EntityInterface;
 use Cake\Http\ServerRequest;
 use Cake\ORM\Locator\LocatorAwareTrait;
 use Cake\ORM\Table;
+use MeowBlog\Controller\AppController;
 use MeowBlog\Model\Entity\Tag;
 use MeowBlog\Model\Table\TagsTable;
 
@@ -34,9 +36,28 @@ class TagsManagerService implements TagsManagerServiceInterface
      *
      * @return \Cake\ORM\Table
      */
-    public function getAll(): Table
+    public function getAll(AppController $appController): Table|SelectQuery
     {
-        return $this->tags;
+        $domain = $appController->getRequest()->getUri()->getHost();
+        $blog = $this->tags->Articles->Blogs->find()->where(['Blogs.Domain' => $domain])->select(['id'])->first();
+
+        // all tags
+        if (is_null($blog)) {
+            return $this->tags;
+        }
+
+        // all tags where tags that are used on any of article
+        $tags = $this->tags->find();
+        $tags->matching(
+            'Articles', function (SelectQuery $q) use ($blog) {
+                return $q->where(['blog_id' => $blog->id]);
+            }
+        );
+
+        // update mysql config with SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));
+        $tags->distinct('Tags.' . $this->tags->getPrimaryKey());
+        
+        return $tags;
     }
 
     /**

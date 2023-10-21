@@ -36,7 +36,7 @@ class TagsController extends AppController
     {
         $this->Authorization->skipAuthorization();
 
-        $tags = $this->paginate($tagsManager->getAll());
+        $tags = $this->paginate($tagsManager->getAll($this));
 
         $this->set(compact('tags'));
     }
