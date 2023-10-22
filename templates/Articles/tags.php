@@ -13,7 +13,15 @@
             ['controller' => 'Articles', 'action' => 'view', $article->slug]
         ); ?></h4>
         <span><?= h($article->created) ?></span>
-        <span><?= $article->tag_string ?></span>
+        <span>
+            &sharp;<?= $article->tag_string ?>
+            <?php if ($this->Articles->isInCurrentBlog($article)): ?>
+                in  <?= $this->Html->link(
+                    $article->blog->title,
+                    'https://' . $article->blog->domain
+                ); ?>
+            <?php endif; ?>
+        </span>
     </article>
 <?php endforeach; ?>
 </section>

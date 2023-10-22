@@ -11,6 +11,7 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Utility\Text;
 use Cake\Validation\Validator;
+use MeowBlog\Model\Entity\Blog;
 
 /**
  * Articles Model
@@ -159,7 +160,7 @@ class ArticlesTable extends Table
      * @param array $tags Tags
      * @return \Cake\ORM\Query\SelectQuery
      */
-    public function findTagged(SelectQuery $query, array $tags = []): SelectQuery
+    public function findTagged(SelectQuery $query, array $tags = [], ?Blog $blog = null): SelectQuery
     {
         $columns = [
             'Articles.id', 'Articles.user_id', 'Articles.title',
@@ -167,7 +168,8 @@ class ArticlesTable extends Table
             'Articles.slug',
         ];
 
-        $query = $query->select($columns)->distinct($columns);
+        // do not filter columns with (->select($columns))
+        $query = $query->distinct($columns);
 
         if (empty($tags)) {
             // If there are no tags provided, find articles that have no tags.
@@ -177,6 +179,14 @@ class ArticlesTable extends Table
             // Find articles that have one or more of the provided tags.
             $query->innerJoinWith('Tags')
                 ->where(['Tags.title IN' => $tags]);
+        }
+
+        if (!is_null($blog)) {
+            $query->matching(
+                'Blogs', function (SelectQuery $q) use ($blog) {
+                    return $q->where(['Blogs.Id' => $blog->id]);
+                }
+            );
         }
 
         return $query->group(['Articles.id']);

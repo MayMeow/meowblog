@@ -161,7 +161,8 @@ class ArticlesController extends AppController
      */
     public function tags(string ...$tags)
     {
-        $articles = $this->Articles->find('tagged', tags: $tags)->contain(['Tags'])->all();
+        $blog = $this->Articles->Blogs->find()->where(['Blogs.domain' => $this->getRequest()->getUri()->getHost()])->first();
+        $articles = $this->Articles->find('tagged', tags: $tags, blog: $blog)->contain(['Tags', 'Blogs'])->all();
         $this->Authorization->skipAuthorization();
 
         $this->set([
