@@ -10,6 +10,8 @@ html {
     -moz-text-size-adjust: none;
     -webkit-text-size-adjust: none;
     text-size-adjust: none;
+
+    font-size: 1.3rem;
 }
 
 /* Remove default margin in favour of better control in authored CSS */
@@ -26,8 +28,15 @@ ol[role='list'] {
 
 /* Set core body defaults */
 body {
+    margin: 0;
+    padding: 0;
     min-height: 100vh;
-    line-height: 1.5;
+    line-height: 1.6;
+    background-color: var(--background);
+    color: var(--foreground);
+
+    display: flex;
+    flex-direction: column;
 }
 
 /* Set shorter line heights on headings and interactive elements */
@@ -43,9 +52,10 @@ h3, h4 {
 }
 
 /* A elements that don't have a class get default styles */
+a,
 a:not([class]) {
     text-decoration-skip-ink: auto;
-    color: currentColor;
+    color: var(--accent);
 }
 
 /* Make images easier to work with */
@@ -69,4 +79,41 @@ textarea:not([rows]) {
 /* Anything that has been anchored to should have extra scroll margin */
 :target {
     scroll-margin-block: 5ex;
+}
+
+.container {
+    flex: 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    flex: 1 auto;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    background-color: var(--content-background);
+    clip-path: polygon(0 0, 100% var(--padding), 100% 100%, 0 100%);
+}
+
+.footer {
+    background-color: var(--content-background);
+}
+
+.article {
+    width: 100%;
+    max-width: 800px;
+    text-align: left;
+    padding: var(--padding);
+    margin: 20px auto;
+}
+
+.admin {
+    text-align: left;
+    max-width: 100%;
+    padding: var(--padding);
+    margin: 20px auto;
 }

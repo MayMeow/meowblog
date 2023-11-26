@@ -1,0 +1,20 @@
+$media-size-phone: "(max-width: 684px)";
+
+:root {
+    --background: #1e2030; //macchiato crust
+    --foreground: #cad3f5; //macchiato text
+    --accent: #ea76cb; //latte pink
+    --content-background: #181926; //macchiato mantle
+
+    --button-text: #eff1f5; //latte base
+    --button-text-hover: #24273a; //macchiato base
+
+    --button: #04a5e5; //latte sky
+    --button-hover: #ea76cb; //latte pink
+
+    --header-width: 1200px;
+    --content-width: 800px;
+
+    --radius: 8px;
+    --padding: 20px;
+}

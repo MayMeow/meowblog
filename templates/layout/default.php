@@ -12,7 +12,6 @@ $appDescription = $this->Blog->getName() ?? 'Meowblog';
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
-
     <?= $this->Html->css(['main', 'https://cdn.maymeow.com/css/prism.css', $this->Blog->getTheme()]) ?>
 
     <?= $this->fetch('meta') ?>
@@ -20,41 +19,38 @@ $appDescription = $this->Blog->getName() ?? 'Meowblog';
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <main class="container">
-        <div id="app">
-            <div id="header">
-                <nav>
-                    <ul>
-                        <li>
-                            <span style="font-size: 2em; font-family: VC Honey Deck,Noto Serif KR,serif;">
-                                <?= $this->Html->link($this->Blog->getName(), url:'/') ?>
-                            </span> <br />
-                            <small><?= $this->Blog->getDescription() ?></small><br />
-                            <ul>
-                                <?php if ($this->Blog->getLinks() != null) : ?>
-                                    <?php foreach ($this->Blog->getLinks() as $link) : ?>
-                                        <li><?= $this->Html->link($link->title, $link->url, ['target' => $link->external ? '_blank': null]) ?></li>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
-                                <?php if ($this->Blog->isLoggedIn()) : ?>
-                                    <li><a href="/home">Admin</a></li>
-                                    <li><a href="/users/logout">Logout</a></li>
-                                <?php endif; ?>
-                            </ul>
-                        </li>
-                    </ul>
+    <div class="container">
+        <header class="mm-header">
+            <div class="mm-header-inner">
+                <div class=logo>
+                    <span style="font-size: 2em; font-family: VC Honey Deck,Noto Serif KR,serif;">
+                        <?= $this->Html->link($this->Blog->getName(), url:'/') ?>
+                    </span> <br />
+                    <small><?= $this->Blog->getDescription() ?></small><br />
+                </div>
+                <nav class="new-menu">
+                    <?php if ($this->Blog->getLinks() != null) : ?>
+                        <?php foreach ($this->Blog->getLinks() as $link) : ?>
+                            <?= $this->Html->link($link->title, $link->url, ['target' => $link->external ? '_blank': null]) ?>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                    <?php if ($this->Blog->isLoggedIn()) : ?>
+                        <a href="/home">Admin</a>
+                        <a href="/users/logout">Logout</a>
+                    <?php endif; ?>
                 </nav>
             </div>
+        </header>
+        <div class="content">            
             <?= $this->Flash->render() ?>
             <?= $this->fetch('content') ?>
         </div>
-    </main>
-    <footer class="container">
+        <footer class="footer">
             <div style="text-align: center;">
                 <small>Meowblog v<?= $appVersion ?> <a href="https://github.com/MayMeow/meowblog">Source Code</a></small>
             </div>
-    </footer>
-
+        </footer>
+    </div>
     <?= $this->Html->script(['https://cdn.maymeow.com/js/prism.js']) ?>
 </body>
 </html>

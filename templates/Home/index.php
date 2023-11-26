@@ -4,45 +4,39 @@
  */
 ?>
 
-<div id="home-page">
+<div class="article">
     <h2>Home</h2>
 
-    <ul>
-        <li>
+    <div class="new-menu">
         <?= $this->Html->link('Articles', [
             'action' => 'Index',
             'controller' => 'Articles',
             'prefix' => 'Admin'
         ]); ?>
-        </li>
-        <li>
+
         <?= $this->Html->link('Tags', [
             'action' => 'Index',
             'controller' => 'Tags',
             'prefix' => 'Admin'
         ]); ?>
-        </li>
-        <li>
+
         <?= $this->Html->link('Users', [
             'action' => 'Index',
             'controller' => 'Users',
             'prefix' => 'Admin'
         ]); ?>
-        </li>
-        <li>
+
         <?= $this->Html->link('Blogs', [
             'action' => 'Index',
             'controller' => 'Blogs',
             'prefix' => 'Admin'
         ]); ?>
-        </li>
-        <li>
+
         <?= $this->Html->link('Links', [
             'action' => 'Index',
             'controller' => 'Links',
             'prefix' => 'Admin'
         ]); ?>
-        </li>
-    </ul>
+    </div>
 
 </div>
