@@ -359,7 +359,7 @@ return [
             'path' => LOGS,
             'file' => 'debug',
             'url' => env('LOG_DEBUG_URL', null),
-            'scopes' => false,
+            'scopes' => null,
             'levels' => ['notice', 'info', 'debug'],
         ],
         'error' => [
@@ -367,7 +367,7 @@ return [
             'path' => LOGS,
             'file' => 'error',
             'url' => env('LOG_ERROR_URL', null),
-            'scopes' => false,
+            'scopes' => null,
             'levels' => ['warning', 'error', 'critical', 'alert', 'emergency'],
         ],
         // To enable this dedicated query log, you need set your datasource's log flag to true
@@ -427,5 +427,6 @@ return [
         'name' => env('APP_NAME', 'MeowBlog'),
         'description' => env('APP_DESCRIPTION', ''),
         'theme' => env('APP_THEME', ColorScheme::Blue->value),
+        'openai_api_key' => env('OPENAI_API_KEY', ''),
     ]
 ];
