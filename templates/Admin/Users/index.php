@@ -4,9 +4,11 @@
  * @var \MeowBlog\Model\Entity\User[]|\Cake\Collection\CollectionInterface $users
  */
 ?>
-<div class="users index content">
-    <?= $this->Html->link(__('New User'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+<div class="admin">
     <h3><?= __('Users') ?></h3>
+    <div class="new-menu">
+        <?= $this->Html->link(__('New User'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+    </div>
     <div class="table-responsive">
         <table>
             <thead>

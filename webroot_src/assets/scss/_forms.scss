@@ -1,0 +1,52 @@
+input, textarea, select {
+    border: 1px solid var(--background);
+    padding: 5px 10px;
+    margin: 0 0 var(--padding) 0;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: var(--background);
+    color: var(--color);
+    &:focus {
+        outline: none;
+        border-color: var(--accent);
+    }
+}
+
+//style checkbox and radio buttons
+input[type="checkbox"], input[type="radio"] {
+    margin: 0 var(--padding) var(--padding) 0;
+    width: auto;
+    box-sizing: border-box;
+    background-color: var(--background);
+    color: var(--color);
+}
+
+button {
+    border: 1px solid var(--button);
+    padding: 5px 10px;
+    margin: 0 0 var(--padding) 0;
+    box-sizing: border-box;
+    background-color: var(--button);
+    color: var(--button-text);
+    font-weight: 600;
+    font-size: .8em;
+    text-transform: lovercase;
+    border-radius: var(--radius);
+
+    &.w100 {
+        width: 100%;
+    }
+
+    &:focus {
+        outline: none;
+        color: var(--button-text-hover);
+        background-color: var(--button-hover);
+        border-color: var(--button-hover);
+    }
+
+    &:hover {
+        color: var(--button-text-hover);
+        background-color: var(--button-hover);
+        border-color: var(--button-hover);
+    }
+}

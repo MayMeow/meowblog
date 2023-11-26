@@ -1,13 +1,23 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
-  base: '/',
-  root: 'webroot_src',
+  server: {
+    host: 'blog.maymeow.com',
+  },
+  plugins: [
+    laravel({
+      input: ['webroot_src/assets/scss/main.scss'],
+      refresh:true,
+    }),
+  ],
   build: {
-    outDir: '../webroot/app',
-    emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        assetFileNames: `[name][extname]`,
+        dir: 'webroot/css',
+      }
+    }
   }
-})
+});

@@ -6,30 +6,22 @@
  * @var \Cake\Collection\CollectionInterface|string[] $tags
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Articles'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
-    <div class="column-responsive column-80">
-        <div class="articles form content">
-            <?= $this->Form->create($article) ?>
-            <fieldset>
-                <legend><?= __('Add Article') ?></legend>
-                <?php
-                    echo $this->Form->control('blog_id', ['options' => $blogs]);
-                    echo $this->Form->control('title');
-                    echo $this->Form->control('article_type', ['options' => $articleTypes]);
-                    echo $this->Form->control('body');
-                    echo $this->Form->control('published');
-                    //echo $this->Form->control('tags._ids', ['options' => $tags]);
-                    echo $this->Form->control('tag_string', ['type' => 'text']);
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
-        </div>
+<div class="admin forms">
+    <div class="new-menu">
+        <?= $this->Html->link(__('List Articles'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+    </div>
+    <div>
+        <?= $this->Form->create($article) ?>
+        <?php
+            echo $this->Form->control('blog_id', ['options' => $blogs]);
+            echo $this->Form->control('title');
+            echo $this->Form->control('article_type', ['options' => $articleTypes]);
+            echo $this->Form->control('body');
+            echo $this->Form->control('published');
+            echo $this->Form->control('tag_string', ['type' => 'text']);
+        ?>
+
+        <?= $this->Form->button(__('Submit')) ?>
+        <?= $this->Form->end() ?>
     </div>
 </div>

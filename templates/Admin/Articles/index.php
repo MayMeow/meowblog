@@ -7,9 +7,11 @@
 use MeowBlog\Model\Entity\ArticleType;
 
 ?>
-<div class="articles index content">
-    <?= $this->Html->link(__('New Article'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+<div class="admin">
     <h3><?= __('Articles') ?></h3>
+        <div class="new-menu">
+        <?= $this->Html->link(__('New Article'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+        </div>
     <div class="table-responsive">
         <table role="grid">
             <thead>

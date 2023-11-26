@@ -4,9 +4,11 @@
  * @var iterable<\MeowBlog\Model\Entity\Link> $links
  */
 ?>
-<div class="links index content">
-    <?= $this->Html->link(__('New Link'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+<div class="admin">
     <h3><?= __('Links') ?></h3>
+    <div class="new-menu">
+        <?= $this->Html->link(__('New Link'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+    </div>
     <div class="table-responsive">
         <table>
             <thead>
