@@ -43,6 +43,8 @@ use MeowBlog\Services\ArticlesManagerService;
 use MeowBlog\Services\ArticlesManagerServiceInterface;
 use MeowBlog\Services\BlogsManagerService;
 use MeowBlog\Services\BlogsManagerServiceInterface;
+use MeowBlog\Services\OpenaiChatService;
+use MeowBlog\Services\OpenaiChatServiceInterface;
 use MeowBlog\Services\TagsManagerService;
 use MeowBlog\Services\TagsManagerServiceInterface;
 use MeowBlog\Services\UsersManagerService;
@@ -158,6 +160,7 @@ class Application extends BaseApplication implements
         $container->add(TagsManagerServiceInterface::class, TagsManagerService::class);
         $container->add(UsersManagerServiceInterface::class, UsersManagerService::class);
         $container->add(BlogsManagerServiceInterface::class, BlogsManagerService::class);
+        $container->add(OpenaiChatServiceInterface::class, OpenaiChatService::class);
     }
 
     /**

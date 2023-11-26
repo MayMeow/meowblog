@@ -7,6 +7,7 @@ use Authorization\Exception\ForbiddenException;
 use MeowBlog\Controller\AppController;
 use MeowBlog\Model\Entity\ArticleType;
 use MeowBlog\Services\ArticlesManagerServiceInterface;
+use MeowBlog\Services\OpenaiChatServiceInterface;
 
 /**
  * Articles Controller
@@ -26,9 +27,11 @@ class ArticlesController extends AppController
         $this->Authorization->skipAuthorization();
 
         $this->paginate = [
-            'contain' => ['Users', 'Blogs'],
+            //'contain' => ['Users', 'Blogs'],
         ];
-        $articles = $this->paginate($this->Articles);
+        $articles = $this->paginate($this->Articles->find('all', [
+            'contain' => ['Users', 'Blogs'],
+        ]));
 
         $this->set(compact('articles'));
     }
@@ -147,5 +150,17 @@ class ArticlesController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function summarize(OpenaiChatServiceInterface $ai, $id = null)
+    {
+        $this->Authorization->skipAuthorization();
+
+        $article = $this->Articles->get($id);
+
+        $result = $ai->getTextSummary($article->body);
+
+        $article->summary = $result;
+        $this->Articles->save($article);
     }
 }
