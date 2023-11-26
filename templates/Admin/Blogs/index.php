@@ -5,9 +5,11 @@
  */
 
 ?>
-<div class="blogs index content">
-    <?= $this->Html->link(__('New Blog'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+<div class="admin">
     <h3><?= __('Blogs') ?></h3>
+    <div class="new-menu">
+    <?= $this->Html->link(__('New Blog'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+    </div>
     <div class="table-responsive">
         <table>
             <thead>

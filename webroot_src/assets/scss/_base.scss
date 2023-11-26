@@ -116,4 +116,9 @@ textarea:not([rows]) {
     max-width: 100%;
     padding: var(--padding);
     margin: 20px auto;
+
+    &.forms {
+        width: 100%;
+        max-width: var(--header-width);
+    }
 }
