@@ -8,8 +8,14 @@
     <h2><?= $article->title ?></h2>
     <h3>at <?= $article->created ?></h3>
 </div>
+<?php if ($article->summary) : ?>
+    <details>
+        <summary role="button">🤖 <?= __('AI Summary')?></summary>
+        <?= $this->Html->tag('div', $article->summary, ['class' => 'summary']) ?>
+    </details>
+<?php endif; ?>
+
 <div id="article">
-    <div>
         <?= $this->Markdown->parse($article->body); ?>
     </div>
     <?php if ($article->tags) : ?>

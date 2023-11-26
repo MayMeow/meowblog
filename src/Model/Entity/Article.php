@@ -17,6 +17,7 @@ use Cake\ORM\Entity;
  * @property string $body
  * @property bool $published
  * @property string $article_type
+ * @property string $summary
  * @property \Cake\I18n\DateTime $created
  * @property \Cake\I18n\DateTime $modified
  *
@@ -50,6 +51,7 @@ class Article extends Entity
         'tags' => true,
         'tag_string' => true,
         'article_type' => true,
+        'summary' => true,
     ];
 
     /**
