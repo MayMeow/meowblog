@@ -1227,16 +1227,16 @@
         },
         {
             "name": "maymeow/cakephp-markdown",
-            "version": "v1.1.1",
+            "version": "v1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MayMeow/cake-markdown.git",
-                "reference": "1b1dd807e94106e79468bd597e06c17b023cfcff"
+                "reference": "e93064494c6df1d4c9633a456f5b42696c955cdd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MayMeow/cake-markdown/zipball/1b1dd807e94106e79468bd597e06c17b023cfcff",
-                "reference": "1b1dd807e94106e79468bd597e06c17b023cfcff",
+                "url": "https://api.github.com/repos/MayMeow/cake-markdown/zipball/e93064494c6df1d4c9633a456f5b42696c955cdd",
+                "reference": "e93064494c6df1d4c9633a456f5b42696c955cdd",
                 "shasum": ""
             },
             "require": {
@@ -1260,9 +1260,9 @@
             "description": "Markdown plugin for CakePHP",
             "support": {
                 "issues": "https://github.com/MayMeow/cake-markdown/issues",
-                "source": "https://github.com/MayMeow/cake-markdown/tree/v1.1.1"
+                "source": "https://github.com/MayMeow/cake-markdown/tree/v1.1.2"
             },
-            "time": "2023-10-08T14:05:36+00:00"
+            "time": "2023-11-26T21:35:20+00:00"
         },
         {
             "name": "mobiledetect/mobiledetectlib",
