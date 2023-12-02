@@ -4,8 +4,6 @@ declare(strict_types=1);
 namespace MeowBlog\Controller\Admin;
 
 use MeowBlog\Controller\AppController;
-use MeowBlog\Model\Entity\ColorScheme;
-use MeowBlog\Model\Entity\ColorSchemeVariant;
 
 /**
  * Blogs Controller
@@ -63,10 +61,7 @@ class BlogsController extends AppController
             $this->Flash->error(__('The blog could not be saved. Please, try again.'));
         }
 
-        $colorSchemes = ColorScheme::list();
-        $colorSchemeVariants = ColorSchemeVariant::list();
-
-        $this->set(compact('blog', 'colorSchemes', 'colorSchemeVariants'));
+        $this->set(compact('blog'));
     }
 
     /**
@@ -89,10 +84,8 @@ class BlogsController extends AppController
             }
             $this->Flash->error(__('The blog could not be saved. Please, try again.'));
         }
-        $colorSchemes = ColorScheme::list();
-        $colorSchemeVariants = ColorSchemeVariant::list();
 
-        $this->set(compact('blog', 'colorSchemes', 'colorSchemeVariants'));
+        $this->set(compact('blog'));
     }
 
     /**

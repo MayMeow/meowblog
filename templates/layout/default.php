@@ -3,7 +3,7 @@ $appVersion = '0.40.0';
 $appDescription = $this->Blog->getName() ?? 'Meowblog';
 ?>
 <!DOCTYPE html>
-<html <?= $this->Blog->getSchemeVariant() ?>>
+<html>
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +12,7 @@ $appDescription = $this->Blog->getName() ?? 'Meowblog';
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
-    <?= $this->Html->css(['main', 'https://cdn.maymeow.com/css/prism.css', $this->Blog->getTheme()]) ?>
+    <?= $this->Html->css(['main', 'https://cdn.maymeow.com/css/prism.css']) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>

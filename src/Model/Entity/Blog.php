@@ -12,8 +12,6 @@ use Cake\ORM\Entity;
  * @property string $title
  * @property string $description
  * @property string $domain
- * @property string $theme
- * @property string $scheme
  * @property string $verification
  * @property string $default_route
  * @property \Cake\I18n\DateTime $created
@@ -36,8 +34,6 @@ class Blog extends Entity
         'title' => true,
         'description' => true,
         'domain' => true,
-        'theme' => true,
-        'scheme' => true,
         'verification' => true,
         'created' => true,
         'modified' => true,

@@ -19,8 +19,6 @@
                 echo $this->Form->control('title');
                 echo $this->Form->control('description');
                 echo $this->Form->control('domain');
-                echo $this->Form->control('theme', ['options' => $colorSchemes]);
-                echo $this->Form->control('scheme', ['options' => $colorSchemeVariants]);
                 echo $this->Form->control('default_route');
             ?>
         <?= $this->Form->button(__('Submit')) ?>

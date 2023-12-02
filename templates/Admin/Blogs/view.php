@@ -27,14 +27,6 @@
                 <td><?= h($blog->domain) ?></td>
             </tr>
             <tr>
-                <th><?= __('Theme') ?></th>
-                <td><?= h($this->Blog->getThemeName($blog->theme)) ?></td>
-            </tr>
-            <tr>
-                <th><?= __('Scheme variant') ?></th>
-                <td><?= h($this->Blog->getSchemeName($blog->scheme)) ?></td>
-            </tr>
-            <tr>
                 <th><?= __('Default route') ?></th>
                 <td><?= h($blog->default_route) ?></td>
             </tr>
