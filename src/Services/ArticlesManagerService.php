@@ -70,6 +70,7 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
      * getArticle function
      *
      * @param string $slug slug
+     * !! use ArticleController instead, it contains ServerRequest
      * @param \Cake\Http\ServerRequest $request from passed request
      * @return \MeowBlog\Model\Entity\Article
      */
@@ -131,7 +132,7 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
         $articleTable = $this->articles;
 
         /** @var \Cake\ORM\Query $q */
-        $q = $articleTable->find('tagged', tags: 'now')->where([
+        $q = $articleTable->find('tagged', tags: ['now'])->where([
             'Blogs.Domain' => $request->getUri()->getHost(),
             'Articles.article_type' => ArticleType::Article->value,
             'Articles.published' => 1,
