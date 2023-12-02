@@ -189,7 +189,7 @@ class ArticlesTable extends Table
             );
         }
 
-        return $query->group(['Blogs.id', 'Articles.id']);
+        return $query->groupBy(['Blogs.id', 'Articles.id']);
     }
 
     /**
