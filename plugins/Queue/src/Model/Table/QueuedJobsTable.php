@@ -3,10 +3,13 @@ declare(strict_types=1);
 
 namespace Queue\Model\Table;
 
+use Cake\I18n\DateTime;
 use Cake\ORM\Query\SelectQuery;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Queue\Model\Entity\QueuedJob;
+use Queue\Utils\QueuedJobPriority;
 
 /**
  * QueuedJobs Model
@@ -78,5 +81,26 @@ class QueuedJobsTable extends Table
             ->allowEmptyDateTime('finished');
 
         return $validator;
+    }
+
+    public function createJob(string $jobClass, array|object $data = [], QueuedJobPriority $priority = QueuedJobPriority::MEDIUM, ?int $recuring = null, ?int $postpone = null): QueuedJob
+    {
+        $newJob = [
+            'reference' => $jobClass,
+            'priority' => $priority->value,
+            'not_before' => $postpone === null ? DateTime::now() : DateTime::now()->addMinutes($postpone),
+            'data' => !empty($data) ? serialize($data) : null,
+        ];
+
+        $newJob = $this->newEntity($newJob);
+
+        return $this->saveOrFail($newJob);
+    }
+
+    public function rerunJob(QueuedJob $job, int $postpone): QueuedJob
+    {
+        $job->not_before = DateTime::now()->addMinutes($postpone);
+
+        return $this->saveOrFail($job);
     }
 }

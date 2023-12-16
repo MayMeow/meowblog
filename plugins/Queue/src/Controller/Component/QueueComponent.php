@@ -5,6 +5,8 @@ namespace Queue\Controller\Component;
 
 use Cake\Controller\Component;
 use Cake\Controller\ComponentRegistry;
+use Cake\ORM\Locator\LocatorAwareTrait;
+use Queue\Model\Entity\QueuedJob;
 use Queue\Services\QueuedJobManagerService;
 use Queue\Services\QueuedJobManagerServiceInterface;
 use Queue\Utils\QueuedJobPriority;
@@ -14,6 +16,7 @@ use Queue\Utils\QueuedJobPriority;
  */
 class QueueComponent extends Component
 {
+    use LocatorAwareTrait;
     /**
      * Default configuration.
      *
@@ -21,9 +24,11 @@ class QueueComponent extends Component
      */
     protected array $_defaultConfig = [];
 
-    public function enqueueJob(string $jobClass, array|object $data = [], QueuedJobPriority $priority = QueuedJobPriority::MEDIUM, ?int $recuring = null, ?int $postpone = null): bool {
-        $queuedJobsService = new QueuedJobManagerService();
+    public function push(string $jobClass, array|object $data = [], QueuedJobPriority $priority = QueuedJobPriority::MEDIUM, ?int $recuring = null, ?int $postpone = null): QueuedJob
+    {
+        /** @var \Queue\Model\Table\QueuedJobsTable $queueJobTable */
+        $queueJobTable = $this->fetchTable('Queue.QueuedJobs');
 
-        return $queuedJobsService->enqueue($jobClass, $data, $priority, $recuring, $postpone);
+        return $queueJobTable->createJob($jobClass, $data, $priority, $recuring, $postpone);
     }
 }

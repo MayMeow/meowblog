@@ -28,17 +28,8 @@ class QueuedJobManagerService implements QueuedJobManagerServiceInterface
 
     public function enqueue(string $jobClass, array|object $data = [], QueuedJobPriority $priority = QueuedJobPriority::MEDIUM, ?int $recuring = null, ?int $postpone = null): bool
     {
-        $newJob = $this->queuedJobsTable->newEmptyEntity();
+        $this->queuedJobsTable->createJob($jobClass, $data, $priority, $recuring, $postpone);
 
-        $newJob->reference = $jobClass;
-        $newJob->priority = $priority->value;
-        !empty($data) ? $newJob->data = serialize($data) : null;
-        $newJob->not_before = $postpone === null ? DateTime::now() : DateTime::now()->addMinutes($postpone);
-
-        if ($this->queuedJobsTable->save($newJob)) {
-            return true;
-        }
-
-        return false;
+        return true;
     }
 }

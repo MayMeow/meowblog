@@ -37,6 +37,7 @@ class RunWorkerCommand extends Command
      */
     public function execute(Arguments $args, ConsoleIo $io)
     {
+        /** @var \Queue\Model\Table\QueuedJobsTable $jobsTable */
         $jobsTable = $this->fetchTable('Queue.QueuedJobs');
 
         /** @var \Queue\Model\Entity\QueuedJob $job */
@@ -67,8 +68,7 @@ class RunWorkerCommand extends Command
         }
 
         if ($instance->getRecure() > 0) {
-            $job->not_before = DateTime::now()->addMinutes($instance->getRecure());
-            $jobsTable->saveOrFail($job);
+            $jobsTable->rerunJob($job, $instance->getRecure());
         } else {
             $jobsTable->deleteOrFail($job);
         }

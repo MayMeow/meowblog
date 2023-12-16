@@ -75,7 +75,7 @@ class ArticlesController extends AppController
             if ($articlesManager->saveToDatabase($article, $this->request)) {
                 $this->Flash->success(__('The article has been saved.'));
 
-                $this->Queue->enqueueJob(UpdateAiSummaryJob::class, data: $article);
+                $this->Queue->push(UpdateAiSummaryJob::class, data: $article);
 
                 return $this->redirect(['action' => 'index']);
             }
@@ -115,7 +115,7 @@ class ArticlesController extends AppController
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('The article has been saved.'));
 
-                $this->Queue->enqueueJob(UpdateAiSummaryJob::class, data: $article);
+                $this->Queue->push(UpdateAiSummaryJob::class, data: $article);
 
                 return $this->redirect(['action' => 'index']);
             }
