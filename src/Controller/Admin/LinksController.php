@@ -23,10 +23,7 @@ class LinksController extends AppController
     {
         $this->Authorization->skipAuthorization();
 
-        $this->paginate = [
-            'contain' => ['Blogs'],
-        ];
-        $links = $this->paginate($this->Links);
+        $links = $this->paginate($this->Links->find()->contain(['Blogs']));
 
         $this->set(compact('links'));
     }
