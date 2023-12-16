@@ -8,12 +8,14 @@ use Cake\Console\Arguments;
 use Cake\Console\ConsoleIo;
 use Cake\Console\ConsoleOptionParser;
 use Cake\I18n\DateTime;
+use Queue\Model\Table\QueuedJobsTable;
 
 /**
  * RunWorker command.
  */
 class RunWorkerCommand extends Command
 {
+    protected QueuedJobsTable $jobsTable;
     /**
      * Hook method for defining this command's option parser.
      *
@@ -28,6 +30,13 @@ class RunWorkerCommand extends Command
         return $parser;
     }
 
+    public function initialize(): void
+    {
+        parent::initialize();
+
+        $this->jobsTable = $this->fetchTable('Queue.QueuedJobs');
+    }
+
     /**
      * Implement this method with your command's logic.
      *
@@ -37,42 +46,38 @@ class RunWorkerCommand extends Command
      */
     public function execute(Arguments $args, ConsoleIo $io)
     {
-        /** @var \Queue\Model\Table\QueuedJobsTable $jobsTable */
-        $jobsTable = $this->fetchTable('Queue.QueuedJobs');
-
         /** @var \Queue\Model\Entity\QueuedJob $job */
-        $job = $jobsTable->find()->where(['not_before <=' => DateTime::now()])
+        $job = $this->jobsTable->find()->where(['not_before <=' => DateTime::now()])
             ->orderByAsc('not_before')
             ->orderByDesc('priority')
             ->first();
 
-        if (!$job) {
+        if ($job) {
+            try {
+                $io->out('Running job: ' . $job->reference . 'via CRON');
+                $instance = new $job->reference;
+                if (!$instance->execute($job->data)) {
+                    $io->err('Job failed: ' . $job->reference);
+        
+                    return static::CODE_ERROR;
+                }
+
+                if ($instance->getRecure() > 0) {
+                    $this->jobsTable->rerunJob($job, $instance->getRecure());
+                } else {
+                    $this->jobsTable->deleteOrFail($job);
+                }
+            } catch (\Exception $e) {
+                $io->err('Job failed: ' . $job->reference);
+                $io->err($e->getMessage());
+
+                return static::CODE_ERROR;
+            }
+        } else {
             $io->out('No jobs found');
 
             return static::CODE_SUCCESS;
         }
-
-        if (!class_exists($job->reference)) {
-            $io->err('Class not found: ' . $job->reference);
-
-            return static::CODE_ERROR;
-        }
-
-        $io->out('Running job: ' . $job->reference);
-        $instance = new $job->reference;
-
-        if (!$instance->execute($job->data)) {
-            $io->err('Job failed: ' . $job->reference);
-
-            return static::CODE_ERROR;
-        }
-
-        if ($instance->getRecure() > 0) {
-            $jobsTable->rerunJob($job, $instance->getRecure());
-        } else {
-            $jobsTable->deleteOrFail($job);
-        }
-
         $io->out('Job finished: ' . $job->reference);
 
         return static::CODE_SUCCESS;
