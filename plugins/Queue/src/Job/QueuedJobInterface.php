@@ -5,5 +5,6 @@ namespace Queue\Job;
 
 interface QueuedJobInterface
 {
-    public function execute(): bool;
+    public function execute(?string $data = null): bool;
+    public function getRecure(): int;
 }

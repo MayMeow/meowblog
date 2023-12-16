@@ -23,7 +23,7 @@ class QueuedJobManagerService implements QueuedJobManagerServiceInterface
 
     public function getAll(): Table|SelectQuery
     {
-        return $this->queuedJobsTable;
+        return $this->queuedJobsTable->find()->orderByDesc('priority')->orderByAsc('not_before');
     }
 
     public function enqueue(string $jobClass, array|object $data = [], QueuedJobPriority $priority = QueuedJobPriority::MEDIUM, ?int $recuring = null, ?int $postpone = null): bool
