@@ -28,6 +28,7 @@ use Cake\Controller\Controller;
  * @link https://book.cakephp.org/4/en/controllers.html#the-app-controller
  * @property \Authorization\Controller\Component\AuthorizationComponent $Authorization
  * @property \Authentication\Controller\Component\AuthenticationComponent $Authentication
+ * @property \Queue\Controller\Component\QueueComponent $Queue
  */
 class AppController extends Controller
 {
@@ -57,5 +58,6 @@ class AppController extends Controller
 
         $this->loadComponent('Authentication.Authentication');
         $this->loadComponent('Authorization.Authorization');
+        $this->loadComponent('Queue.Queue');
     }
 }

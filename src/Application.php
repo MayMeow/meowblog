@@ -50,6 +50,8 @@ use MeowBlog\Services\TagsManagerServiceInterface;
 use MeowBlog\Services\UsersManagerService;
 use MeowBlog\Services\UsersManagerServiceInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Queue\Services\QueuedJobManagerService;
+use Queue\Services\QueuedJobManagerServiceInterface;
 
 /**
  * Application setup class.
@@ -161,6 +163,7 @@ class Application extends BaseApplication implements
         $container->add(UsersManagerServiceInterface::class, UsersManagerService::class);
         $container->add(BlogsManagerServiceInterface::class, BlogsManagerService::class);
         $container->add(OpenaiChatServiceInterface::class, OpenaiChatService::class);
+        $container->add(QueuedJobManagerServiceInterface::class, QueuedJobManagerService::class);
     }
 
     /**
