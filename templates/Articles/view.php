@@ -13,8 +13,8 @@
     </div>
     <?php if ($article->summary) : ?>
         <details>
-            <summary role="button">🤖 <?= __('AI Summary')?></summary>
-            <?= $this->Html->tag('div', $article->summary, ['class' => 'summary']) ?>
+            <summary>🤖 <?= __('AI Summary')?></summary>
+            <?= $this->Html->tag('div', $article->summary) ?>
         </details>
     <?php endif; ?>
 

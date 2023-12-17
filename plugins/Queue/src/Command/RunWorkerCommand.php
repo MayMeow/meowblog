@@ -7,7 +7,9 @@ use Cake\Command\Command;
 use Cake\Console\Arguments;
 use Cake\Console\ConsoleIo;
 use Cake\Console\ConsoleOptionParser;
+use Cake\Core\Configure;
 use Cake\I18n\DateTime;
+use Cake\Log\Log;
 use Queue\Model\Table\QueuedJobsTable;
 
 /**
@@ -26,6 +28,8 @@ class RunWorkerCommand extends Command
     public function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser = parent::buildOptionParser($parser);
+
+        $parser->setDescription('Run a single worker job via CRON');
 
         return $parser;
     }
@@ -52,9 +56,13 @@ class RunWorkerCommand extends Command
             ->orderByDesc('priority')
             ->first();
 
+        Log::setConfig('queue', Configure::read('Queue.log'));
+
+        Log::info('Running worker', 'queue');
+
         if ($job) {
             try {
-                $io->out('Running job: ' . $job->reference . 'via CRON');
+                Log::info('Running job: ' . $job->reference, 'queue');
                 $instance = new $job->reference;
                 if (!$instance->execute($job->data)) {
                     $io->err('Job failed: ' . $job->reference);
@@ -71,14 +79,18 @@ class RunWorkerCommand extends Command
                 $io->err('Job failed: ' . $job->reference);
                 $io->err($e->getMessage());
 
+                Log::error('Job failed: ' . $job->reference, 'queue');
+                Log::error($e->getMessage(), 'queue');
+                Log::debug($e->getTraceAsString(), 'queue');
+
                 return static::CODE_ERROR;
             }
         } else {
-            $io->out('No jobs found');
+            Log::info('Queue is empty', 'queue');
 
             return static::CODE_SUCCESS;
         }
-        $io->out('Job finished: ' . $job->reference);
+        Log::info('Job finished: ' . $job->reference, 'queue');
 
         return static::CODE_SUCCESS;
     }
