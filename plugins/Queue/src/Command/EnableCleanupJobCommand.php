@@ -1,18 +1,19 @@
 <?php
 declare(strict_types=1);
 
-namespace Tools\Command;
+namespace Queue\Command;
 
 use Cake\Command\Command;
 use Cake\Console\Arguments;
 use Cake\Console\ConsoleIo;
 use Cake\Console\ConsoleOptionParser;
-use Cake\Utility\Security;
+use Queue\Job\CleanupJob;
+use Queue\Services\QueuedJobManagerService;
 
 /**
- * GenerateSecurityKey command.
+ * EnableCleanupJob command.
  */
-class GenerateSecurityKeyCommand extends Command
+class EnableCleanupJobCommand extends Command
 {
     /**
      * Hook method for defining this command's option parser.
@@ -23,7 +24,9 @@ class GenerateSecurityKeyCommand extends Command
      */
     public function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
-        return parent::buildOptionParser($parser);
+        $parser = parent::buildOptionParser($parser);
+
+        return $parser;
     }
 
     /**
@@ -31,13 +34,12 @@ class GenerateSecurityKeyCommand extends Command
      *
      * @param \Cake\Console\Arguments $args The command arguments.
      * @param \Cake\Console\ConsoleIo $io The console io
-     * @return null|void|int The exit code or null for success
+     * @return int|null|void The exit code or null for success
      */
-    public function execute(Arguments $args, ConsoleIo $io): ?int
+    public function execute(Arguments $args, ConsoleIo $io)
     {
-        $key = Security::hash(Security::randomBytes(256), 'sha256', false);
-        $io->info($key);
+        $manager = new QueuedJobManagerService();
 
-        return static::CODE_SUCCESS;
+        $manager->enqueue(CleanupJob::class, postpone: 10);
     }
 }

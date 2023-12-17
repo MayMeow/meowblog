@@ -37,6 +37,12 @@
             'controller' => 'Links',
             'prefix' => 'Admin'
         ]); ?>
+
+    <?= $this->Html->link('Queued Jobs', [
+            'action' => 'Index',
+            'controller' => 'QueuedJobs',
+            'prefix' => 'Admin'
+        ]); ?>
     </div>
 
 </div>

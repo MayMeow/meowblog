@@ -428,5 +428,14 @@ return [
         'name' => env('APP_NAME', 'MeowBlog'),
         'description' => env('APP_DESCRIPTION', ''),
         'openai_api_key' => env('OPENAI_API_KEY', ''),
+    ],
+
+    'Queue' => [
+        'log' => [
+            'path' => LOGS,
+            'className' => FileLog::class,
+            'levels' => ['warning', 'error', 'critical', 'alert', 'emergency', 'info', 'debug'],
+            'file' => 'queue',
+        ]
     ]
 ];

@@ -5,9 +5,11 @@ namespace MeowBlog\Controller\Admin;
 
 use Authorization\Exception\ForbiddenException;
 use MeowBlog\Controller\AppController;
+use MeowBlog\Job\UpdateAiSummaryJob;
 use MeowBlog\Model\Entity\ArticleType;
 use MeowBlog\Services\ArticlesManagerServiceInterface;
 use MeowBlog\Services\OpenaiChatServiceInterface;
+use Symfony\Component\VarDumper\Cloner\Data;
 
 /**
  * Articles Controller
@@ -73,12 +75,15 @@ class ArticlesController extends AppController
             if ($articlesManager->saveToDatabase($article, $this->request)) {
                 $this->Flash->success(__('The article has been saved.'));
 
+                $this->Queue->push(UpdateAiSummaryJob::class, data: $article);
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The article could not be saved. Please, try again.'));
         }
 
         $articleTypes = ArticleType::list();
+
 
         // $users = $this->Articles->Users->find('list', ['limit' => 200])->all();
         // $tags = $this->Articles->Tags->find('list', ['limit' => 200])->all();
@@ -109,6 +114,8 @@ class ArticlesController extends AppController
             $article = $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('The article has been saved.'));
+
+                $this->Queue->push(UpdateAiSummaryJob::class, data: $article);
 
                 return $this->redirect(['action' => 'index']);
             }

@@ -1,0 +1,32 @@
+details {
+    max-width: 100%;
+    background-color: var(--details-background);
+    color: var(--content-background);
+    border-radius: var(--radius);
+
+    &:not([open]) {
+        width: max-content;
+        margin: 20px 0px;
+
+        @media #{$media-size-phone} {
+            width: 100%;
+            margin: 20px auto;
+        }
+    }
+
+    &[open] {
+        width: 100%;
+        margin: 20px auto;
+    }
+
+    summary {
+        padding: 5px 20px;
+        font-weight: 600;
+        font-size: .8em;
+        text-transform: lowercase;
+    }
+
+    div {
+        padding: 20px;
+    }
+}
