@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace MeowBlog\Job;
 
+use Cake\Core\Configure;
 use Cake\ORM\Locator\LocatorAwareTrait;
 use MeowBlog\Services\OpenaiChatService;
 use Queue\Job\QueuedJobInterface;
@@ -18,6 +19,10 @@ class UpdateAiSummaryJob implements QueuedJobInterface
 
     public function execute(?string $data = null): bool
     {
+        if (Configure::read('MeowBlog.openai_api_key') == null) {
+            return false;
+        }
+
         if (!is_null($data)) {
             $data = unserialize($data);
         }
