@@ -24,16 +24,14 @@ class UpdateAiSummaryJob implements QueuedJobInterface
         }
 
         if (!is_null($data)) {
-            $data = unserialize($data);
+            $data = json_decode($data, true);
         }
 
-        /** @var \MeowBlog\Model\Entity\Article $data */
-
         $ai = new OpenaiChatService();
-        $result = $ai->getTextSummary($data->body);
+        $result = $ai->getTextSummary($data['original_text']);
 
         $at = $this->fetchTable('MeowBlog.Articles');
-        $article = $at->get($data->id);
+        $article = $at->get($data['article_id']);
         $article->summary = $result;
         $at->save($article);
         

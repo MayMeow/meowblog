@@ -24,7 +24,7 @@ class QueueComponent extends Component
      */
     protected array $_defaultConfig = [];
 
-    public function push(string $jobClass, array|object $data = [], QueuedJobPriority $priority = QueuedJobPriority::MEDIUM, ?int $recuring = null, ?int $postpone = null): QueuedJob
+    public function push(string $jobClass, array $data = [], QueuedJobPriority $priority = QueuedJobPriority::MEDIUM, ?int $recuring = null, ?int $postpone = null): QueuedJob
     {
         /** @var \Queue\Model\Table\QueuedJobsTable $queueJobTable */
         $queueJobTable = $this->fetchTable('Queue.QueuedJobs');
