@@ -83,13 +83,13 @@ class QueuedJobsTable extends Table
         return $validator;
     }
 
-    public function createJob(string $jobClass, array|object $data = [], QueuedJobPriority $priority = QueuedJobPriority::MEDIUM, ?int $recuring = null, ?int $postpone = null): QueuedJob
+    public function createJob(string $jobClass, array $data = [], QueuedJobPriority $priority = QueuedJobPriority::MEDIUM, ?int $recuring = null, ?int $postpone = null): QueuedJob
     {
         $newJob = [
             'reference' => $jobClass,
             'priority' => $priority->value,
             'not_before' => $postpone === null ? DateTime::now() : DateTime::now()->addMinutes($postpone),
-            'data' => !empty($data) ? serialize($data) : null,
+            'data' => !empty($data) ? json_encode($data) : null,
         ];
 
         $newJob = $this->newEntity($newJob);

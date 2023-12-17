@@ -26,7 +26,7 @@ class QueuedJobManagerService implements QueuedJobManagerServiceInterface
         return $this->queuedJobsTable->find()->orderByDesc('priority')->orderByAsc('not_before');
     }
 
-    public function enqueue(string $jobClass, array|object $data = [], QueuedJobPriority $priority = QueuedJobPriority::MEDIUM, ?int $recuring = null, ?int $postpone = null): bool
+    public function enqueue(string $jobClass, array $data = [], QueuedJobPriority $priority = QueuedJobPriority::MEDIUM, ?int $recuring = null, ?int $postpone = null): bool
     {
         $this->queuedJobsTable->createJob($jobClass, $data, $priority, $recuring, $postpone);
 

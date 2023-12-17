@@ -11,5 +11,5 @@ interface QueuedJobManagerServiceInterface
 {
     public function getAll(): Table|SelectQuery;
 
-    public function enqueue(string $jobClass, array|object $data = [], QueuedJobPriority $priority = QueuedJobPriority::MEDIUM, ?int $recuring = null, ?int $postpone = null): bool;
+    public function enqueue(string $jobClass, array $data = [], QueuedJobPriority $priority = QueuedJobPriority::MEDIUM, ?int $recuring = null, ?int $postpone = null): bool;
 }

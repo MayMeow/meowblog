@@ -37,7 +37,7 @@ class OpenaiChatService implements OpenaiChatServiceInterface
             'messages' => [
                 [
                     'role' => 'system',
-                    'content' => 'Create blog post summary: ' . $text,
+                    'content' => 'Write a blog post summary of 100 words or less: ' . $text,
                 ]
             ],
         ];
