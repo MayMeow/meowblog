@@ -5,6 +5,9 @@ namespace MeowBlog\Controller;
 
 use Cake\Database\Query;
 use Cake\Event\EventInterface;
+use Cake\I18n\Date;
+use Cake\I18n\Time;
+use DateTime;
 use MeowBlog\Model\Entity\ArticleType;
 use MeowBlog\Services\ArticlesManagerService;
 use MeowBlog\Services\ArticlesManagerServiceInterface;
@@ -204,15 +207,22 @@ class ArticlesController extends AppController
     {
         $this->Authorization->skipAuthorization();
 
-        $this->viewBuilder()->setLayout('ajax');
-        $this->response = $this->response->withType('application/rss+xml');
-
         if (!$blogsManager->getId($this->request)) {
             return $this->redirect(['action' => 'index']);
         }
 
         $articles = $articlesManager->getAll($this->request, $this);
 
-        $this->set(compact('articles'));
+        $daysWithArticle = [];
+        foreach ($articles as $article) {
+        
+            $daysWithArticle[] = date('z', $article->created->getTimestamp());
+        }
+        
+        $day = new DateTime('2023-01-01');
+        $offset = $day->format('N')-1;
+        $daysCount = $day->format('L') ? 366 : 365;
+
+        $this->set(compact('daysWithArticle', 'offset', 'daysCount'));
     }
 }
