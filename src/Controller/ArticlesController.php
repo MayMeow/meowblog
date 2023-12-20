@@ -6,6 +6,7 @@ namespace MeowBlog\Controller;
 use Cake\Database\Query;
 use Cake\Event\EventInterface;
 use MeowBlog\Model\Entity\ArticleType;
+use MeowBlog\Services\ArticlesManagerService;
 use MeowBlog\Services\ArticlesManagerServiceInterface;
 use MeowBlog\Services\BlogsManagerServiceInterface;
 
@@ -26,7 +27,7 @@ class ArticlesController extends AppController
     public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
-        $this->Authentication->allowUnauthenticated(['index', 'tags', 'view', 'now', 'micro']);
+        $this->Authentication->allowUnauthenticated(['index', 'tags', 'view', 'now', 'micro', 'feed']);
     }
 
     /**
@@ -195,6 +196,22 @@ class ArticlesController extends AppController
         ];
 
         $articles = $articlesManager->getAll($this->request, $this, articleType: ArticleType::Micro);
+
+        $this->set(compact('articles'));
+    }
+
+    public function feed(BlogsManagerServiceInterface $blogsManager, ArticlesManagerServiceInterface $articlesManager)
+    {
+        $this->Authorization->skipAuthorization();
+
+        $this->viewBuilder()->setLayout('ajax');
+        $this->response = $this->response->withType('application/rss+xml');
+
+        if (!$blogsManager->getId($this->request)) {
+            return $this->redirect(['action' => 'index']);
+        }
+
+        $articles = $articlesManager->getAll($this->request, $this);
 
         $this->set(compact('articles'));
     }

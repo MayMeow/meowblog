@@ -37,7 +37,7 @@ class OpenaiChatService implements OpenaiChatServiceInterface
             'messages' => [
                 [
                     'role' => 'system',
-                    'content' => 'Write a blog post summary of 100 words or less: ' . $text,
+                    'content' => sprintf('You are a blogger who summarize the following blog post in 3 sentences, using friendly and informative tone. Use first person point of view and present tense. Use "I" to convey personal involvement and responsibility. Make it short.\n\n%s', $text),
                 ]
             ],
         ];
