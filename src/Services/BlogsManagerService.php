@@ -26,7 +26,7 @@ class BlogsManagerService implements BlogsManagerServiceInterface
     {
         try {
             /** @var Blog $blog */
-            $blog = $this->blogs->findByDomain($request->getUri()->getHost())->firstOrFail();
+            $blog = $this->blogs->findByDomain($request)->firstOrFail();
 
             return $blog->title;
         } catch (\Exception $e) {
@@ -40,7 +40,7 @@ class BlogsManagerService implements BlogsManagerServiceInterface
     {
         try {
             /** @var Blog $blog */
-            $blog = $this->blogs->findByDomain($request->getUri()->getHost())->firstOrFail();
+            $blog = $this->blogs->findByDomain($request)->firstOrFail();
 
             return $blog->description;
         } catch (\Exception $e) {
@@ -54,7 +54,7 @@ class BlogsManagerService implements BlogsManagerServiceInterface
     {
         try {
             /** @var Blog $blog */
-            $blog = $this->blogs->findByDomain($request->getUri()->getHost())->firstOrFail();
+            $blog = $this->blogs->findByDomain($request)->firstOrFail();
 
             return $blog->default_route;
         } catch (\Exception $e) {
@@ -68,7 +68,7 @@ class BlogsManagerService implements BlogsManagerServiceInterface
     {
         try {
             /** @var Blog $blog */
-            $blog = $this->blogs->findByDomain($request->getUri()->getHost())->contain([
+            $blog = $this->blogs->findByDomain($request)->contain([
                 'Links' => [
                     'sort' => ['Links.weight' => 'ASC']
                 ]
@@ -93,7 +93,7 @@ class BlogsManagerService implements BlogsManagerServiceInterface
     {
         try {
             /** @var Blog $blog */
-            $blog = $this->blogs->findByDomain($request->getUri()->getHost())->firstOrFail();
+            $blog = $this->blogs->findByDomain($request)->firstOrFail();
 
             return $blog->id;
         } catch (\Exception $e) {

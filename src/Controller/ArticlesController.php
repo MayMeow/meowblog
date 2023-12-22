@@ -30,7 +30,7 @@ class ArticlesController extends AppController
     public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
-        $this->Authentication->allowUnauthenticated(['index', 'tags', 'view', 'now', 'micro', 'feed']);
+        $this->Authentication->allowUnauthenticated(['index', 'tags', 'view', 'now', 'micro', 'stats']);
     }
 
     /**
@@ -203,7 +203,7 @@ class ArticlesController extends AppController
         $this->set(compact('articles'));
     }
 
-    public function feed(BlogsManagerServiceInterface $blogsManager, ArticlesManagerServiceInterface $articlesManager)
+    public function stats(BlogsManagerServiceInterface $blogsManager, ArticlesManagerServiceInterface $articlesManager)
     {
         $this->Authorization->skipAuthorization();
 
