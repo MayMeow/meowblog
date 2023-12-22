@@ -25,8 +25,9 @@ class BlogsManagerService implements BlogsManagerServiceInterface
     public function getName(ServerRequest $request): string
     {
         try {
-            /** @var Blog $blog */
-            $blog = $this->blogs->findByDomain($request->getUri()->getHost())->firstOrFail();
+            $domain = $request->getUri()->getHost();
+
+            $blog = $this->blogs->find('domain', domain: $domain)->firstOrFail();
 
             return $blog->title;
         } catch (\Exception $e) {
@@ -39,8 +40,9 @@ class BlogsManagerService implements BlogsManagerServiceInterface
     public function getDescription(ServerRequest $request): string
     {
         try {
-            /** @var Blog $blog */
-            $blog = $this->blogs->findByDomain($request->getUri()->getHost())->firstOrFail();
+            $domain = $request->getUri()->getHost();
+
+            $blog = $this->blogs->find('domain', domain: $domain)->firstOrFail();
 
             return $blog->description;
         } catch (\Exception $e) {
@@ -53,8 +55,9 @@ class BlogsManagerService implements BlogsManagerServiceInterface
     public function getDefaultRoute(ServerRequest $request): ?string
     {
         try {
-            /** @var Blog $blog */
-            $blog = $this->blogs->findByDomain($request->getUri()->getHost())->firstOrFail();
+            $domain = $request->getUri()->getHost();
+
+            $blog = $this->blogs->find('domain', domain: $domain)->firstOrFail();
 
             return $blog->default_route;
         } catch (\Exception $e) {
@@ -67,8 +70,9 @@ class BlogsManagerService implements BlogsManagerServiceInterface
     public function getLinks(ServerRequest $request): ?array
     {
         try {
-            /** @var Blog $blog */
-            $blog = $this->blogs->findByDomain($request->getUri()->getHost())->contain([
+            $domain = $request->getUri()->getHost();
+
+            $blog = $this->blogs->find('domain', domain: $domain)->contain([
                 'Links' => [
                     'sort' => ['Links.weight' => 'ASC']
                 ]
@@ -92,8 +96,9 @@ class BlogsManagerService implements BlogsManagerServiceInterface
     public function getId(ServerRequest $request): ?int
     {
         try {
-            /** @var Blog $blog */
-            $blog = $this->blogs->findByDomain($request->getUri()->getHost())->firstOrFail();
+            $domain = $request->getUri()->getHost();
+
+            $blog = $this->blogs->find('domain', domain: $domain)->firstOrFail();
 
             return $blog->id;
         } catch (\Exception $e) {

@@ -3,10 +3,14 @@ declare(strict_types=1);
 
 namespace MeowBlog\Model\Table;
 
+use Cake\Controller\Controller;
+use Cake\Database\Query\SelectQuery;
+use Cake\Http\ServerRequest;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use MeowBlog\Model\Entity\Blog;
 
 /**
  * Blogs Model
@@ -89,5 +93,12 @@ class BlogsTable extends Table
         ));
 
         return $rules;
+    }
+
+    function findDomain(SelectQuery $q, string $domain) : SelectQuery
+    {
+        $q = $q->where(['domain' => $domain]);
+
+        return $q;
     }
 }

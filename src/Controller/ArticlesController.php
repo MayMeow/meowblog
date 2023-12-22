@@ -5,7 +5,11 @@ namespace MeowBlog\Controller;
 
 use Cake\Database\Query;
 use Cake\Event\EventInterface;
+use Cake\I18n\Date;
+use Cake\I18n\Time;
+use DateTime;
 use MeowBlog\Model\Entity\ArticleType;
+use MeowBlog\Services\ArticlesManagerService;
 use MeowBlog\Services\ArticlesManagerServiceInterface;
 use MeowBlog\Services\BlogsManagerServiceInterface;
 
@@ -26,7 +30,7 @@ class ArticlesController extends AppController
     public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
-        $this->Authentication->allowUnauthenticated(['index', 'tags', 'view', 'now', 'micro']);
+        $this->Authentication->allowUnauthenticated(['index', 'tags', 'view', 'now', 'micro', 'stats']);
     }
 
     /**
@@ -197,5 +201,29 @@ class ArticlesController extends AppController
         $articles = $articlesManager->getAll($this->request, $this, articleType: ArticleType::Micro);
 
         $this->set(compact('articles'));
+    }
+
+    public function stats(BlogsManagerServiceInterface $blogsManager, ArticlesManagerServiceInterface $articlesManager)
+    {
+        $this->Authorization->skipAuthorization();
+
+        if (!$blogsManager->getId($this->request)) {
+            return $this->redirect(['action' => 'index']);
+        }
+
+        /** @var array<\MeowBlog\Model\Entity\Article> $articles */
+        $articles = $articlesManager->getAll($this->request, $this);
+
+        $daysWithArticle = [];
+        foreach ($articles as $article) {
+        
+            $daysWithArticle[] = date('z', $article->created->getTimestamp());
+        }
+        
+        $day = new DateTime('2023-01-01');
+        $offset = $day->format('N')-1;
+        $daysCount = $day->format('L') ? 366 : 365;
+
+        $this->set(compact('daysWithArticle', 'offset', 'daysCount'));
     }
 }
