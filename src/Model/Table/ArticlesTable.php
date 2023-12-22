@@ -11,6 +11,8 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Utility\Text;
 use Cake\Validation\Validator;
+use MeowBlog\Model\Entity\Article;
+use MeowBlog\Model\Entity\ArticleType;
 use MeowBlog\Model\Entity\Blog;
 
 /**
@@ -227,5 +229,32 @@ class ArticlesTable extends Table
         }
 
         return $out;
+    }
+
+    /**
+     * Find Now page
+     * 
+     * Find all published articles with tag 'now' ordered from newest to oldest
+     *
+     * @param SelectQuery $query
+     * @param string $domain
+     * @return SelectQuery
+     */
+    public function findNow(SelectQuery $query, string $domain): SelectQuery
+    {
+        $query = $query->find('tagged', tags: ['now'])->where([
+            'Blogs.domain' => $domain,
+            'Articles.article_type' => ArticleType::Article->value,
+            'Articles.published' => 1,
+        ])->orderBy(['Articles.created' => 'DESC']);
+
+        return $query->contain(['Blogs', 'Tags']);
+    }
+
+    public function findSlug(SelectQuery $q, string $slug): SelectQuery
+    {
+        $q = $q->where(['Articles.slug' => $slug]);
+
+        return $q;
     }
 }

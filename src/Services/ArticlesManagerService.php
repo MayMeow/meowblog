@@ -41,7 +41,8 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
      */
     public function getAll(ServerRequest $request, AppController $controller, bool $paginate = true, ArticleType $articleType = ArticleType::Article, bool $publishedOnly = true): ResultSetInterface|PaginatedResultSet
     {   
-        $blog = $this->articles->Blogs->find()->where(['Blogs.domain' => $request->getUri()->getHost()])->first();
+        $domain = $request->getUri()->getHost();
+        $blog = $this->articles->Blogs->find('domain', domain: $domain)->first();
 
         // if blog exists find only blog's article otherwise find show all
         if ($blog) {
@@ -80,7 +81,7 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
         $articleTable = $this->articles;
 
         /** @var \Cake\ORM\Query $q */
-        $q = $articleTable->findBySlug($slug)->where(['Blogs.domain' => $request->getUri()->getHost()]);
+        $q = $articleTable->find('slug', slug: $slug)->where(['Blogs.domain' => $request->getUri()->getHost()]);
 
         /** @var \MeowBlog\Model\Entity\Article $article */
         $article = $q->contain(['Users', 'Tags', 'Blogs'])->firstOrfail();
@@ -114,7 +115,7 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
         $articleTable = $this->articles;
 
         /** @var \Cake\ORM\Query $q */
-        $q = $articleTable->findBySlug(Text::slug($request->getUri()->getHost()))->where([
+        $q = $articleTable->find('slug', slug: Text::slug($request->getUri()->getHost()))->where([
             'Blogs.domain' => $request->getUri()->getHost(),
             'Articles.article_type' => ArticleType::Page->value,
             'Articles.published' => 1,
@@ -128,18 +129,7 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
 
     public function getLatestNowPageContent(ServerRequest $request): ?Article
     {
-        /** @var \MeowBlog\Model\Table\ArticlesTable $articleTable */
-        $articleTable = $this->articles;
-
-        /** @var \Cake\ORM\Query $q */
-        $q = $articleTable->find('tagged', tags: ['now'])->where([
-            'Blogs.Domain' => $request->getUri()->getHost(),
-            'Articles.article_type' => ArticleType::Article->value,
-            'Articles.published' => 1,
-        ])->orderBy(['Articles.created' => 'DESC']);
-
-        /** @var \MeowBlog\Model\Entity\Article $savedArticle */
-        $article = $q->contain(['Blogs', 'Tags'])->first();
+        $article = $this->articles->find('now', domain: $request->getUri()->getHost())->first();
 
         return $article ? $article : null;
     }

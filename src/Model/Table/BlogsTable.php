@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace MeowBlog\Model\Table;
 
+use Cake\Controller\Controller;
 use Cake\Database\Query\SelectQuery;
 use Cake\Http\ServerRequest;
 use Cake\ORM\Query;
@@ -94,8 +95,10 @@ class BlogsTable extends Table
         return $rules;
     }
 
-    public function findByDomain(ServerRequest $request): SelectQuery
+    function findDomain(SelectQuery $q, string $domain) : SelectQuery
     {
-        return $this->find()->where(['domain' => $request->getUri()->getHost()]);
+        $q = $q->where(['domain' => $domain]);
+
+        return $q;
     }
 }

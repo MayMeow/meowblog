@@ -211,6 +211,7 @@ class ArticlesController extends AppController
             return $this->redirect(['action' => 'index']);
         }
 
+        /** @var array<\MeowBlog\Model\Entity\Article> $articles */
         $articles = $articlesManager->getAll($this->request, $this);
 
         $daysWithArticle = [];
