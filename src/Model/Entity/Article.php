@@ -54,6 +54,11 @@ class Article extends Entity
         'summary' => true,
     ];
 
+    protected array $_virtual = [
+        'tag_string',
+        'type_name',
+    ];
+
     /**
      * Return tags in string format
      *
@@ -73,5 +78,10 @@ class Article extends Entity
         }, '');
 
         return trim($str, ', ');
+    }
+
+    protected function _getTypeName(): string
+    {
+        return strtolower(ArticleType::from($this->article_type)->name);
     }
 }

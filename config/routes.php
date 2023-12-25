@@ -88,6 +88,16 @@ $routes->scope('/', function (RouteBuilder $builder) {
         $builder->fallbacks();
     });
 
+    // api
+    $builder->prefix('Api', function (RouteBuilder $builder) {
+        $builder->setExtensions(['json']);
+
+        $builder->prefix('version1', ['path' => '/v1'], function (RouteBuilder $builder) {
+            $builder->setExtensions(['json']);
+            $builder->connect('/{controller}/{action}/*');
+        });
+    });
+
     $builder->fallbacks();
 });
 

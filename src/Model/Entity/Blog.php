@@ -40,4 +40,9 @@ class Blog extends Entity
         'default_route' => true,
         'links' => true,
     ];
+
+    protected array $_hidden = [
+        'verification',
+        'default_route',
+    ];
 }
