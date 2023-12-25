@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace MeowBlog\Services;
 
+use Cake\Database\Query\SelectQuery;
 use Cake\Datasource\Paging\PaginatedResultSet;
 use Cake\Datasource\ResultSetInterface;
 use Cake\Http\ServerRequest;
@@ -31,9 +32,9 @@ interface ArticlesManagerServiceInterface
      * @param bool $paginate whether to paginate or not
      * @param ArticleType $articleType article type
      * @param bool $publishedOnly whether to only get published articles
-     * @return array<\MeowBlog\Model\View\ArticleViewModel> array of articles
+     * @return ResultSetInterface|PaginatedResultSet|SelectQuery;
      */
-    public function getAll(ServerRequest $request, AppController $controller, bool $paginate = true, ArticleType $articleType = ArticleType::Article, bool $publishedOnly = true): ResultSetInterface|PaginatedResultSet;
+    public function getAll(ServerRequest $request, AppController $controller, bool $paginate = true, ArticleType $articleType = ArticleType::Article, bool $publishedOnly = true): ResultSetInterface|PaginatedResultSet|SelectQuery;
 
     /**
      * saveToDatabase function

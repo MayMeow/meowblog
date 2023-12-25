@@ -32,4 +32,9 @@ class Tag extends Entity
         'modified' => true,
         'articles' => true,
     ];
+
+    protected array $_hidden = [
+        'created',
+        'modified',
+    ];
 }

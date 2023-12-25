@@ -8,6 +8,7 @@ use Cake\Datasource\ResultSetInterface;
 use Cake\Http\ServerRequest;
 use Cake\ORM\Locator\LocatorAwareTrait;
 use Cake\ORM\Query;
+use Cake\ORM\Query\SelectQuery;
 use Cake\ORM\ResultSet;
 use Cake\ORM\Table;
 use Cake\Utility\Text;
@@ -36,12 +37,14 @@ class ArticlesManagerService implements ArticlesManagerServiceInterface
 
     /**
      * getAll function
+     * 
+     * !! consolidate this. Each service should only return SelectQuery
      *
-     * @return \Cake\ORM\Table|\Cake\ORM\Query
+     * @return ResultSetInterface|PaginatedResultSet|SelectQuery
      */
-    public function getAll(ServerRequest $request, AppController $controller, bool $paginate = true, ArticleType $articleType = ArticleType::Article, bool $publishedOnly = true): ResultSetInterface|PaginatedResultSet
+    public function getAll(ServerRequest $request, AppController $controller, bool $paginate = true, ArticleType $articleType = ArticleType::Article, bool $publishedOnly = true): ResultSetInterface|PaginatedResultSet|SelectQuery
     {   
-        $domain = $request->getUri()->getHost();
+        $domain = $controller->getRequest()->getUri()->getHost();
         $blog = $this->articles->Blogs->find('domain', domain: $domain)->first();
 
         // if blog exists find only blog's article otherwise find show all
