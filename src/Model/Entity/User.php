@@ -43,6 +43,11 @@ class User extends Entity
      */
     protected array $_hidden = [
         'password',
+        'email'
+    ];
+
+    protected array $_virtual = [
+        'username'
     ];
 
     /**
@@ -56,5 +61,11 @@ class User extends Entity
         $hasher = new DefaultPasswordHasher();
 
         return $hasher->hash($password);
+    }
+
+    protected function _getUsername()
+    {
+        [$username, $_] = explode('@', $this->email);
+        return $username;
     }
 }
