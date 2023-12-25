@@ -57,6 +57,7 @@ class Article extends Entity
     protected array $_virtual = [
         'tag_string',
         'type_name',
+        'created_timestamp',
     ];
 
     /**
@@ -83,5 +84,10 @@ class Article extends Entity
     protected function _getTypeName(): string
     {
         return strtolower(ArticleType::from($this->article_type)->name);
+    }
+
+    protected function _getCreatedTimestamp(): int
+    {
+        return $this->created->getTimestamp();
     }
 }
