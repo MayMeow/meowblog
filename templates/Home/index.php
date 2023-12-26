@@ -43,6 +43,12 @@
             'controller' => 'QueuedJobs',
             'prefix' => 'Admin'
         ]); ?>
+
+    <?= $this->Html->link('Resources (Files)', [
+            'action' => 'Index',
+            'controller' => 'Resources',
+            'prefix' => 'Admin'
+        ]); ?>
     </div>
 
 </div>

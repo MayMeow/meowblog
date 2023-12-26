@@ -14,6 +14,7 @@
         "guzzlehttp/guzzle": "^7.8",
         "josegonzalez/dotenv": "^4.0",
         "maymeow/cakephp-markdown": "^1.1",
+        "maymeow/file-upload": "^2.0.0",
         "mobiledetect/mobiledetectlib": "^3.74",
         "openai-php/client": "^0.7.8"
     },

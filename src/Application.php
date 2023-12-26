@@ -71,6 +71,7 @@ class Application extends BaseApplication implements
     public function bootstrap(): void
     {
         $this->addPlugin('Tools');
+        $this->addPlugin('FileUpload');
 
         // Call parent to load bootstrap from files.
         parent::bootstrap();

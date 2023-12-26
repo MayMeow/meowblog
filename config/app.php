@@ -6,6 +6,8 @@ use Cake\Database\Driver\Mysql;
 use Cake\Error\ExceptionRenderer;
 use Cake\Log\Engine\FileLog;
 use Cake\Mailer\Transport\MailTransport;
+use FileUpload\Storage\BunnyStorageManager;
+use FileUpload\Storage\LocalStorageManager;
 
 return [
     /*
@@ -436,6 +438,23 @@ return [
             'className' => FileLog::class,
             'levels' => ['warning', 'error', 'critical', 'alert', 'emergency', 'info', 'debug'],
             'file' => 'queue',
+        ]
+    ],
+    
+    'Storage' => [
+        'defaultStorageType' => env('STORAGE_DEFAULT_STORAGE_TYPE', 'local'),
+        'local' => [
+            'managerClass' => LocalStorageManager::class,
+            'storagePath' => env('STORAGE_LOCAL_STORAGE_PATH', ROOT . DS . 'storage' . DS),
+        ],
+        'bunny' => [
+            'managerClass' => BunnyStorageManager::class,
+            'cdnDomain' => env('BUNNY_STORAGE_CDN_DOMAIN', ''), // your cnd url
+            'region' => env('BUNNY_STORAGE_REGION', ''), // region, empty is DE
+            'baseHostName' => 'storage.bunnycdn.com', // base host name not changeable
+            'storageZone' => env('BUNNY_STORAGE_ZONE', ''), // your storage zone name
+            'storageZonePath' => env('BUNNY_STORAGE_ZONE_PATH', ''), // folder in zono
+            'accessKey' => env('BUNNY_STORAGE_ACCESS_KEY', ''), // API key for write access
         ]
     ]
 ];

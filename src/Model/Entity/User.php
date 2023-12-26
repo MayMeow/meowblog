@@ -63,8 +63,16 @@ class User extends Entity
         return $hasher->hash($password);
     }
 
-    protected function _getUsername()
+    protected function _getUsername(): ?string
     {
+        if (isset($this->_fields['username'])) {
+            return $this->_fields['username'];
+        }
+
+        if ($this->isEmpty('email')) {
+            return null;
+        }
+
         [$username, $_] = explode('@', $this->email);
         return $username;
     }

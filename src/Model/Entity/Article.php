@@ -81,13 +81,27 @@ class Article extends Entity
         return trim($str, ', ');
     }
 
-    protected function _getTypeName(): string
+    protected function _getTypeName(): ?string
     {
+        if (isset($this->_fields['type_name'])) {
+            return $this->_fields['type_name'];
+        }
+
+        if (!isset($this->_fields['type_name'])) {
+            return null;
+        }
         return strtolower(ArticleType::from($this->article_type)->name);
     }
 
-    protected function _getCreatedTimestamp(): int
+    protected function _getCreatedTimestamp(): ?int
     {
+        if (isset($this->_fields['created_timestamp'])) {
+            return $this->_fields['created_timestamp'];
+        }
+        
+        if (!isset($this->_fields['created_timestamp'])) {
+            return null;
+        }
         return $this->created->getTimestamp();
     }
 }
