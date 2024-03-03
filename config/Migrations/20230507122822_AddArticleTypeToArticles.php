@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use MeowBlog\Model\Entity\ArticleType;
+use MeowBlog\Model\Entity\NodeType;
 use Migrations\AbstractMigration;
 
 class AddArticleTypeToArticles extends AbstractMigration
@@ -17,7 +17,7 @@ class AddArticleTypeToArticles extends AbstractMigration
     {
         $table = $this->table('articles');
         $table->addColumn('article_type', 'string', [
-            'default' => ArticleType::Article->value,
+            'default' => NodeType::Node->value,
             'limit' => 50,
             'null' => false,
         ]);

@@ -10,7 +10,7 @@ use Cake\Validation\Validator;
 /**
  * Users Model
  *
- * @property \MeowBlog\Model\Table\ArticlesTable&\Cake\ORM\Association\HasMany $Articles
+ * @property \MeowBlog\Model\Table\NodesTable&\Cake\ORM\Association\HasMany $Nodes
  * @method \MeowBlog\Model\Entity\User newEmptyEntity()
  * @method \MeowBlog\Model\Entity\User newEntity(array $data, array $options = [])
  * @method \MeowBlog\Model\Entity\User[] newEntities(array $data, array $options = [])
@@ -44,7 +44,7 @@ class UsersTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->hasMany('Articles', [
+        $this->hasMany('Nodes', [
             'foreignKey' => 'user_id',
         ]);
     }
@@ -82,8 +82,8 @@ class UsersTable extends Table
     {
         $rules->add($rules->isUnique(['email']), ['errorField' => 'email']);
         $rules->addDelete($rules->isNotLinkedTo(
-            'Articles',
-            message: 'This user has articles. Please delete them first.'
+            'Nodes',
+            message: 'This user has nodes. Please delete them first.'
         ));
 
         return $rules;

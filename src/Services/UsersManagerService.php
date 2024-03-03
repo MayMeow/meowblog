@@ -43,7 +43,7 @@ class UsersManagerService implements UsersManagerServiceInterface
         $q = $this->users->find()->where(['id' => $id]);
 
         if ($withRelations) {
-            $q->contain(['Articles']);
+            $q->contain(['Nodes']);
         }
 
         //TODO fix this in next version

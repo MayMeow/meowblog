@@ -15,7 +15,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\DateTime $created
  * @property \Cake\I18n\DateTime $modified
  *
- * @property \MeowBlog\Model\Entity\Article[] $articles
+ * @property \MeowBlog\Model\Entity\Node[] $nodes
  */
 class User extends Entity
 {
@@ -33,7 +33,7 @@ class User extends Entity
         'password' => true,
         'created' => true,
         'modified' => true,
-        'articles' => true,
+        'nodes' => true,
     ];
 
     /**

@@ -22,8 +22,8 @@ class TagsControllerTest extends TestCase
      */
     protected $fixtures = [
         'app.Tags',
-        'app.Articles',
-        'app.ArticlesTags',
+        'app.Nodes',
+        'app.NodesTags',
     ];
 
     /**

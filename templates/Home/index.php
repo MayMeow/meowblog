@@ -4,13 +4,13 @@
  */
 ?>
 
-<div class="article">
+<div class="node">
     <h2>Home</h2>
 
     <div class="new-menu">
-        <?= $this->Html->link('Articles', [
+        <?= $this->Html->link('Nodes', [
             'action' => 'Index',
-            'controller' => 'Articles',
+            'controller' => 'Nodes',
             'prefix' => 'Admin'
         ]); ?>
 

@@ -10,7 +10,7 @@ use Cake\Validation\Validator;
 /**
  * Tags Model
  *
- * @property \MeowBlog\Model\Table\ArticlesTable&\Cake\ORM\Association\BelongsToMany $Articles
+ * @property \MeowBlog\Model\Table\NodesTable&\Cake\ORM\Association\BelongsToMany $Nodes
  * @method \MeowBlog\Model\Entity\Tag newEmptyEntity()
  * @method \MeowBlog\Model\Entity\Tag newEntity(array $data, array $options = [])
  * @method \MeowBlog\Model\Entity\Tag[] newEntities(array $data, array $options = [])
@@ -44,10 +44,10 @@ class TagsTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsToMany('Articles', [
+        $this->belongsToMany('Nodes', [
             'foreignKey' => 'tag_id',
-            'targetForeignKey' => 'article_id',
-            'joinTable' => 'articles_tags',
+            'targetForeignKey' => 'node_id',
+            'joinTable' => 'nodes_tags',
         ]);
     }
 
@@ -81,8 +81,8 @@ class TagsTable extends Table
         $rules->add($rules->isUnique(['title']), ['errorField' => 'title']);
 
         $rules->addDelete($rules->isNotLinkedTo(
-            'Articles',
-            message: 'This tag cannot be deleted because it is linked to articles.'
+            'Nodes',
+            message: 'This tag cannot be deleted because it is linked to nodes.'
         ));
 
         return $rules;

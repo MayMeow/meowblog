@@ -39,17 +39,17 @@ class TagsManagerService implements TagsManagerServiceInterface
     public function getAll(AppController $appController): Table|SelectQuery
     {
         $domain = $appController->getRequest()->getUri()->getHost();
-        $blog = $this->tags->Articles->Blogs->find()->where(['Blogs.Domain' => $domain])->select(['id'])->first();
+        $blog = $this->tags->Nodes->Blogs->find()->where(['Blogs.Domain' => $domain])->select(['id'])->first();
 
         // all tags
         if (is_null($blog)) {
             return $this->tags;
         }
 
-        // all tags where tags that are used on any of article
+        // all tags where tags that are used on any of node
         $tags = $this->tags->find();
         $tags->matching(
-            'Articles', function (SelectQuery $q) use ($blog) {
+            'Nodes', function (SelectQuery $q) use ($blog) {
                 return $q->where(['blog_id' => $blog->id]);
             }
         );
@@ -68,7 +68,7 @@ class TagsManagerService implements TagsManagerServiceInterface
      */
     public function getOne(int $id): EntityInterface | Tag
     {
-        return $this->tags->get($id, contain: ['Articles']);
+        return $this->tags->get($id, contain: ['Nodes']);
     }
 
     /**

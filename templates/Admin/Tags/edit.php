@@ -2,7 +2,7 @@
 /**
  * @var \MeowBlog\View\AppView $this
  * @var \MeowBlog\Model\Entity\Tag $tag
- * @var string[]|\Cake\Collection\CollectionInterface $articles
+ * @var string[]|\Cake\Collection\CollectionInterface $nodes
  */
 ?>
 <div class="row">
@@ -24,7 +24,7 @@
                 <legend><?= __('Edit Tag') ?></legend>
                 <?php
                     echo $this->Form->control('title');
-                    echo $this->Form->control('articles._ids', ['options' => $articles]);
+                    echo $this->Form->control('nodes._ids', ['options' => $nodes]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
