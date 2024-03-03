@@ -11,7 +11,7 @@
         <ul>
         <?php foreach ($tags as $tag): ?>
             <li>
-                <?= $this->Html->link($tag->title, ['controller' => 'Articles', 'action' => 'tagged', $tag->title]) ?>
+                <?= $this->Html->link($tag->title, ['controller' => 'Nodes', 'action' => 'tagged', $tag->title]) ?>
             </li>
         <?php endforeach; ?>
         </ul>

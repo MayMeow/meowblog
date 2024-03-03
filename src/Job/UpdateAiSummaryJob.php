@@ -30,10 +30,10 @@ class UpdateAiSummaryJob implements QueuedJobInterface
         $ai = new OpenaiChatService();
         $result = $ai->getTextSummary($data['original_text']);
 
-        $at = $this->fetchTable('MeowBlog.Articles');
-        $article = $at->get($data['article_id']);
-        $article->summary = $result;
-        $at->save($article);
+        $at = $this->fetchTable('MeowBlog.Nodes');
+        $node = $at->get($data['node_id']);
+        $node->summary = $result;
+        $at->save($node);
         
         return true;
     }

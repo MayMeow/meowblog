@@ -66,8 +66,8 @@ class TagsController extends AppController
             }
             $this->Flash->error(__('The tag could not be saved. Please, try again.'));
         }
-        $articles = $this->Tags->Articles->find('list', ['limit' => 200])->all();
-        $this->set(compact('tag', 'articles'));
+        $nodes = $this->Tags->Nodes->find('list', ['limit' => 200])->all();
+        $this->set(compact('tag', 'nodes'));
     }
 
     /**
@@ -92,8 +92,8 @@ class TagsController extends AppController
             }
             $this->Flash->error(__('The tag could not be saved. Please, try again.'));
         }
-        $articles = $this->Tags->Articles->find('list', ['limit' => 200])->all();
-        $this->set(compact('tag', 'articles'));
+        $nodes = $this->Tags->Nodes->find('list', ['limit' => 200])->all();
+        $this->set(compact('tag', 'nodes'));
     }
 
     /**

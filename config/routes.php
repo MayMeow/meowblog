@@ -52,7 +52,7 @@ $routes->scope('/', function (RouteBuilder $builder) {
      */
     // $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
 
-    $builder->connect('/', ['controller' => 'Articles', 'action' => 'index']);
+    $builder->connect('/', ['controller' => 'Nodes', 'action' => 'index']);
 
     /*
      * ...and connect the rest of 'Pages' controller's URLs.
@@ -73,15 +73,15 @@ $routes->scope('/', function (RouteBuilder $builder) {
      * routes you want in your application.
      */
 
-    $builder->connect('/article/{slug}', ['controller' => 'Articles', 'action' => 'view'])->setPass(['slug']);
-    $builder->connect('/page/{slug}', ['controller' => 'Articles', 'action' => 'view'])->setPass(['slug']);
+    $builder->connect('/node/{slug}', ['controller' => 'Nodes', 'action' => 'view'])->setPass(['slug']);
+    $builder->connect('/page/{slug}', ['controller' => 'Nodes', 'action' => 'view'])->setPass(['slug']);
 
-    $builder->connect('/now', ['controller' => 'Articles', 'action' => 'now']);
-    $builder->connect('/micro', ['controller' => 'Articles', 'action' => 'micro']);
+    $builder->connect('/now', ['controller' => 'Nodes', 'action' => 'now']);
+    $builder->connect('/micro', ['controller' => 'Nodes', 'action' => 'micro']);
 
-    $builder->scope("/articles", function (RouteBuilder $builder) {
-        $builder->connect('/tagged/*', ['controller' => 'Articles', 'action' => 'tags']);
-        $builder->connect('/v/{slug}', ['controller' => 'Articles', 'action' => 'view'])->setPass(['slug']);
+    $builder->scope("/nodes", function (RouteBuilder $builder) {
+        $builder->connect('/tagged/*', ['controller' => 'Nodes', 'action' => 'tags']);
+        $builder->connect('/v/{slug}', ['controller' => 'Nodes', 'action' => 'view'])->setPass(['slug']);
     });
 
     $builder->prefix('Admin', function (RouteBuilder $builder) {

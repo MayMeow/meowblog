@@ -13,7 +13,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\DateTime $created
  * @property \Cake\I18n\DateTime $modified
  *
- * @property \MeowBlog\Model\Entity\Article[] $articles
+ * @property \MeowBlog\Model\Entity\Node[] $nodes
  */
 class Tag extends Entity
 {
@@ -30,7 +30,7 @@ class Tag extends Entity
         'title' => true,
         'created' => true,
         'modified' => true,
-        'articles' => true,
+        'nodes' => true,
     ];
 
     protected array $_hidden = [

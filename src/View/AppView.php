@@ -26,7 +26,7 @@ use Cake\View\View;
  * @property \Markdown\View\Helper\MarkdownHelper $Markdown
  * @property \MeowBlog\View\Helper\BlogHelper $Blog
  * @property \MeowBlog\View\Helper\ShortcodesHelper $Shortcodes
- * @property \MeowBlog\View\Helper\ArticlesHelper $Articles
+ * @property \MeowBlog\View\Helper\NodesHelper $Nodes
  */
 class AppView extends View
 {
@@ -44,6 +44,6 @@ class AppView extends View
         $this->loadHelper('Markdown.Markdown');
         $this->loadHelper('Blog');
         $this->loadHelper('Shortcodes');
-        $this->loadHelper('Articles');
+        $this->loadHelper('Nodes');
     }
 }

@@ -36,8 +36,8 @@
                 </tr>
             </table>
             <div class="related">
-                <h4><?= __('Related Articles') ?></h4>
-                <?php if (!empty($tag->articles)) : ?>
+                <h4><?= __('Related Nodes') ?></h4>
+                <?php if (!empty($tag->nodes)) : ?>
                 <div class="table-responsive">
                     <table>
                         <tr>
@@ -51,20 +51,20 @@
                             <th><?= __('Modified') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
-                        <?php foreach ($tag->articles as $articles) : ?>
+                        <?php foreach ($tag->nodes as $nodes) : ?>
                         <tr>
-                            <td><?= h($articles->id) ?></td>
-                            <td><?= h($articles->user_id) ?></td>
-                            <td><?= h($articles->title) ?></td>
-                            <td><?= h($articles->slug) ?></td>
-                            <td><?= h($articles->body) ?></td>
-                            <td><?= h($articles->published) ?></td>
-                            <td><?= h($articles->created) ?></td>
-                            <td><?= h($articles->modified) ?></td>
+                            <td><?= h($nodes->id) ?></td>
+                            <td><?= h($nodes->user_id) ?></td>
+                            <td><?= h($nodes->title) ?></td>
+                            <td><?= h($nodes->slug) ?></td>
+                            <td><?= h($nodes->body) ?></td>
+                            <td><?= h($nodes->published) ?></td>
+                            <td><?= h($nodes->created) ?></td>
+                            <td><?= h($nodes->modified) ?></td>
                             <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Articles', 'action' => 'view', $articles->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Articles', 'action' => 'edit', $articles->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Articles', 'action' => 'delete', $articles->id], ['confirm' => __('Are you sure you want to delete # {0}?', $articles->id)]) ?>
+                                <?= $this->Html->link(__('View'), ['controller' => 'Nodes', 'action' => 'view', $nodes->id]) ?>
+                                <?= $this->Html->link(__('Edit'), ['controller' => 'Nodes', 'action' => 'edit', $nodes->id]) ?>
+                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Nodes', 'action' => 'delete', $nodes->id], ['confirm' => __('Are you sure you want to delete # {0}?', $nodes->id)]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>
