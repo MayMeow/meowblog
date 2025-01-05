@@ -1,5 +1,5 @@
 {
-  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "image": "ubuntu:24.04",
   "features": {
     "ghcr.io/itsmechlark/features/redis-server:1": {},
     "ghcr.io/devcontainers/features/php:1": {},
