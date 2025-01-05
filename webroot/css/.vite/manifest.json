@@ -1,7 +1,7 @@
 {
   "webroot_src/assets/scss/main.scss": {
     "file": "main.css",
-    "isEntry": true,
-    "src": "webroot_src/assets/scss/main.scss"
+    "src": "webroot_src/assets/scss/main.scss",
+    "isEntry": true
   }
 }

@@ -1,5 +1,5 @@
 <?php
-$appVersion = '0.52.0';
+$appVersion = '0.54.0';
 $appDescription = $this->Blog->getName() ?? 'Meowblog';
 ?>
 <!DOCTYPE html>
