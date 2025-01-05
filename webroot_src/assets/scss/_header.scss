@@ -35,10 +35,33 @@
 
         background-color: var(--button);
         color: var(--button-text);
+        transition: transform .15s ease-in-out;
 
         &:hover {
             background-color: var(--button-hover);
             color: var(--button-text-hover);
+            transform: rotate(2deg) scale(1.05);
+
+            svg {
+                transform: rotate(-5deg) scale(1.2) translateX(-5px);
+            }
+
+            span {
+                transform: scale(1.2);
+            }
+        }
+
+        span {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: transform .15s ease-in-out;
+
+            svg {
+                position: relative;
+                height: 1em;
+                width: 1em;
+            }
         }
     }
 }
