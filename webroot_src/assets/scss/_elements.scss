@@ -1,3 +1,5 @@
+@use "variables";
+
 details {
     max-width: 100%;
     background-color: var(--details-background);
@@ -8,7 +10,7 @@ details {
         width: max-content;
         margin: 20px 0px;
 
-        @media #{$media-size-phone} {
+        @media #{variables.$media-size-phone} {
             width: 100%;
             margin: 20px auto;
         }

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use MeowBlog\Model\Entity\ColorSchemeVariant;
+# use MeowBlog\Model\Entity\ColorSchemeVariant;
 use Migrations\AbstractMigration;
 
 class AddSchemeToBlogs extends AbstractMigration
@@ -17,7 +17,7 @@ class AddSchemeToBlogs extends AbstractMigration
     {
         $table = $this->table('blogs');
         $table->addColumn('scheme', 'string', [
-            'default' => ColorSchemeVariant::Default->value,
+            'default' => "",
             'limit' => 255,
             'null' => false,
         ]);
